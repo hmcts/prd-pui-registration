@@ -280,6 +280,11 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@hmcts/frontend@0.0.14-alpha":
+  version "0.0.14-alpha"
+  resolved "https://registry.yarnpkg.com/@hmcts/frontend/-/frontend-0.0.14-alpha.tgz#ebd5a8e85bf11a0473f02398ecece3321cf82953"
+  integrity sha512-gRaSJgF41A7SyL87nwf9dU/nFrB4OPT/xz4CwtJkkaxX0cLjUiAiNGr3ti6wLEaHviCh5Jjw8i5kMHWm9bGBFw==
+
 "@ngtools/webpack@6.0.8":
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.0.8.tgz#a05bce526aee9da62bb230a95fba83fee99d0bca"
@@ -3007,6 +3012,11 @@ globule@^1.0.0:
     glob "~7.1.1"
     lodash "~4.17.10"
     minimatch "~3.0.2"
+
+govuk-frontend@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-2.5.0.tgz#7fa7a1f6522ffbc500613598aaae32ecbf390a9a"
+  integrity sha512-NjrI7G7oFXvuFhj30a3bAuouUWZwfkpewEUmmz5Sfm/BgM9ElTyhV/bvQaGcCefLhYTwXI8DSnZ86861GMZUug==
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"
