@@ -24,5 +24,9 @@ export class RegisterComponent implements OnInit {
     const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
     this.formDraft.setValidators(formGroupValidators);
   }
+
+  // dispatch load action
+
+  // subscribe to a selector
 }
 
