@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 
 import {CommonModule} from '@angular/common';
+import {registerRouting} from './register.routing';
+import {SharedModule} from '../app/shared/shared.module';
 
 // containers
 import * as fromContainers from './containers';
-
-import {registerRouting} from './register.routing';
+// from app container
 
 
 @NgModule({
   imports: [
     CommonModule,
-    registerRouting
+    registerRouting,
+    SharedModule,
   ],
   exports: [...fromContainers.containers],
   declarations: [...fromContainers.containers],
@@ -19,7 +21,7 @@ import {registerRouting} from './register.routing';
 })
 
 /**
- * Entry point to RergisterModule
+ * Entry point to RegisterModule
  */
 
 export class RegisterModule {

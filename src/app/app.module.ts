@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './containers/app/app.component';
 import {RegisterModule} from '../register/register.module';
+import {SharedModule} from './shared/shared.module';
 
 // from Containers
 import * as fromContainers from './containers/';
@@ -19,12 +20,13 @@ export const ROUTES: Routes = [
   declarations: [
     AppComponent,
     ...fromComponents.components,
-    ...fromContainers.containers
+    ...fromContainers.containers,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     RegisterModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
