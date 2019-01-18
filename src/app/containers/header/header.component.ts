@@ -21,7 +21,7 @@ export class HeaderComponent implements  OnInit {
             active: true
         }];
         this.serviceName = {
-            name: 'Judicial case manager',
+            name: 'Pui Registration',
             url: '/'
         };
         this.navigations = {
