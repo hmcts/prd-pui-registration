@@ -6,18 +6,28 @@ import {SharedModule} from '../app/shared/shared.module';
 
 // containers
 import * as fromContainers from './containers';
-// from app container
+
+// services
+import * as fromServices from './services';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+
+import { reducers, effects } from './store';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     registerRouting,
     SharedModule,
+    StoreModule.forFeature('registration', reducers),
+    EffectsModule.forFeature(effects),
   ],
   exports: [...fromContainers.containers],
   declarations: [...fromContainers.containers],
-  providers: []
+  providers: [...fromServices.services]
 })
 
 /**
