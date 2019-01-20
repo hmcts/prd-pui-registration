@@ -16,3 +16,4 @@ export class LoadRegistrationFormFail {
   readonly type = LOAD_REGISTRATION_FORM_FAIL;
   constructor(public payload: any) {}
 }
+
