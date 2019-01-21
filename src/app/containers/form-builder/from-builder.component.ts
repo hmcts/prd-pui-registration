@@ -7,9 +7,21 @@ import {FormGroup} from '@angular/forms';
 })
 
 export class FromBuilderComponent implements OnInit {
-  constructor() {}
+
+  constructor() {
+
+  }
+
   @Input() formDraft: FormGroup;
+  @Input() pageItems: any;
+  @Input() useValidation = true;
+
 
   ngOnInit(): void {
+    debugger
+  }
+
+  onFormSubmit() {
+    debugger;
   }
 }

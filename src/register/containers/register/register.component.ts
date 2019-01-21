@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormsService} from '../../../app/containers/form-builder/services/form-builder.service';
 import {ValidationService} from '../../../app/containers/form-builder/services/form-builder-validation.service';
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
-import {Observable} from 'rxjs';
-import {debug} from 'util';
-
+import {Observable, Subscription} from 'rxjs';
 
 
 /**
@@ -17,7 +15,7 @@ import {debug} from 'util';
   selector: 'app-prd-register-component',
   templateUrl: './register.component.html',
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private formsService: FormsService,
@@ -25,12 +23,16 @@ export class RegisterComponent implements OnInit {
     private store: Store<fromStore.RegistrationState>) {}
 
   formDraft: FormGroup;
-  formDraftSelector$: Observable<any>
+  pageItems: any;
+  $formDraftSubscription: Subscription;
 
   ngOnInit(): void {
     this.store.dispatch(new fromStore.LoadRegistrationForm());
-    this.store.pipe(select(fromStore.getRegistationEntities)).subscribe(formData => {
+    this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
+      .subscribe(formData => {
       console.log(formData);
+      this.pageItems = formData['meta']
+      this.createForm(this.pageItems, formData['formValues']);
     })
   }
 
@@ -40,8 +42,8 @@ export class RegisterComponent implements OnInit {
     this.formDraft.setValidators(formGroupValidators);
   }
 
-  // dispatch load action
-
-  // subscribe to a selector
+  ngOnDestroy(): void {
+    this.$formDraftSubscription.unsubscribe();
+  }
 }
 
