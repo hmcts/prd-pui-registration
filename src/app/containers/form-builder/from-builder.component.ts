@@ -18,10 +18,8 @@ export class FromBuilderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    debugger
   }
 
   onFormSubmit() {
-    debugger;
   }
 }

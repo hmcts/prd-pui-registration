@@ -26,12 +26,12 @@ import {LabelComponent} from '../components/label/label.component';
     ReactiveFormsModule
   ],
   declarations: [
+    ValidationErrorFormGroupComponent,
     FromBuilderComponent,
     FieldsetComponent,
     JuiFormElementsComponent,
     LegendComponent,
     HintComponent,
-    ValidationErrorFormGroupComponent,
     DateComponent,
     InputsComponent,
     RadiobuttonComponent,
@@ -42,12 +42,12 @@ import {LabelComponent} from '../components/label/label.component';
 
   ],
   exports: [
+    ValidationErrorFormGroupComponent,
     FromBuilderComponent,
     FieldsetComponent,
     JuiFormElementsComponent,
     LegendComponent,
     HintComponent,
-    ValidationErrorFormGroupComponent,
     DateComponent,
     InputsComponent,
     RadiobuttonComponent,

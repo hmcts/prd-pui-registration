@@ -7,9 +7,9 @@
           {{data.hint.text}}
       </app-hint>
       <ng-container *ngIf="data.validationError && validate">
-          <app-validation-error-formgroup [group]="group" [validationErrorId]="data.validationError.identifier">
-              {{data.validationError.value}}
-          </app-validation-error-formgroup>
+          <!--<app-validation-error-formgroup [group]="group" [validationErrorId]="data.validationError.identifier">-->
+              <!--{{data.validationError.value}}-->
+          <!--</app-validation-error-formgroup>-->
       </ng-container>
       <app-date *ngIf="data.date"
                 [id]="data.date.formName"

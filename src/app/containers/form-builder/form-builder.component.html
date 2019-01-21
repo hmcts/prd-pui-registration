@@ -1,4 +1,3 @@
-<H1>form builder goes here</H1>
 <form *ngIf="pageItems" [formGroup]="formDraft" (ngSubmit)="onFormSubmit()">
   <div [ngClass]="{'govuk-form-group':true, 'govuk-form-group--error' : useValidation && formDraft.invalid }">
     <h1 class="govuk-heading-xl">
