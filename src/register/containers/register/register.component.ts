@@ -4,7 +4,9 @@ import {FormsService} from '../../../app/containers/form-builder/services/form-b
 import {ValidationService} from '../../../app/containers/form-builder/services/form-builder-validation.service';
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
-import {Observable, Subscription} from 'rxjs';
+import * as fromRoot from '../../../app/store';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 
 /**
@@ -20,6 +22,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private formsService: FormsService,
     private validationService: ValidationService,
+    private route: ActivatedRoute,
     private store: Store<fromStore.RegistrationState>) {}
 
   formDraft: FormGroup;
@@ -28,19 +31,27 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.store.dispatch(new fromStore.LoadRegistrationForm());
+    const id = this.route.snapshot.paramMap.get('pageId'); /// maybe needs to be subscription.
 
+    console.log( id)
     this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
       .subscribe(formData => {
-      console.log(formData);
       this.pageItems = formData['meta']
-      this.createForm(this.pageItems, formData['formValues']);
+      // this.createForm(this.pageItems, formData['formValues']);
     })
   }
+
 
   createForm(pageitems, pageValues) {
     this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
     const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
     this.formDraft.setValidators(formGroupValidators);
+  }
+
+  onNavigate(pageId) {
+    this.store.dispatch( new fromRoot.Go({
+      path: ['/register', pageId]
+    }))
   }
 
   ngOnDestroy(): void {
