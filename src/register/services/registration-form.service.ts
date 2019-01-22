@@ -351,7 +351,8 @@ const dummy = {
 export class RegistrationFormService {
   constructor(private http: HttpClient) {}
 
-  getRetistrationFrom(): Observable<any> {
+  getRetistrationFrom(pageId): Observable<any> {
+
     return of(dummy)
     // return this.http
     //   .get<any>(`/api/pizzas`)

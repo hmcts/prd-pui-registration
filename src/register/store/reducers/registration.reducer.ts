@@ -1,14 +1,20 @@
 import * as fromRegistration from '../actions/registration.actions';
 
+export interface PageItems {
+  formData: any,
+
+}
 
 export interface RegistrationFormState {
-  entities: any[];
+  pages: {[id: string]: any};
+  currentPage: string;
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: RegistrationFormState = {
-  entities: [],
+  pages: {},
+  currentPage: '',
   loaded: false,
   loading: false,
 };
@@ -18,51 +24,42 @@ export function reducer(
   action: fromRegistration.RegistrationActions
 ): RegistrationFormState {
   switch (action.type) {
-    case fromRegistration.LOAD_REGISTRATION_FORM: {
+    case fromRegistration.SET_CURRENT_PAGE: {
+      const currentPage = action.payload;
+      return {
+        ...state,
+        currentPage
+      };
+    }
+    case fromRegistration.LOAD_PAGE_ITEMS: {
       return {
         ...state,
         loading: true,
       };
     }
 
-    case fromRegistration.LOAD_REGISTRATION_FORM_SUCCESS: {
-      const formData = action.payload;
-
-      const entities = formData;
-
-      // const entities = pizzas.reduce(
-      //   (entities: { [id: number]: Pizza }, pizza: Pizza) => {
-      //     return {
-      //       ...entities,
-      //       [pizza.id]: pizza,
-      //     };
-      //   },
-      //   {
-      //     ...state.entities,
-      //   }
-      // );
+    case fromRegistration.LOAD_PAGE_ITEMS_SUCCSES: {
+      const pages = {
+        ...state.pages,
+        [state.currentPage]: action.payload,
+        loaded: true
+      }
 
       return {
         ...state,
+        pages,
         loading: false,
         loaded: true,
-        entities,
       };
     }
 
-    case fromRegistration.LOAD_REGISTRATION_FORM_FAIL: {
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
-      };
-    }
+
   }
 
   return state;
 }
 
-export const getRegistationFormEntities = (state: RegistrationFormState) => state.entities;
+export const getRegistationFormPages = (state: RegistrationFormState) => state.pages;
 export const getRegistrationFromLoading = (state: RegistrationFormState) => state.loading;
 export const getRegistrationPizzasLoaded = (state: RegistrationFormState) => state.loaded;
 

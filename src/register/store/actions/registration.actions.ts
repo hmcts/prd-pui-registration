@@ -1,26 +1,36 @@
 // load registration form
 import {Action} from '@ngrx/store';
 
-export const LOAD_REGISTRATION_FORM = '[Registration] Load Registration From';
-export const LOAD_REGISTRATION_FORM_SUCCESS = '[Registration] Load Registration From Success';
-export const LOAD_REGISTRATION_FORM_FAIL = '[Registration] Load Registration From Fail';
+export const SET_CURRENT_PAGE = '[Registration] Set Current Page';
 
-export class LoadRegistrationForm {
-  readonly type = LOAD_REGISTRATION_FORM;
+export const LOAD_PAGE_ITEMS = '[Registration] LoadPageItems';
+export const LOAD_PAGE_ITEMS_SUCCSES = '[Registration] LoadPageItems Success';
+export const LOAD_PAGE_ITEMS_FAIL = '[Registration] LoadPageItems Fail';
+
+
+export class SetCurrentPage implements Action {
+  readonly type = SET_CURRENT_PAGE;
+  constructor(public payload: string) {}
 }
 
-export class LoadRegistrationFormSuccsess  implements Action {
-  readonly type = LOAD_REGISTRATION_FORM_SUCCESS;
-  constructor(public payload: any) {}  // TODO add type
+export class LoadPageItems implements Action {
+  readonly type = LOAD_PAGE_ITEMS;
+  constructor(public payload: string) {}
 }
 
-export class LoadRegistrationFormFail implements Action {
-  readonly type = LOAD_REGISTRATION_FORM_FAIL;
+export class LoadPageItemsSuccess implements Action {
+  readonly type = LOAD_PAGE_ITEMS_SUCCSES;
+  constructor(public payload: any) {}
+}
+
+export class LoadPageItemsFail implements Action {
+  readonly type = LOAD_PAGE_ITEMS_FAIL;
   constructor(public payload: any) {}
 }
 
 
 export type RegistrationActions =
-  | LoadRegistrationForm
-  | LoadRegistrationFormSuccsess
-  | LoadRegistrationFormFail;
+  | SetCurrentPage
+  | LoadPageItems
+  | LoadPageItemsSuccess
+  | LoadPageItemsFail;

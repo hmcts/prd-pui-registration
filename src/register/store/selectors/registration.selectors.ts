@@ -10,5 +10,5 @@ export const getRegistrationState = createSelector(
 
 export const getRegistationEntities = createSelector(
   getRegistrationState,
-  fromRegistration.getRegistationFormEntities
+  fromRegistration.getRegistationFormPages
 );
