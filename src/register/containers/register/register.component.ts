@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormsService} from '../../../app/containers/form-builder/services/form-builder.service';
 import {ValidationService} from '../../../app/containers/form-builder/services/form-builder-validation.service';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {Subscription} from 'rxjs';
@@ -26,26 +26,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   formDraft: FormGroup;
   pageItems: any;
+  pageId: string;
   $formDraftSubscription: Subscription;
 
   ngOnInit(): void {
     this.subscribeToRoute();
-    // this.store.dispatch(new fromStore.LoadRegistrationForm());
 
-
-    // this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
-    //   .subscribe(formData => {
-    //   this.pageItems = formData['meta']
-    //   // this.createForm(this.pageItems, formData['formValues']);
-    // });
+    this.$formDraftSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
+      .subscribe(formData => {
+        this.pageItems = formData['meta'];
+        this.createForm(this.pageItems, formData['formValues']);
+    });
   }
 
-
-  // createForm(pageitems, pageValues) {
-  //   this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
-  //   const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
-  //   this.formDraft.setValidators(formGroupValidators);
-  // }
+  createForm(pageitems, pageValues) {
+    this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
+    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
+    this.formDraft.setValidators(formGroupValidators);
+  }
 
   onNavigate(pageId) {
     this.store.dispatch( new fromRoot.Go({
@@ -55,16 +53,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   subscribeToRoute() {
     this.route.paramMap.subscribe(snapshot => {
-      const pageId = snapshot.get('pageId');
-      if (pageId) {
-        this.store.dispatch(new fromStore.SetCurrentPage(pageId));
-        this.store.dispatch(new fromStore.LoadPageItems(pageId));
+      this.pageId = snapshot.get('pageId');
+      if (this.pageId) {
+        this.store.dispatch(new fromStore.SetCurrentPage(this.pageId));
+        this.store.dispatch(new fromStore.LoadPageItems(this.pageId));
       }
     });
   }
 
   ngOnDestroy(): void {
-    this.$formDraftSubscription.unsubscribe();
+    // this.$formDraftSubscription.unsubscribe();
   }
 }
 

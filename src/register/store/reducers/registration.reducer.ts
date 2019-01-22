@@ -1,12 +1,14 @@
 import * as fromRegistration from '../actions/registration.actions';
 
 export interface PageItems {
-  formData: any,
-
+  formData: any;
+  meta: any;
+  loaded: boolean;
+  loading: boolean;
 }
 
 export interface RegistrationFormState {
-  pages: {[id: string]: any};
+  pages: {[id: string]: PageItems};
   currentPage: string;
   loaded: boolean;
   loading: boolean;

@@ -14,10 +14,10 @@ export class FromBuilderComponent implements OnInit {
   @Input() pageItems: any;
   @Input() useValidation = true;
 
-
   ngOnInit(): void {
   }
 
-  onFormSubmit() {
+  onFormSubmit($event) {
+    debugger;
   }
 }

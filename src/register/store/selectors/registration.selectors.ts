@@ -8,7 +8,22 @@ export const getRegistrationState = createSelector(
   (state: fromFeature.RegistrationState) => state.registration
 );
 
-export const getRegistationEntities = createSelector(
+export const getRegistrationPages = createSelector(
   getRegistrationState,
   fromRegistration.getRegistationFormPages
 );
+
+export const getCurrentPage = createSelector(
+  getRegistrationState,
+  (state) => state.currentPage
+);
+
+export const getCurrentPageItems = createSelector(
+  getRegistrationPages,
+  getCurrentPage,
+  (state, current) => state[current]
+);
+
+
+
+
