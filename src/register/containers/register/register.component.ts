@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   $formDraftSubscription: Subscription;
 
   ngOnInit(): void {
-    this.store.dispatch(new fromStore.LoadRegistrationForm());
+    // this.store.dispatch(new fromStore.LoadRegistrationForm());
 
     this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
       .subscribe(formData => {
