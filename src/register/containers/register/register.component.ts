@@ -29,12 +29,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.store.dispatch(new fromStore.LoadRegistrationForm());
 
-    this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
-      .subscribe(formData => {
-      console.log(formData);
-      this.pageItems = formData['meta']
-      this.createForm(this.pageItems, formData['formValues']);
-    })
+    // this.$formDraftSubscription = this.store.pipe(select(fromStore.getRegistationEntities))
+    //   .subscribe(formData => {
+    //   console.log(formData);
+    //   this.pageItems = formData['meta']
+    //   this.createForm(this.pageItems, formData['formValues']);
+    // })
   }
 
   createForm(pageitems, pageValues) {
