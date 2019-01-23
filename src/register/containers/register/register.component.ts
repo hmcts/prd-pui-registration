@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
   pageId: string;
 
   ngOnInit(): void {
-    this.getPageItems();
-    this.initForm();
+    this.subscribeToRoute();
+    this.subscribeToPageItems();
   }
 
   onNavigate(pageId) {
@@ -39,17 +39,16 @@ export class RegisterComponent implements OnInit {
     }));
   }
 
-  getPageItems(): void {
+  subscribeToRoute(): void {
     this.store.pipe(select(fromStore.getCurrentPage)).subscribe((routeParams) => {
-      if (routeParams.pageId) {
+      if (routeParams.pageId && routeParams.pageId !== this.pageId) { // TODO see why double call.
         this.pageId = routeParams.pageId;
-        debugger;
         this.store.dispatch(new fromStore.LoadPageItems(this.pageId));
       }
     });
   }
 
-  initForm(): void {
+  subscribeToPageItems(): void {
     this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
         if (formData) {
