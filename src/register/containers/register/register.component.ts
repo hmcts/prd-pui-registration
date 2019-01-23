@@ -65,5 +65,9 @@ export class RegisterComponent implements OnInit {
     this.formDraft.setValidators(formGroupValidators);
   }
 
+  onPageContinue(event): void {
+    debugger
+  }
+
 }
 

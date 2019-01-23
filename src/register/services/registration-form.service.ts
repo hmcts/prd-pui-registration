@@ -27,6 +27,10 @@ const dummy = {
           },
           control: 'orgName',
           classes: ''
+        },
+        hiddenInput: {
+          control: 'nextPageUrl',
+          value: 'next-page'
         }
       },
 

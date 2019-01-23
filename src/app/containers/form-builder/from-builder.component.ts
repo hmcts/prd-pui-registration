@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -14,10 +14,13 @@ export class FromBuilderComponent implements OnInit {
   @Input() pageItems: any;
   @Input() useValidation = true;
 
+  @Output() submitPage = new EventEmitter<FormGroup>();
+
   ngOnInit(): void {
   }
 
-  onFormSubmit($event) {
-    debugger;
+  onFormSubmit() {
+    const { value } = this.formDraft;
+    this.submitPage.emit({ ...value });
   }
 }

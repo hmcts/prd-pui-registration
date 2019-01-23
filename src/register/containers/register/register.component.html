@@ -26,5 +26,6 @@
 <app-form-builder
   [formDraft]="formDraft"
   [pageItems]="pageItems"
-  [useValidation]="false" >
+  [useValidation]="false"
+  (submitPage)="onPageContinue($event)" >
 </app-form-builder>
