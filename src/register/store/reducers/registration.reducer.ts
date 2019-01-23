@@ -9,14 +9,12 @@ export interface PageItems {
 
 export interface RegistrationFormState {
   pages: {[id: string]: PageItems};
-  currentPage: string;
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: RegistrationFormState = {
   pages: {},
-  currentPage: '',
   loaded: false,
   loading: false,
 };
@@ -26,13 +24,7 @@ export function reducer(
   action: fromRegistration.RegistrationActions
 ): RegistrationFormState {
   switch (action.type) {
-    case fromRegistration.SET_CURRENT_PAGE: {
-      const currentPage = action.payload;
-      return {
-        ...state,
-        currentPage
-      };
-    }
+
     case fromRegistration.LOAD_PAGE_ITEMS: {
       return {
         ...state,
@@ -41,11 +33,14 @@ export function reducer(
     }
 
     case fromRegistration.LOAD_PAGE_ITEMS_SUCCSES: {
+      const pageId = action.payload.pageId;
+      const payload = action.payload.payload;
+
       const pages = {
         ...state.pages,
-        [state.currentPage]: action.payload,
+        [pageId]: payload,
         loaded: true
-      }
+      };
 
       return {
         ...state,

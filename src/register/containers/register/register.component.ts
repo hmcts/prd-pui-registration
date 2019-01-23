@@ -7,6 +7,7 @@ import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 /**
  * Bootstraps the Register Components
@@ -16,7 +17,7 @@ import {ActivatedRoute} from '@angular/router';
   selector: 'app-prd-register-component',
   templateUrl: './register.component.html',
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit {
 
   constructor(
     private formsService: FormsService,
@@ -30,19 +31,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   $formDraftSubscription: Subscription;
 
   ngOnInit(): void {
-    this.subscribeToRoute();
-
-    this.$formDraftSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
-      .subscribe(formData => {
-        this.pageItems = formData['meta'];
-        this.createForm(this.pageItems, formData['formValues']);
-    });
-  }
-
-  createForm(pageitems, pageValues) {
-    this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
-    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
-    this.formDraft.setValidators(formGroupValidators);
+    this.getPageItems();
+    this.initForm();
   }
 
   onNavigate(pageId) {
@@ -51,18 +41,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }));
   }
 
-  subscribeToRoute() {
-    this.route.paramMap.subscribe(snapshot => {
-      this.pageId = snapshot.get('pageId');
-      if (this.pageId) {
-        this.store.dispatch(new fromStore.SetCurrentPage(this.pageId));
+  getPageItems(): void {
+    this.store.pipe(take(1), select(fromStore.getCurrentPage)).subscribe((routeParams) => {
+      if (routeParams.pageId) {
+        this.pageId = routeParams.pageId;
         this.store.dispatch(new fromStore.LoadPageItems(this.pageId));
       }
     });
   }
 
-  ngOnDestroy(): void {
-    // this.$formDraftSubscription.unsubscribe();
+  initForm(): void {
+    this.store.pipe(take(1), select(fromStore.getCurrentPageItems))
+      .subscribe(formData => {
+        if (formData) {
+          this.pageItems = formData['meta'];
+          this.createForm(this.pageItems, formData['formValues']);
+        }
+      });
   }
+
+  createForm(pageitems, pageValues) {
+    this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
+    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
+    this.formDraft.setValidators(formGroupValidators);
+  }
+
 }
 

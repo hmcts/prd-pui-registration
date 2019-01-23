@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
+import * as fromRoot from '../../../app/store';
 import * as fromFeature from '../../store/reducers';
 import * as fromRegistration from '../../store/reducers/registration.reducer';
 
@@ -14,14 +15,14 @@ export const getRegistrationPages = createSelector(
 );
 
 export const getCurrentPage = createSelector(
-  getRegistrationState,
-  (state) => state.currentPage
+  fromRoot.getRouterState,
+  (router) => router.state.params
 );
 
 export const getCurrentPageItems = createSelector(
   getRegistrationPages,
-  getCurrentPage,
-  (state, current) => state[current]
+  fromRoot.getRouterState,
+  (state, router) => state[router.state.params.pageId]
 );
 
 
