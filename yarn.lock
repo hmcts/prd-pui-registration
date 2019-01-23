@@ -280,10 +280,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@hmcts/frontend@0.0.14-alpha":
-  version "0.0.14-alpha"
-  resolved "https://registry.yarnpkg.com/@hmcts/frontend/-/frontend-0.0.14-alpha.tgz#ebd5a8e85bf11a0473f02398ecece3321cf82953"
-  integrity sha512-gRaSJgF41A7SyL87nwf9dU/nFrB4OPT/xz4CwtJkkaxX0cLjUiAiNGr3ti6wLEaHviCh5Jjw8i5kMHWm9bGBFw==
+"@hmcts/frontend@0.0.24-alpha":
+  version "0.0.24-alpha"
+  resolved "https://registry.yarnpkg.com/@hmcts/frontend/-/frontend-0.0.24-alpha.tgz#7e4fb95f66d14b66c90f582a8c400c61d5c93879"
+  integrity sha512-fIjnBjNpbsNipnGXXUwbtpQn9fze+u27vpSX+dPfkyy7jCggYG2GINBdRJ/KqbFKiGeQYlqHcW9tKKapceN7mw==
 
 "@ngrx/effects@^6.0.3":
   version "6.1.2"
