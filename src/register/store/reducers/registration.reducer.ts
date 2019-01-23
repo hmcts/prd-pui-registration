@@ -1,10 +1,8 @@
 import * as fromRegistration from '../actions/registration.actions';
 
 export interface PageItems {
-  formData: any;
+  formValues: any;
   meta: any;
-  loaded: boolean;
-  loading: boolean;
 }
 
 export interface RegistrationFormState {
@@ -38,8 +36,7 @@ export function reducer(
 
       const pages = {
         ...state.pages,
-        [pageId]: payload,
-        loaded: true
+        [pageId]: payload
       };
 
       return {
@@ -49,7 +46,6 @@ export function reducer(
         loaded: true,
       };
     }
-
 
   }
 

@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
   formDraft: FormGroup;
   pageItems: any;
   pageId: string;
-  $formDraftSubscription: Subscription;
 
   ngOnInit(): void {
     this.getPageItems();
