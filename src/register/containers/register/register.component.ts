@@ -5,7 +5,6 @@ import {ValidationService} from '../../../app/containers/form-builder/services/f
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
-import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {take} from 'rxjs/operators';
 
@@ -41,16 +40,17 @@ export class RegisterComponent implements OnInit {
   }
 
   getPageItems(): void {
-    this.store.pipe(take(1), select(fromStore.getCurrentPage)).subscribe((routeParams) => {
+    this.store.pipe(select(fromStore.getCurrentPage)).subscribe((routeParams) => {
       if (routeParams.pageId) {
         this.pageId = routeParams.pageId;
+        debugger;
         this.store.dispatch(new fromStore.LoadPageItems(this.pageId));
       }
     });
   }
 
   initForm(): void {
-    this.store.pipe(take(1), select(fromStore.getCurrentPageItems))
+    this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
         if (formData) {
           this.pageItems = formData['meta'];
@@ -66,7 +66,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onPageContinue(event): void {
-    debugger
+    this.store.dispatch( new fromRoot.Go({
+      path: ['/register', event.nextUrl]
+    }));
   }
 
 }
