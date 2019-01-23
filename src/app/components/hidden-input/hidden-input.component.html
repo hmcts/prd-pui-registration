@@ -1,0 +1,8 @@
+<ng-container [formGroup]="group">
+    <input [class]="'govuk-input ' + item.classes"
+           [formControlName]="item.control"
+           [id]="item.control"
+           [name]="item.control"
+           [value]="value"
+           type="hidden">
+</ng-container>

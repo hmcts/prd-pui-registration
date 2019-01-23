@@ -29,8 +29,8 @@ const dummy = {
           classes: ''
         },
         hiddenInput: {
-          control: 'nextPageUrl',
-          value: 'next-page'
+          control: 'nextUrl',
+          value: 'next-page-url'
         }
       },
 
