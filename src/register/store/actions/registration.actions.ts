@@ -4,7 +4,7 @@ import {Action} from '@ngrx/store';
 export const SET_CURRENT_PAGE = '[Registration] Set Current Page';
 
 export const LOAD_PAGE_ITEMS = '[Registration] LoadPageItems';
-export const LOAD_PAGE_ITEMS_SUCCSES = '[Registration] LoadPageItems Success';
+export const LOAD_PAGE_ITEMS_SUCCESS = '[Registration] LoadPageItems Success';
 export const LOAD_PAGE_ITEMS_FAIL = '[Registration] LoadPageItems Fail';
 
 
@@ -19,7 +19,7 @@ export class LoadPageItems implements Action {
 }
 
 export class LoadPageItemsSuccess implements Action {
-  readonly type = LOAD_PAGE_ITEMS_SUCCSES;
+  readonly type = LOAD_PAGE_ITEMS_SUCCESS;
   constructor(public payload: any) {}
 }
 

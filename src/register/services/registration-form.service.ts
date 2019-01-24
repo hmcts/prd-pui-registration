@@ -236,7 +236,7 @@ const formObj = {
           }
         },
         {
-          hiddenInput: {
+            hiddenInput: {
             control: 'nextUrl',
             value: 'email-address'
           }
@@ -306,7 +306,7 @@ export class RegistrationFormService {
   getRetistrationFrom(pageId): Observable<any> {
 
     return of(formObj[pageId]);
-
+    // http service goes here
   }
 
 

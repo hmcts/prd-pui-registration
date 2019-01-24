@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormsService} from '../../../app/containers/form-builder/services/form-builder.service';
 import {ValidationService} from '../../../app/containers/form-builder/services/form-builder-validation.service';
@@ -7,6 +7,7 @@ import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute} from '@angular/router';
 import {take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -15,8 +16,9 @@ import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-prd-register-component',
   templateUrl: './register.component.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush // can't use because of back btn
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private formsService: FormsService,
@@ -27,6 +29,8 @@ export class RegisterComponent implements OnInit {
   formDraft: FormGroup;
   pageItems: any;
   pageId: string;
+  $routeSubscription: Subscription;
+  $pageItemsSubscritpion: Subscription;
 
   ngOnInit(): void {
     this.subscribeToRoute();
@@ -40,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   subscribeToRoute(): void {
-    this.store.pipe(select(fromStore.getCurrentPage)).subscribe((routeParams) => {
+    this.$routeSubscription = this.store.pipe(select(fromStore.getCurrentPage)).subscribe((routeParams) => {
       if (routeParams.pageId && routeParams.pageId !== this.pageId) { // TODO see why double call.
         this.pageId = routeParams.pageId;
         this.store.dispatch(new fromStore.LoadPageItems(this.pageId));
@@ -49,7 +53,7 @@ export class RegisterComponent implements OnInit {
   }
 
   subscribeToPageItems(): void {
-    this.store.pipe(select(fromStore.getCurrentPageItems))
+    this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
         if (formData) {
           this.pageItems = formData['meta'];
@@ -68,6 +72,11 @@ export class RegisterComponent implements OnInit {
     this.store.dispatch( new fromRoot.Go({
       path: ['/register', event.nextUrl]
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.$pageItemsSubscritpion.unsubscribe();
+    this.$routeSubscription.unsubscribe();
   }
 
 }
