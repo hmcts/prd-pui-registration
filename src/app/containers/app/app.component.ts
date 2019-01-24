@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import * as fromRoot from '../../store';
 import {Store} from '@ngrx/store';
-import * as fromStore from '../../../register/store';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,8 @@ import * as fromStore from '../../../register/store';
 export class AppComponent {
   constructor(private store: Store<fromRoot.State>) {}
 
-  onGoBack() {
-    this.store.dispatch(new fromRoot.Back())
+  onGoBack(event) {
+    event.preventDefault();
+    this.store.dispatch(new fromRoot.Back());
   }
 }
