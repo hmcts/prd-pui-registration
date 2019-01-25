@@ -1,17 +1,103 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-<div class="govuk-phase-banner">
-  <p class="govuk-phase-banner__content"><strong class="govuk-tag govuk-phase-banner__content__tag ">
-    alpha
-  </strong>
-    <span class="govuk-phase-banner__text">
-      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
-    </span>
-  </p>
+    <!-- start page START-->
+    <ng-container *ngIf="pageId === undefined">
+        <h1 class="govuk-heading-xl">Register to manage civil and family law cases</h1>
+        <p class="govuk-body">At the same time as you register your organisation, you'll give us details to create your user account.</p>
+        <p class="govuk-body">We’ll approve the registration within 3 working days and send you an email asking you to finish creating your account.</p>
+        <button (click)="onNavigate('organisation-name')" role="button" class="govuk-button govuk-button--start">Start</button>
+    </ng-container>
+    <!-- start page END-->
+
+    <app-form-builder *ngIf="pageId != 'check'"
+      [formDraft]="formDraft"
+      [pageItems]="pageItems"
+      [useValidation]="false"
+      (submitPage)="onPageContinue($event)" >
+    </app-form-builder>
+
+    <!--TODO add this as component -->
+    <div class="govuk-grid-column-two-thirds" *ngIf="pageId === 'check'">
+      <h1 class="govuk-heading-xl">Check your answers before you register</h1>
+      <dl class="govuk-check-your-answers  govuk-check-your-answers--short  govuk-!-margin-bottom-6">
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">Organisation name</dt>
+          <dd class="govuk-check-your-answers__answer">
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/organisation-name">Change <span class="govuk-visually-hidden">organisation name</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">Organisation address</dt>
+          <dd class="govuk-check-your-answers__answer">
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/organisation-address">Change <span class="govuk-visually-hidden">organistaion address</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">PBA number</dt>
+          <dd class="govuk-check-your-answers__answer">
+
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/organisation-pba">Change <span class="govuk-visually-hidden">PBA number</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">DX reference</dt>
+          <dd class="govuk-check-your-answers__answer">
+            <br>
+
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/organisation-address">Change <span class="govuk-visually-hidden">organistaion address</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">First name(s)</dt>
+          <dd class="govuk-check-your-answers__answer">
+
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/name">Change <span class="govuk-visually-hidden">name</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">Last name</dt>
+          <dd class="govuk-check-your-answers__answer">
+
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/name">Change <span class="govuk-visually-hidden">name</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-check-your-answers__contents">
+          <dt class="govuk-check-your-answers__question">Email address</dt>
+          <dd class="govuk-check-your-answers__answer">
+
+          </dd>
+          <dd class="govuk-check-your-answers__change">
+            <a href="/mvp/register-organisation/name">Change <span class="govuk-visually-hidden">name</span></a>
+          </dd>
+        </div>
+      </dl>
+      <h2 class="govuk-heading-l">Now submit your registration details</h2>
+      <p>You are confirming that the details you've given are accurate.</p>
+
+      <a href="" role="button" draggable="false" class="govuk-button">
+        Submit
+      </a>
+
+    </div>
+
+  </div>
 </div>
-
-
-<app-form-builder
-  [formDraft]="formDraft"
-  [pageItems]="pageItems"
-  [useValidation]="false" >
-</app-form-builder>

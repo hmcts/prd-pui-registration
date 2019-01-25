@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HmctsGlobalFooterComponent } from './hmcts-global-footer.component';
 import {helpData, navigationData} from './mock/hmcts-global-footer.mock';
 import {Component, DebugElement, Input, ViewChild} from '@angular/core';
-import {Helper, Navigation} from '../../../shared/components/footer/footer.model';
+import {Helper, Navigation} from '../../containers/footer/footer.model';
+
 
 describe('HmctsGlobalFooterComponent', () => {
     @Component({

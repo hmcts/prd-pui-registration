@@ -26,6 +26,10 @@
                   [hint]="data.input.hint"
                   [label]="data.input.label"
                   [labelFor]="data.input.control"></app-inputs>
+    <app-hidden-input *ngIf="data.hiddenInput"
+                      [item]="data.hiddenInput"
+                      [group]="group"
+                      [value]="data.hiddenInput.value"></app-hidden-input>
       <app-radiobutton *ngIf="data.radios" [classes]="'govuk-radios ' + data.radios.classes"
                        [items]="data.radios.radioGroup"
                        [group]="group"

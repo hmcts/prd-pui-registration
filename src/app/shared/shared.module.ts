@@ -17,6 +17,7 @@ import {CheckboxComponent} from '../components/checkbox/checkbox.component';
 import {TextareasComponent} from '../components/textareas/textareas.component';
 import {ButtonsComponent} from '../components/buttons/buttons.component';
 import {LabelComponent} from '../components/label/label.component';
+import {HiddenInputComponent} from '../components/hidden-input/hidden-input.component';
 
 
 @NgModule( {
@@ -39,6 +40,7 @@ import {LabelComponent} from '../components/label/label.component';
     TextareasComponent,
     ButtonsComponent,
     LabelComponent,
+    HiddenInputComponent
 
   ],
   exports: [
@@ -54,7 +56,8 @@ import {LabelComponent} from '../components/label/label.component';
     CheckboxComponent,
     TextareasComponent,
     ButtonsComponent,
-    LabelComponent
+    LabelComponent,
+    HiddenInputComponent
   ],
   providers: [
     FormsService,

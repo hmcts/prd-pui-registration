@@ -1,14 +1,22 @@
 import * as fromRegistration from '../actions/registration.actions';
 
+export interface PageItems {
+  formValues: any;
+  meta: any;
+  loading: boolean;
+  loaded: boolean;
+}
 
 export interface RegistrationFormState {
-  entities: any[];
+  pages: {[id: string]: PageItems};
+  pagesValues: {[id: string]: string}
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: RegistrationFormState = {
-  entities: [],
+  pages: {},
+  pagesValues: {},
   loaded: false,
   loading: false,
 };
@@ -18,51 +26,51 @@ export function reducer(
   action: fromRegistration.RegistrationActions
 ): RegistrationFormState {
   switch (action.type) {
-    case fromRegistration.LOAD_REGISTRATION_FORM: {
+
+    case fromRegistration.LOAD_PAGE_ITEMS: {
       return {
         ...state,
         loading: true,
       };
     }
 
-    case fromRegistration.LOAD_REGISTRATION_FORM_SUCCESS: {
-      const formData = action.payload;
+    case fromRegistration.LOAD_PAGE_ITEMS_SUCCESS: {
+      const pageId = action.payload.pageId;
+      const payload = action.payload.payload;
+      const pageItems = {
+        ...payload,
+        loaded: true,
+        loading: false
+      };
 
-      const entities = formData;
-
-      // const entities = pizzas.reduce(
-      //   (entities: { [id: number]: Pizza }, pizza: Pizza) => {
-      //     return {
-      //       ...entities,
-      //       [pizza.id]: pizza,
-      //     };
-      //   },
-      //   {
-      //     ...state.entities,
-      //   }
-      // );
+      const pages = {
+        ...state.pages,
+        [pageId]: pageItems
+      };
 
       return {
         ...state,
+        pages,
         loading: false,
         loaded: true,
-        entities,
       };
     }
 
-    case fromRegistration.LOAD_REGISTRATION_FORM_FAIL: {
+    case fromRegistration.SAVE_FORM_DATA: {
+      const pageId = action.payload.pageId;
+      const formValue = action.payload.formValues;
+
       return {
         ...state,
-        loading: false,
-        loaded: false,
-      };
+        [pageId]: formValue
+      }
     }
   }
 
   return state;
 }
 
-export const getRegistationFormEntities = (state: RegistrationFormState) => state.entities;
+export const getRegistationFormPages = (state: RegistrationFormState) => state.pages;
 export const getRegistrationFromLoading = (state: RegistrationFormState) => state.loading;
 export const getRegistrationPizzasLoaded = (state: RegistrationFormState) => state.loaded;
 
