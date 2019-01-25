@@ -13,7 +13,7 @@
     <app-form-builder *ngIf="pageId != 'check'"
       [formDraft]="formDraft"
       [pageItems]="pageItems"
-      [useValidation]="false"
+      [useValidation]="true"
       (submitPage)="onPageContinue($event)" >
     </app-form-builder>
 
