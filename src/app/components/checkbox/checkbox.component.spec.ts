@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxComponent } from './checkbox.component';
 import {Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement, Input, ViewChild} from '@angular/core';
 import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Selector} from '../../selector-helper';
 
 describe('CheckboxComponent', () => {
     @Component({

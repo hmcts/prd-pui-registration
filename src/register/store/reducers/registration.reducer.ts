@@ -9,12 +9,14 @@ export interface PageItems {
 
 export interface RegistrationFormState {
   pages: {[id: string]: PageItems};
+  pagesValues: {[id: string]: string}
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: RegistrationFormState = {
   pages: {},
+  pagesValues: {},
   loaded: false,
   loading: false,
 };
@@ -39,7 +41,7 @@ export function reducer(
         ...payload,
         loaded: true,
         loading: false
-      }
+      };
 
       const pages = {
         ...state.pages,
@@ -54,6 +56,15 @@ export function reducer(
       };
     }
 
+    case fromRegistration.SAVE_FORM_DATA: {
+      const pageId = action.payload.pageId;
+      const formValue = action.payload.formValues;
+
+      return {
+        ...state,
+        [pageId]: formValue
+      }
+    }
   }
 
   return state;

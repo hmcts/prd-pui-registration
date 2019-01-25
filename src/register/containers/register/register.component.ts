@@ -69,6 +69,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onPageContinue(event): void {
+
+    this.store.dispatch(new fromStore.SaveFormData({pageId: this.pageId, formValues: event}));
+
     this.store.dispatch( new fromRoot.Go({
       path: ['/register', event.nextUrl]
     }));
