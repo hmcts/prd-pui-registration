@@ -1,5 +1,5 @@
 // Recommended - Use these styles for the check your answers pattern
-.app-check-your-answers {
+.govuk-check-your-answers {
 
   @include govuk-font(19);
 
@@ -8,29 +8,29 @@
   }
 }
 
-.app-check-your-answers--short {
+.govuk-check-your-answers--short {
   @include govuk-media-query($from: desktop) {
     // to make group of q&a line up horizontally (unless there is just one group)
     width: 100%;
     // recommended for mostly short questions
-    .app-check-your-answers__question {
+    .govuk-check-your-answers__question {
       width: 30%;
     }
   }
 }
 
-.app-check-your-answers--long {
+.govuk-check-your-answers--long {
   @include govuk-media-query($from: desktop) {
     // to make group of q&a line up horizontally (unless there is just one group)
     width: 100%;
     // recommended for mostly long questions
-    .app-check-your-answers__question {
+    .govuk-check-your-answers__question {
       width: 50%;
     }
   }
 }
 
-.app-check-your-answers__contents {
+.govuk-check-your-answers__contents {
   position: relative;
   border-bottom: 1px solid $govuk-border-colour;
 
@@ -40,17 +40,17 @@
   }
 }
 
-.app-check-your-answers__contents:first-child .app-check-your-answers__question,
-.app-check-your-answers__contents:first-child .app-check-your-answers__answer,
-.app-check-your-answers__contents:first-child .app-check-your-answers__change {
+.govuk-check-your-answers__contents:first-child .govuk-check-your-answers__question,
+.govuk-check-your-answers__contents:first-child .govuk-check-your-answers__answer,
+.govuk-check-your-answers__contents:first-child .govuk-check-your-answers__change {
   @include govuk-media-query($from: desktop) {
     padding-top: 0;
   }
 }
 
-.app-check-your-answers__question,
-.app-check-your-answers__answer,
-.app-check-your-answers__change {
+.govuk-check-your-answers__question,
+.govuk-check-your-answers__answer,
+.govuk-check-your-answers__change {
   display: block;
   margin: 0;
   @include govuk-media-query($from: desktop) {
@@ -60,17 +60,17 @@
   }
 }
 
-.app-check-your-answers__question {
+.govuk-check-your-answers__question {
   font-weight: bold;
   margin: govuk-em(12, 19) 4em govuk-em(4,19) 0;
-  // using margin instead of padding because of easier absolutely positioning of .app-check-your-answers__change
+  // using margin instead of padding because of easier absolutely positioning of .govuk-check-your-answers__change
 }
 
-.app-check-your-answers__answer {
+.govuk-check-your-answers__answer {
   padding-bottom: govuk-em(9, 19);
 }
 
-.app-check-your-answers__change {
+.govuk-check-your-answers__change {
   text-align: right;
   position: absolute;
   top: 0;
