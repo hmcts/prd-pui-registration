@@ -11,12 +11,13 @@ function payload(req, res,store) {
 }
 
 async function handleStateRoute(req, res) {
-    process(req, res, mapping, templates, payload, new Store(req))
+    console.log('reached')
+    process(req, res, mapping, payload, templates, new Store(req))
 }
 
-export default app => {
-    const router = express.Router({ mergeParams: true })
+export  const router = express.Router({ mergeParams: true })
 
-    router.get('/:jurId/:caseTypeId/:caseId/:stateId', handleStateRoute)
-    router.post('/:jurId/:caseTypeId/:caseId/:stateId', handleStateRoute)
-}
+router.get('/states/:jurId/:caseTypeId/:caseId/:stateId', handleStateRoute)
+router.post('/states/:jurId/:caseTypeId/:caseId/:stateId', handleStateRoute)
+
+export default router

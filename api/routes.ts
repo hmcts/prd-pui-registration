@@ -1,5 +1,8 @@
+import * as express from 'express'
 import stateRouter from './states'
 
-export default app => {
-    app.use('/states', stateRouter)
-}
+const router = express.Router({ mergeParams: true })
+
+router.use('/decisions', stateRouter)
+
+export default router

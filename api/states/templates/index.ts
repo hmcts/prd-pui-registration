@@ -1,5 +1,9 @@
-import start from './organisation'
+import organisationName from './organisationName'
 
-export default {
-    start,
+const templates: any = []
+
+templates.any = {
+    'organisation-name' : organisationName,
 }
+
+export default templates

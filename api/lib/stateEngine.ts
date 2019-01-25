@@ -1,6 +1,6 @@
 import * as log4js from 'log4js'
 import { map } from 'p-iteration'
-import { config } from '../../config'
+import config from './config'
 import { some } from './util'
 
 import { forwardStack, pushStack, shiftStack, stackEmpty } from '../lib/stack'
@@ -50,7 +50,7 @@ export function handleInstruction(instruction, stateId, variables) {
         logger.info(`Instruction result without state: ${instruction.result} `)
         return instruction.result
     }
-    return null
+
 }
 
 export function getRegister(mapping) {
@@ -62,6 +62,10 @@ export async function process(req, res, mapping, payload, templates, store) {
     const caseId = req.params.caseId
     const caseTypeId = req.params.caseTypeId.toLowerCase()
     const stateId = req.params.stateId
+
+    if (!req.body) {
+        req.body = {}
+    }
 
     const event = req.body.event
     let variables = req.body.formValues
@@ -128,6 +132,7 @@ export async function process(req, res, mapping, payload, templates, store) {
             return
         }
 
+        console.log(templates)
         meta = templates[caseTypeId][stateId]
         result = true
     }
