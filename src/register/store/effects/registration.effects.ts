@@ -15,11 +15,12 @@ export class RegistrationEffects {
 
   @Effect()
   loadRegistrationForm$ = this.actions$.pipe(
-    ofType(registrationActions.LOAD_REGISTRATION_FORM),
-    switchMap(() => {
-      return this.registrationService.getRetistrationFrom().pipe(
-        map(regForm => new registrationActions.LoadRegistrationFormSuccsess(regForm)),
-        catchError(error => of(new registrationActions.LoadRegistrationFormFail(error)))
+    ofType(registrationActions.LOAD_PAGE_ITEMS),
+    map((action: registrationActions.LoadPageItems) => action.payload),
+    switchMap((pageId) => {
+      return this.registrationService.getRetistrationFrom(pageId).pipe(
+        map(returnedItems => new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId})),
+        catchError(error => of(new registrationActions.LoadPageItemsSuccess(error)))
       );
     })
   );
