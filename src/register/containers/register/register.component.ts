@@ -7,7 +7,7 @@ import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute} from '@angular/router';
 import {take} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -31,10 +31,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   pageId: string;
   $routeSubscription: Subscription;
   $pageItemsSubscritpion: Subscription;
+  formData;
 
   ngOnInit(): void {
     this.subscribeToRoute();
     this.subscribeToPageItems();
+    this.store.pipe(select((state: any) => state.registration.registration.pagesValues.formValue))
+      .subscribe((data) => {
+        this.formData = data;
+    });
   }
 
   onNavigate(pageId) {

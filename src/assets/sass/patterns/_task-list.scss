@@ -1,7 +1,7 @@
 // Task list pattern
 
 // Override column width for tablet and up
-.app-column-minimum {
+.govuk-column-minimum {
   @include govuk-media-query($from: tablet) {
     min-width: 600px;
   }
@@ -10,7 +10,7 @@
 // Spacing to the left of the task list
 $task-list-indent: 35px;
 
-.app-task-list {
+.govuk-task-list {
   list-style: none;
   padding: 0;
   margin-top: $govuk-gutter;
@@ -19,7 +19,7 @@ $task-list-indent: 35px;
   }
 }
 
-.app-task-list__section {
+.govuk-task-list__section {
   display: table;
 
   @include govuk-font(24, $weight: bold);
@@ -27,7 +27,7 @@ $task-list-indent: 35px;
   padding-bottom: ($govuk-gutter / 6);
 }
 
-.app-task-list__section-number {
+.govuk-task-list__section-number {
   display: table-cell;
   padding-right: ($govuk-gutter / 6);
 
@@ -38,7 +38,7 @@ $task-list-indent: 35px;
 }
 
 
-.app-task-list__items {
+.govuk-task-list__items {
   list-style: none;
   padding: 0;
   margin-bottom: $govuk-gutter;
@@ -51,22 +51,22 @@ $task-list-indent: 35px;
   }
 }
 
-.app-task-list__item {
+.govuk-task-list__item {
   border-bottom: 1px solid $govuk-border-colour;
   padding-top: govuk-spacing(2);
   padding-bottom: govuk-spacing(2);
   @include govuk-clearfix
 }
 
-.app-task-list__item:first-child {
+.govuk-task-list__item:first-child {
   border-top: 1px solid $govuk-border-colour;
 }
 
-.app-task-list__task-name {
+.govuk-task-list__task-name {
   width: 33.3%;
   float: left;
 }
 
-.app-task-list__task-completed {
+.govuk-task-list__task-completed {
   float: right;
 }
