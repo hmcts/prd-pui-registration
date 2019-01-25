@@ -14,6 +14,12 @@ export const getRegistrationPages = createSelector(
   fromRegistration.getRegistationFormPages
 );
 
+export const getRegistrationPagesValues = createSelector(
+  getRegistrationState,
+  fromRegistration.getRegistationFormPagesValues
+);
+
+
 export const getCurrentPage = createSelector(
   fromRoot.getRouterState,
   (router) => router.state.params
@@ -22,7 +28,18 @@ export const getCurrentPage = createSelector(
 export const getCurrentPageItems = createSelector(
   getRegistrationPages,
   fromRoot.getRouterState,
-  (state, router) => state[router.state.params.pageId]
+  getRegistrationPagesValues,
+  (state, router, pageValues) => {
+    // if (pageValues['formValue']) {
+    //     delete pageValues['formValue'].nextUrl;
+    //
+    // }
+    return {
+      pageItems: state[router.state.params.pageId],
+      pageValues
+    };
+
+  }
 );
 
 

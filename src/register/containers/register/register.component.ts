@@ -55,9 +55,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   subscribeToPageItems(): void {
     this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
-        if (formData) {
-          this.pageItems = formData['meta'];
-          this.createForm(this.pageItems, formData['formValues']);
+        const formValues = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : {}
+        if (formData.pageItems) {
+          this.pageItems = formData.pageItems['meta'];
+          this.createForm(this.pageItems, formValues);
         }
       });
   }
@@ -69,11 +70,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onPageContinue(event): void {
-
+    const nextUrl = event.nextUrl;
+    delete event.nextUrl; // removing nextUrl for it not to get overwriten in formValuse
     this.store.dispatch(new fromStore.SaveFormData({pageId: this.pageId, formValues: event}));
 
     this.store.dispatch( new fromRoot.Go({
-      path: ['/register', event.nextUrl]
+      path: ['/register', nextUrl]
     }));
   }
 
