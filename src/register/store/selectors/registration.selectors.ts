@@ -30,10 +30,6 @@ export const getCurrentPageItems = createSelector(
   fromRoot.getRouterState,
   getRegistrationPagesValues,
   (state, router, pageValues) => {
-    // if (pageValues['formValue']) {
-    //     delete pageValues['formValue'].nextUrl;
-    //
-    // }
     return {
       pageItems: state[router.state.params.pageId],
       pageValues

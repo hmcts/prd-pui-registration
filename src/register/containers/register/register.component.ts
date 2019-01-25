@@ -58,7 +58,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const formValues = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : {}
         if (formData.pageItems) {
           this.pageItems = formData.pageItems['meta'];
-          this.createForm(this.pageItems, formValues);
+          if (this.pageId !== 'check') {
+            this.createForm(this.pageItems, formValues);
+          }
         }
       });
   }
