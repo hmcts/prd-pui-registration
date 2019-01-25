@@ -9,7 +9,7 @@ export interface PageItems {
 
 export interface RegistrationFormState {
   pages: {[id: string]: PageItems};
-  pagesValues: {[id: string]: string}
+  pagesValues: Object;
   loaded: boolean;
   loading: boolean;
 }
@@ -59,10 +59,14 @@ export function reducer(
     case fromRegistration.SAVE_FORM_DATA: {
       const pageId = action.payload.pageId;
       const formValue = action.payload.formValues;
+      const pagesValues = {
+        ...state.pagesValues,
+        formValue
+      };
 
       return {
         ...state,
-        [pageId]: formValue
+        pagesValues
       }
     }
   }
@@ -71,6 +75,7 @@ export function reducer(
 }
 
 export const getRegistationFormPages = (state: RegistrationFormState) => state.pages;
+export const getRegistationFormPagesValues = (state: RegistrationFormState) => state.pagesValues;
 export const getRegistrationFromLoading = (state: RegistrationFormState) => state.loading;
 export const getRegistrationPizzasLoaded = (state: RegistrationFormState) => state.loaded;
 
