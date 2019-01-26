@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         if (formData.pageItems) {
           this.pageItems = formData.pageItems['meta'];
           if (this.pageId !== 'check') {
+            // move this on FB level
             this.createForm(this.pageItems, formValues);
           }
         }

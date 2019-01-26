@@ -19,7 +19,6 @@ export const getRegistrationPagesValues = createSelector(
   fromRegistration.getRegistationFormPagesValues
 );
 
-
 export const getCurrentPage = createSelector(
   fromRoot.getRouterState,
   (router) => router.state.params
