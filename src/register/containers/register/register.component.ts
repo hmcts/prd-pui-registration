@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private store: Store<fromStore.RegistrationState>) {}
 
   formDraft: FormGroup;
-  pageItems: any;
+  pageItems: any; // todo add the type
+  pageValues: any;
   pageId: string;
   $routeSubscription: Subscription;
   $pageItemsSubscritpion: Subscription;
@@ -63,19 +64,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const formValues = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : {}
         if (formData.pageItems) {
           this.pageItems = formData.pageItems['meta'];
-          if (this.pageId !== 'check') {
-            // move this on FB level
-            this.createForm(this.pageItems, formValues);
-          }
+            this.pageValues = formValues;
         }
       });
   }
 
-  createForm(pageitems, pageValues) {
-    this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
-    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
-    this.formDraft.setValidators(formGroupValidators);
-  }
 
   onPageContinue(event): void {
     const nextUrl = event.nextUrl;
