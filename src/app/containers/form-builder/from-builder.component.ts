@@ -26,6 +26,7 @@ export class FromBuilderComponent implements OnInit, OnChanges {
   @Output() submitPage = new EventEmitter<FormGroup>();
 
   formDraft: FormGroup;
+  isValid: boolean;
 
   ngOnInit(): void {
   }
@@ -38,8 +39,11 @@ export class FromBuilderComponent implements OnInit, OnChanges {
 
   createForm() {
     this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, this.pageValues));
+
     const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, this.pageItems.formGroupValidators);
     this.formDraft.setValidators(formGroupValidators);
+
+    this.isValid = this.formDraft.status === 'VALID';
   }
 
   onFormSubmit() {

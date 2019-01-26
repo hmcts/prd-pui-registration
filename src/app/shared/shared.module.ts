@@ -18,6 +18,7 @@ import {TextareasComponent} from '../components/textareas/textareas.component';
 import {ButtonsComponent} from '../components/buttons/buttons.component';
 import {LabelComponent} from '../components/label/label.component';
 import {HiddenInputComponent} from '../components/hidden-input/hidden-input.component';
+import {ValidationHeaderComponent} from '../components/validation-header/validation-header.component';
 
 
 @NgModule( {
@@ -40,7 +41,8 @@ import {HiddenInputComponent} from '../components/hidden-input/hidden-input.comp
     TextareasComponent,
     ButtonsComponent,
     LabelComponent,
-    HiddenInputComponent
+    HiddenInputComponent,
+    ValidationHeaderComponent
 
   ],
   exports: [
@@ -57,7 +59,8 @@ import {HiddenInputComponent} from '../components/hidden-input/hidden-input.comp
     TextareasComponent,
     ButtonsComponent,
     LabelComponent,
-    HiddenInputComponent
+    HiddenInputComponent,
+    ValidationHeaderComponent
   ],
   providers: [
     FormsService,

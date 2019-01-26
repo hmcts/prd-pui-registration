@@ -26,6 +26,7 @@ const formObj = {
                 text: '',
                 classes: 'govuk-label--m'
               },
+              validators: ['required'],
               control: 'orgName',
               classes: ''
             },

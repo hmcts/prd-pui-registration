@@ -1,3 +1,8 @@
+<ng-container *ngIf="useValidation && formDraft.invalid">
+  <app-validation-header [validationHeaderErrorMessages]="this.pageItems.validationHeaderErrorMessages" [formGroup]="formDraft">
+  </app-validation-header>
+</ng-container>
+
 <form *ngIf="pageItems" [formGroup]="formDraft" (ngSubmit)="onFormSubmit()">
   <div [ngClass]="{'govuk-form-group':true, 'govuk-form-group--error' : useValidation && formDraft.invalid }">
     <h1 class="govuk-heading-xl">

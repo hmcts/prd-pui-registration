@@ -36,12 +36,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
-  onNavigate(pageId) {
-    this.store.dispatch( new fromRoot.Go({
-      path: ['/register', pageId]
-    }));
-  }
-
   subscribeToRoute(): void {
     this.$routeSubscription = this.store.pipe(select(fromStore.getCurrentPage)).subscribe((routeParams) => {
       if (routeParams.pageId && routeParams.pageId !== this.pageId) { // TODO see why double call.
@@ -54,8 +48,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   subscribeToPageItems(): void {
     this.$pageItemsSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
-        this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : {};
-        this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
+        if(this.pageId){
+          this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
+          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
+
+        }
+
       });
   }
 
