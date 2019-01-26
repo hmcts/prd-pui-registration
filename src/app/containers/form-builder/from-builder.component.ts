@@ -3,6 +3,12 @@ import {FormGroup} from '@angular/forms';
 import {FormsService} from './services/form-builder.service';
 import {ValidationService} from './services/form-builder-validation.service';
 
+/**
+ * Form Builder Wrapper
+ *
+ */
+
+
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html'
@@ -17,7 +23,6 @@ export class FromBuilderComponent implements OnInit, OnChanges {
   @Input() pageItems: any;
   @Input() pageValues: any;
   @Input() useValidation = true;
-
   @Output() submitPage = new EventEmitter<FormGroup>();
 
   formDraft: FormGroup;
