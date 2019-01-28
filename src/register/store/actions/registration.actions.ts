@@ -33,7 +33,7 @@ export class LoadPageItemsFail implements Action {
 
 export class SaveFormData implements Action {
   readonly type = SAVE_FORM_DATA;
-  constructor(public payload: {pageId: string; formValues: Object}) {}
+  constructor(public payload: Object) {}
 }
 
 

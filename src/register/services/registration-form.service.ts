@@ -19,6 +19,26 @@ const formObj = {
         'name': 'organisation-name',
         'header': 'What\'s the name of your organisation?',
         'formGroupValidators': [],
+        'validationHeaderErrorMessages': [
+          // {
+          //   validationLevel: 'formControl',
+          //   controlId: 'orgName',
+          //   text: 'Enter organisation name',
+          //   href: '/register/organisation-name'
+          // },
+          // {
+          //   validationLevel: 'formControl',
+          //   controlId: 'officeAddressOne',
+          //   text: 'Enter office address',
+          //   href: '/register/organisation-address'
+          // },
+          // {
+          //   validationLevel: 'formControl',
+          //   controlId: 'emailAddress',
+          //   text: 'Enter office address',
+          //   href: '/register/organisation-address'
+          // }
+        ],
         'groups': [
           {
             input: {
@@ -26,6 +46,7 @@ const formObj = {
                 text: '',
                 classes: 'govuk-label--m'
               },
+              validators: ['required'],
               control: 'orgName',
               classes: ''
             },
@@ -80,7 +101,7 @@ const formObj = {
         },
         {
           input: {
-            validators: ['required'],
+            // validators: ['required'],
             validationError: {
               value: 'Enter the length of hearing in minutes, for example "20"',
               controlId: 'officeAddressTwo'

@@ -1,13 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FormsService} from '../../../app/containers/form-builder/services/form-builder.service';
-import {ValidationService} from '../../../app/containers/form-builder/services/form-builder-validation.service';
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute} from '@angular/router';
-import {take} from 'rxjs/operators';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -21,17 +17,15 @@ import {Observable, Subscription} from 'rxjs';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
-    private formsService: FormsService,
-    private validationService: ValidationService,
     private route: ActivatedRoute,
     private store: Store<fromStore.RegistrationState>) {}
 
-  formDraft: FormGroup;
-  pageItems: any;
+  pageItems: any; // todo add the type
+  pageValues: any;
   pageId: string;
   $routeSubscription: Subscription;
-  $pageItemsSubscritpion: Subscription;
-  formData;
+  $pageItemsSubscription: Subscription;
+  formData; // todo add the type or make this observable using async pipe in html
 
   ngOnInit(): void {
     this.subscribeToRoute();
@@ -40,12 +34,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.formData = data;
     });
-  }
-
-  onNavigate(pageId) {
-    this.store.dispatch( new fromRoot.Go({
-      path: ['/register', pageId]
-    }));
   }
 
   subscribeToRoute(): void {
@@ -58,28 +46,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   subscribeToPageItems(): void {
-    this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
+    this.$pageItemsSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
-        const formValues = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : {}
-        if (formData.pageItems) {
-          this.pageItems = formData.pageItems['meta'];
-          if (this.pageId !== 'check') {
-            this.createForm(this.pageItems, formValues);
-          }
+        if(this.pageId){
+          this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
+          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
+
         }
+
       });
   }
 
-  createForm(pageitems, pageValues) {
-    this.formDraft = new FormGroup(this.formsService.defineformControls(pageitems, pageValues));
-    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, pageitems.formGroupValidators);
-    this.formDraft.setValidators(formGroupValidators);
-  }
 
   onPageContinue(event): void {
     const nextUrl = event.nextUrl;
-    delete event.nextUrl; // removing nextUrl for it not to get overwriten in formValuse
-    this.store.dispatch(new fromStore.SaveFormData({pageId: this.pageId, formValues: event}));
+    delete event.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
+    this.store.dispatch(new fromStore.SaveFormData( event));
 
     this.store.dispatch( new fromRoot.Go({
       path: ['/register', nextUrl]
@@ -87,7 +69,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$pageItemsSubscritpion.unsubscribe();
+    this.$pageItemsSubscription.unsubscribe();
     this.$routeSubscription.unsubscribe();
   }
 

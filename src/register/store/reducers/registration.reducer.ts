@@ -57,17 +57,15 @@ export function reducer(
     }
 
     case fromRegistration.SAVE_FORM_DATA: {
-      const pageId = action.payload.pageId;
-      const formValue = action.payload.formValues;
       const pagesValues = {
         ...state.pagesValues,
-        formValue
+        formValue: action.payload
       };
 
       return {
         ...state,
         pagesValues
-      }
+      };
     }
   }
 
