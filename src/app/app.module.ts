@@ -22,6 +22,7 @@ import * as fromContainers from './containers/';
 import * as fromComponents from './components';
 
 import {environment} from '../environments/environment';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/register' },
@@ -40,6 +41,8 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
