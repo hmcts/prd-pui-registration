@@ -1,5 +1,7 @@
-<ng-container [formGroup]="group">
-    <input [class]="'govuk-input ' + item.classes"
+<ng-container
+  [formGroup]="group">
+    <input
+           [ngClass]=" { 'govuk-input ': true }[item.classes]"
            [formControlName]="item.control"
            [id]="item.control"
            [name]="item.control"
