@@ -24,16 +24,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   pageValues: any;
   pageId: string;
   $routeSubscription: Subscription;
-  $pageItemsSubscription: Subscription;
-  formData; // todo add the type or make this observable using async pipe in html
+  $pageItemsSubscritpion: Subscription;
+  formData;
 
   ngOnInit(): void {
     this.subscribeToRoute();
     this.subscribeToPageItems();
-    this.store.pipe(select((state: any) => state.registration.registration.pagesValues.formValue))
-      .subscribe((data) => {
-        this.formData = data;
-    });
+    this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
   }
 
   subscribeToRoute(): void {

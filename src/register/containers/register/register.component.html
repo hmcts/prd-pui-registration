@@ -16,15 +16,15 @@
       [useValidation]="true"
       (submitPage)="onPageContinue($event)" >
     </app-form-builder>
-
     <!--TODO add this as component -->
-    <ng-container *ngIf="formData && (pageId === 'check' && formData.length != 0)">
+    <ng-container *ngIf="(data$ | async).length !== 0 ">
+    <div class="govuk-grid-column-two-thirds" *ngIf="pageId === 'check'">
       <h1 class="govuk-heading-xl">Check your answers before you register</h1>
       <dl class="govuk-check-your-answers  govuk-check-your-answers--short  govuk-!-margin-bottom-6">
         <div class="govuk-check-your-answers__contents">
           <dt class="govuk-check-your-answers__question">Organisation name</dt>
           <dd class="govuk-check-your-answers__answer">
-            {{ formData.orgName}}
+            {{ (data$ | async).formValue.orgName }}
           </dd>
           <dd class="govuk-check-your-answers__change">
             <a [routerLink]="'/register/organisation-name'">Change <span class="govuk-visually-hidden">organisation name</span></a>
@@ -34,13 +34,13 @@
         <div class="govuk-check-your-answers__contents">
           <dt class="govuk-check-your-answers__question">Organisation address</dt>
           <dd class="govuk-check-your-answers__answer">
-            {{ formData.officeAddressOne }} <br />
-            {{ formData.officeAddressTwo }} <br />
-            {{ formData.townOrCity }} <br />
-            {{ formData.county }} <br />
-            {{ formData.postcode }} <br />
-            {{ formData.officeAddressOne }} <br />
-            {{ formData.officeAddressTwo }}
+            {{ (data$ | async).formValue.officeAddressOne }} <br />
+            {{ (data$ | async).formValue.officeAddressTwo }} <br />
+            {{ (data$ | async).formValue.townOrCity }} <br />
+            {{ (data$ | async).formValue.county }} <br />
+            {{ (data$ | async).formValue.postcode }} <br />
+            {{ (data$ | async).formValue.officeAddressOne }} <br />
+            {{ (data$ | async).formValue.officeAddressTwo }}
           </dd>
           <dd class="govuk-check-your-answers__change">
             <a [routerLink]="'/register/organisation-address'" >Change <span class="govuk-visually-hidden">organistaion address</span></a>
@@ -50,8 +50,8 @@
         <div class="govuk-check-your-answers__contents">
           <dt class="govuk-check-your-answers__question">PBA number</dt>
           <dd class="govuk-check-your-answers__answer">
-            {{ formData.PBAnumber1 }} <br />
-            {{ formData.PBAnumber2 }}
+            {{ (data$ | async).formValue.PBAnumber1 }} <br />
+            {{ (data$ | async).formValue.PBAnumber2 }}
           </dd>
           <dd class="govuk-check-your-answers__change">
             <a [routerLink]="'/register/pba-number'">Change <span class="govuk-visually-hidden">PBA number</span></a>
@@ -61,8 +61,8 @@
         <div class="govuk-check-your-answers__contents">
           <dt class="govuk-check-your-answers__question">DX reference</dt>
           <dd class="govuk-check-your-answers__answer">
-            {{ formData.DXnumber }}<br>
-            {{ formData.DXexchange }}
+            {{ (data$ | async).formValue.DXnumber }} <br>
+            {{ (data$ | async).formValue.DXexchange }}
           </dd>
           <dd class="govuk-check-your-answers__change">
             <a [routerLink]="'/register/DXreference'">Change <span class="govuk-visually-hidden">DX reference</span></a>
@@ -72,7 +72,7 @@
         <div class="govuk-check-your-answers__contents">
           <dt class="govuk-check-your-answers__question">Email address</dt>
           <dd class="govuk-check-your-answers__answer">
-            {{ formData.emailAddress }}
+            {{ (data$ | async).formValue.emailAddress }}
           </dd>
           <dd class="govuk-check-your-answers__change">
             <a  [routerLink]="'/register/email-address'">Change <span class="govuk-visually-hidden">email address</span></a>
