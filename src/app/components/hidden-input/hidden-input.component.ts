@@ -8,7 +8,10 @@ import {ValidationService} from '../../containers/form-builder/services/form-bui
 })
 export class HiddenInputComponent {
     @Input() group: FormGroup;
-    @Input() item;
+    @Input() item: {
+      control: string;
+      classes: Array<string>
+    };
     @Input() value;
 
     constructor() {
