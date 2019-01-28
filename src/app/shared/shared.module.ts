@@ -19,6 +19,7 @@ import {ButtonsComponent} from '../components/buttons/buttons.component';
 import {LabelComponent} from '../components/label/label.component';
 import {HiddenInputComponent} from '../components/hidden-input/hidden-input.component';
 import {ValidationHeaderComponent} from '../components/validation-header/validation-header.component';
+import {ValidationErrorFormControlComponent} from '../components/validation-error-formcontrol/validation-error-formcontrol.component';
 
 const COMPONENTS = [
   ValidationErrorFormGroupComponent,
@@ -35,7 +36,8 @@ const COMPONENTS = [
   ButtonsComponent,
   LabelComponent,
   HiddenInputComponent,
-  ValidationHeaderComponent
+  ValidationHeaderComponent,
+  ValidationErrorFormControlComponent
 ];
 
 @NgModule( {

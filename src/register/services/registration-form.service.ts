@@ -259,6 +259,63 @@ const formObj = {
         {
             hiddenInput: {
             control: 'nextUrl',
+            value: 'name'
+          }
+        },
+        {
+          button: {
+            control: 'createButton',
+            value: 'Continue',
+            type: 'submit',
+            classes: '',
+            onEvent: 'continue'
+          }
+        }
+      ]
+    }
+  },
+
+  'name': {
+    'formValues': {
+      'approveDraftConsent': 'no',
+      'visitedPages': {
+        'create': true
+      },
+      'notesForAdmin': ''
+    },
+    'meta': {
+      'idPrefix': 'tbc',
+      'name': 'whatsYourName',
+      'header': 'What\'s your name?',
+      'formGroupValidators': [],
+      groups: [
+        {
+          input: {
+            label: {
+              text: 'First name(s)',
+              classes: 'govuk-label--m'
+            },
+            hint: {
+              text: 'Include all middle names.',
+              classes: 'govuk-hint'
+            },
+            control: 'firstName',
+            classes: 'govuk-!-width-two-thirds'
+          }
+        },
+        {
+          input: {
+            label: {
+              text: 'Last name',
+              classes: 'govuk-label--m'
+            },
+            control: 'lastName',
+            classes: 'govuk-!-width-two-thirds'
+          }
+        },
+        {
+          hiddenInput: {
+            control: 'nextUrl',
             value: 'email-address'
           }
         },
