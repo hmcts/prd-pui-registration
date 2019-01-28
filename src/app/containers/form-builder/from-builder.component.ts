@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormsService} from './services/form-builder.service';
 import {ValidationService} from './services/form-builder-validation.service';
+import {Subscription} from 'rxjs';
 
 /**
  * Form Builder Wrapper
@@ -14,7 +15,7 @@ import {ValidationService} from './services/form-builder-validation.service';
   templateUrl: './form-builder.component.html'
 })
 
-export class FromBuilderComponent implements OnInit, OnChanges {
+export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private formsService: FormsService,
@@ -26,9 +27,14 @@ export class FromBuilderComponent implements OnInit, OnChanges {
   @Output() submitPage = new EventEmitter<FormGroup>();
 
   formDraft: FormGroup;
-  isValid: boolean;
+  formSubscirption: Subscription;
 
   ngOnInit(): void {
+    this.createForm();
+    this.formSubscirption = this.formDraft.valueChanges.subscribe(values => {
+      this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, values));
+      this.setValidators();
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,15 +45,21 @@ export class FromBuilderComponent implements OnInit, OnChanges {
 
   createForm() {
     this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, this.pageValues));
+    this.setValidators();
+  }
 
+  setValidators(): void {
     const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, this.pageItems.formGroupValidators);
     this.formDraft.setValidators(formGroupValidators);
-
-    this.isValid = this.formDraft.status === 'VALID';
   }
 
   onFormSubmit() {
     const { value } = this.formDraft;
     this.submitPage.emit({ ...value });
+  }
+
+  ngOnDestroy(): void {
+    // todo
+    // this.formSubscirption.unsubscribe();
   }
 }

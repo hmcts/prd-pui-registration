@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
