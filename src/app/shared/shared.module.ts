@@ -20,6 +20,23 @@ import {LabelComponent} from '../components/label/label.component';
 import {HiddenInputComponent} from '../components/hidden-input/hidden-input.component';
 import {ValidationHeaderComponent} from '../components/validation-header/validation-header.component';
 
+const COMPONENTS = [
+  ValidationErrorFormGroupComponent,
+  FromBuilderComponent,
+  FieldsetComponent,
+  JuiFormElementsComponent,
+  LegendComponent,
+  HintComponent,
+  DateComponent,
+  InputsComponent,
+  RadiobuttonComponent,
+  CheckboxComponent,
+  TextareasComponent,
+  ButtonsComponent,
+  LabelComponent,
+  HiddenInputComponent,
+  ValidationHeaderComponent
+];
 
 @NgModule( {
   imports: [
@@ -27,46 +44,12 @@ import {ValidationHeaderComponent} from '../components/validation-header/validat
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [
-    ValidationErrorFormGroupComponent,
-    FromBuilderComponent,
-    FieldsetComponent,
-    JuiFormElementsComponent,
-    LegendComponent,
-    HintComponent,
-    DateComponent,
-    InputsComponent,
-    RadiobuttonComponent,
-    CheckboxComponent,
-    TextareasComponent,
-    ButtonsComponent,
-    LabelComponent,
-    HiddenInputComponent,
-    ValidationHeaderComponent
-
-  ],
-  exports: [
-    ValidationErrorFormGroupComponent,
-    FromBuilderComponent,
-    FieldsetComponent,
-    JuiFormElementsComponent,
-    LegendComponent,
-    HintComponent,
-    DateComponent,
-    InputsComponent,
-    RadiobuttonComponent,
-    CheckboxComponent,
-    TextareasComponent,
-    ButtonsComponent,
-    LabelComponent,
-    HiddenInputComponent,
-    ValidationHeaderComponent
-  ],
+  declarations: [ ...COMPONENTS ],
+  exports: [ ...COMPONENTS ],
   providers: [
     FormsService,
     ValidationService,
-
   ]
-} )
+})
 export class SharedModule {
 }
