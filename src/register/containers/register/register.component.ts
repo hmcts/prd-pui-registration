@@ -54,7 +54,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       });
   }
 
-
   onPageContinue(event): void {
     const nextUrl = event.nextUrl;
     delete event.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
