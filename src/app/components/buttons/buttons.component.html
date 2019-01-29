@@ -1,5 +1,8 @@
-<ng-container 
-*ngIf="group"
-[formGroup]="group">
+<ng-container *ngIf="group && !isValid" [formGroup]="group">
     <input id="{{control + value}}" [class]="classes" [type]="typeBtn" [formControlName]="control" [value]="value">
+</ng-container>
+
+<!-- TODO MAKE THIS ONE BUTTON TAG -->
+<ng-container *ngIf="isValid">
+    <button [class]="classes" [disabled]="true" >{{value}}</button>
 </ng-container>

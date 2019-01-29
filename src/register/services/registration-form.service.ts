@@ -20,24 +20,12 @@ const formObj = {
         'header': 'What\'s the name of your organisation?',
         'formGroupValidators': [],
         'validationHeaderErrorMessages': [
-          // {
-          //   validationLevel: 'formControl',
-          //   controlId: 'orgName',
-          //   text: 'Enter organisation name',
-          //   href: '/register/organisation-name'
-          // },
-          // {
-          //   validationLevel: 'formControl',
-          //   controlId: 'officeAddressOne',
-          //   text: 'Enter office address',
-          //   href: '/register/organisation-address'
-          // },
-          // {
-          //   validationLevel: 'formControl',
-          //   controlId: 'emailAddress',
-          //   text: 'Enter office address',
-          //   href: '/register/organisation-address'
-          // }
+          {
+            validationLevel: 'formControl',
+            controlId: 'orgName',
+            text: 'Enter organisation name',
+            href: '/register/organisation-name'
+          }
         ],
         'groups': [
           {
@@ -47,6 +35,10 @@ const formObj = {
                 classes: 'govuk-label--m'
               },
               validators: ['required'],
+              validationError: {
+                value: 'Enter Organisation Name',
+                controlId: 'orgName'
+              },
               control: 'orgName',
               classes: ''
             },
@@ -83,6 +75,26 @@ const formObj = {
       'name': 'organisation-name',
       'header': 'What\'s the address of your main office?',
       'formGroupValidators': [],
+      'validationHeaderErrorMessages': [
+        {
+          validationLevel: 'formControl',
+          controlId: 'officeAddressOne',
+          text: 'Enter Building and street',
+          href: '/register/organisation-address'
+        },
+        {
+          validationLevel: 'formControl',
+          controlId: 'townOrCity',
+          text: 'Enter town or city',
+          href: '/register/organisation-address'
+        },
+        {
+          validationLevel: 'formControl',
+          controlId: 'postcode',
+          text: 'Enter postcode',
+          href: '/register/organisation-address'
+        }
+      ],
       groups: [
         {
           input: {
@@ -92,7 +104,7 @@ const formObj = {
             },
             validators: ['required'],
             validationError: {
-              value: 'Enter the length of hearing in minutes, for example "20"',
+              value: 'Enter Building and street',
               controlId: 'officeAddressOne'
             },
             control: 'officeAddressOne',
@@ -119,7 +131,7 @@ const formObj = {
             control: 'townOrCity',
             validators: ['required'],
             validationError: {
-              value: 'Enter when you’d like the hearing to take place',
+              value: 'Enter town or city',
               controlId: 'townOrCity'
             },
             classes: 'govuk-!-width-two-thirds'
@@ -144,7 +156,7 @@ const formObj = {
             control: 'postcode',
             validators: ['required'],
             validationError: {
-              value: 'Enter when you’d like the hearing to take place',
+              value: 'Enter enter postcode',
               controlId: 'Poscode'
             },
             classes: 'govuk-input--width-10'
@@ -288,6 +300,20 @@ const formObj = {
       'name': 'whatsYourName',
       'header': 'What\'s your name?',
       'formGroupValidators': [],
+      'validationHeaderErrorMessages': [
+        {
+          validationLevel: 'formControl',
+          controlId: 'firstName',
+          text: 'Enter first name',
+          href: '/register/organisation-address'
+        },
+        {
+          validationLevel: 'formControl',
+          controlId: 'lastName',
+          text: 'Enter Last Name',
+          href: '/register/organisation-address'
+        }
+      ],
       groups: [
         {
           input: {
@@ -299,6 +325,11 @@ const formObj = {
               text: 'Include all middle names.',
               classes: 'govuk-hint'
             },
+            validators: ['required'],
+            validationError: {
+              value: 'Enter first name',
+              controlId: 'firstName'
+            },
             control: 'firstName',
             classes: 'govuk-!-width-two-thirds'
           }
@@ -308,6 +339,11 @@ const formObj = {
             label: {
               text: 'Last name',
               classes: 'govuk-label--m'
+            },
+            validators: ['required'],
+            validationError: {
+              value: 'Enter last name',
+              controlId: 'lastName'
             },
             control: 'lastName',
             classes: 'govuk-!-width-two-thirds'
@@ -342,15 +378,23 @@ const formObj = {
     },
     'meta': {
       'idPrefix': 'tbc',
-      'name': 'organisation-name',
+      'name': 'email',
       'header': 'What\'s your email address?',
       'formGroupValidators': [],
+      'validationHeaderErrorMessages': [
+        {
+          validationLevel: 'formControl',
+          controlId: 'emailAddress',
+          text: 'Enter email address',
+          href: '/register/organisation-address'
+        }
+      ],
       groups: [
         {
           input: {
-            validators: ['required'],
+            validators: ['required', 'email'],
             validationError: {
-              value: 'Enter the length of hearing in minutes, for example "20"',
+              value: 'Enter email address',
               controlId: 'emailAddress'
             },
             control: 'emailAddress',
