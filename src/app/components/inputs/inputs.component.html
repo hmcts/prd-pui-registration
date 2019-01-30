@@ -11,9 +11,10 @@
         <app-validation-error-formcontrol *ngIf="showValidation" [group]="group" [controlId]="item.control" id="{{item.control}}">{{validationError.value}}</app-validation-error-formcontrol>
     </ng-container>
     <input
+           [class]="item.classes"
            [formControlName]="item.control"
            [id]="item.control"
            [name]="item.control"
-           [ngClass]=" { 'govuk-input--error': isControlInvalidAndShowValidation(group, item.control, showValidation), 'govuk-input ': true }[item.classes]"
+           [ngClass]=" { 'govuk-input--error': isControlInvalidAndShowValidation(group, item.control, showValidation), 'govuk-input ': true }"
            type="text">
 </ng-container>

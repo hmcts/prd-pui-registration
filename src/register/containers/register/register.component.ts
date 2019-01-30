@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   $routeSubscription: Subscription;
   $pageItemsSubscritpion: Subscription;
   formData;
+  data$: Observable<any>;
 
   ngOnInit(): void {
     this.subscribeToRoute();
