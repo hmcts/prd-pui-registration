@@ -20,6 +20,7 @@ export class RegistrationEffects {
     switchMap((pageId) => {
       return this.registrationService.getRetistrationFrom(pageId).pipe(
         map(returnedItems => {
+          // returnedItems to be passed as Object otherwise interactes each charater
           return new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId});
 
         }),

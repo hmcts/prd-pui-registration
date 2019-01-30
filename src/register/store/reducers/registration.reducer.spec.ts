@@ -24,7 +24,7 @@ describe('RegistrationReducer', () => {
 
       const completion = new LoadPageItemsSuccess({payload: {}, pageId });
       const state = reducer(initialState, action);
-      console.log('state.pages', state.pages)
+      // console.log('state.pages', state.pages)
       expect(state.pages).toEqual({});
     });
   });
