@@ -20,7 +20,7 @@ export class RegistrationEffects {
     switchMap((pageId) => {
       return this.registrationService.getRetistrationFrom(pageId).pipe(
         map(returnedItems => {
-          return new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId})
+          return new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId});
 
         }),
         catchError(error => of(new registrationActions.LoadPageItemsSuccess(error)))
