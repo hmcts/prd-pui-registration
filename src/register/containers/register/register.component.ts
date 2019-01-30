@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   subscribeToPageItems(): void {
-    this.$pageItemsSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
+    this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
         if(this.pageId){
           this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$pageItemsSubscription.unsubscribe();
+    this.$pageItemsSubscritpion.unsubscribe();
     this.$routeSubscription.unsubscribe();
   }
 
