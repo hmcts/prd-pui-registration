@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Form, FormGroup} from '@angular/forms';
+import {AbstractControl, Form, FormGroup} from '@angular/forms';
 import {Validators, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {controlsisTextAreaValidWhenCheckboxChecked, FormGroupValidator} from './form-group-validation.typescript';
+import {controlsisTextAreaValidWhenCheckboxChecked, controlsRadioConditionalModel, FormGroupValidator
+} from './form-group-validation.typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,9 @@ export class ValidationService {
     {
       simpleName: 'email',
       ngValidatorFunction: Validators.email
-    },
+    }
   ];
+
 
   constructor() {
   }
@@ -57,7 +59,7 @@ export class ValidationService {
    * @see state_meta
    * @param validators - ie. ['required', 'email']
    */
-  getNgValidators(validators: Array<string>) {
+  getNgValidators(validators: Array<string>): any[] {
 
     const ngValidators: Array<any> = [];
 
@@ -76,10 +78,10 @@ export class ValidationService {
    * Checks if validators have been set on the control, an example of a validator being set on a control is:
    *
    * {
-   *  control: 'informationNeeded',
-   *  value: 'Information text',
-   *  validators: ['required']
-   * }
+     *  control: 'informationNeeded',
+     *  value: 'Information text',
+     *  validators: ['required']
+     * }
    *
    * TODO: Unit test.
    *
@@ -129,8 +131,7 @@ export class ValidationService {
    * need to pass this in once the Universal Form Builder is merged with Validation.
    * @return {boolean}
    */
-  isFormGroupInvalid(formGroup: FormGroup, validationErrorId: string): boolean {
-
+  isFormGroupInvalid(formGroup: any, validationErrorId: string): boolean {
     if (formGroup.errors && formGroup.errors.hasOwnProperty(validationErrorId)) {
       return formGroup.errors[validationErrorId];
     } else {
@@ -160,11 +161,10 @@ export class ValidationService {
    * @return {any}
    */
   isAnyCheckboxChecked(formGroup: FormGroup, checkboxes: Array<string>, validationIdentifier: string): ValidatorFn | null {
-
     const isAnyCheckboxCheckedValidationFn: ValidatorFn = (controls: FormGroup): ValidationErrors | null => {
 
       for (const checkbox of checkboxes) {
-        if (controls.get(checkbox).value) {
+        if (controls.get(checkbox).value === true) {
           return null;
         }
       }
@@ -178,10 +178,11 @@ export class ValidationService {
   }
 
 
-  isAllFieldsRequired(formGroup: FormGroup, fields: Array<string>, validationIdentifier: string): ValidatorFn | null {
+  // Common function for validator
+  // Returninng the validationIdentifier true if invalid and null if valid
 
-    const isAllFieldsRequiredValidationFn: ValidatorFn = (controls: FormGroup): ValidationErrors | null => {
-
+  isAllFieldsRequiredValidationFn(controls: FormGroup, fields: Array<string>, validationIdentifier){
+    if (controls !== null && fields !== null) {
       for (const field of fields) {
         if (!controls.get(field).value) {
           return {
@@ -189,8 +190,24 @@ export class ValidationService {
           };
         }
       }
-    };
+    }
 
+    return null;
+  }
+
+  /**
+   * isAllFieldsRequired
+   *
+   * @param formGroup
+   * @param controls is object
+   * @param validationIdentifier
+   * @return {any}
+   */
+
+  isAllFieldsRequired(formGroup: FormGroup, fields: Array<string>, validationIdentifier: string): ValidatorFn | null {
+    const isAllFieldsRequiredValidationFn: ValidatorFn = (controls: FormGroup): ValidationErrors | null => {
+      return this.isAllFieldsRequiredValidationFn(controls, fields, validationIdentifier);
+    };
     return isAllFieldsRequiredValidationFn;
   }
 
@@ -213,7 +230,7 @@ export class ValidationService {
         return null;
       }
 
-      if (formControls.get(controls.textareaControl).value.length > 0) {
+      if (formControls.get(controls.textareaControl).value && formControls.get(controls.textareaControl).value.length > 0) {
         return null;
       }
 
@@ -223,6 +240,49 @@ export class ValidationService {
     };
 
     return isTextAreaValidWhenCheckboxChecked;
+  }
+
+  /**
+   * isRadioValidWhenSomeOptionSelected
+   *
+   * @param formGroup
+   * @param controls is object
+   * { checkboxControl : string, textareaControl : string }
+   * @param validationIdentifier
+   * @return {any}
+   */
+
+  isRadioValidWhenSomeOptionSelected(formGroup: FormGroup, controls: any, validationIdentifier: string){
+
+    const isRadioValidWhenSomeOptionSelected: ValidatorFn = (formControls: FormGroup): ValidationErrors | null => {
+
+      for (const option of controls.selectedOptions) {
+        if (formControls.get(controls.radioControl).value !== null && formControls.get(controls.radioControl).value !== option.selectedOption) {
+
+          // Do not validate child if parent is valid so
+          // Reset child validation to valid state here
+          // Add word "ValidationFn" to the name of validator when you extend child validation functions
+
+          if (option.childValidator.validatorFunc) {
+            return  this[option.childValidator.validatorFunc + "ValidationFn"](null, null, option.childValidator.validationErrorId);
+          }
+
+          return null;
+
+        } else {
+          if (option.childValidator.validatorFunc){
+            return this[option.childValidator.validatorFunc + "ValidationFn"](formGroup, option.childValidator.controls, option.childValidator.validationErrorId);
+          }
+        }
+      }
+
+      return {
+        [validationIdentifier]: true,
+      };
+
+    };
+
+    return isRadioValidWhenSomeOptionSelected;
   }
 
   /**
@@ -236,12 +296,12 @@ export class ValidationService {
    *
    * @param {FormGroup} formGroup - Angular FormGroup
    * @param formGroupValidators - [{
-   *    validatorFunc: 'isAnyCheckboxChecked',
-   *    validationErrorId: 'reasonsConstentOrderNotApproved',
-   *    checkboxes: [
-   *        'partiesNeedAttend', 'NotEnoughInformation', 'orderNotAppearOfS25ca1973', 'd81',
-   *        'pensionAnnex', 'applicantTakenAdvice', 'respondentTakenAdvice', 'Other2'
-   *    ]}]
+     *    validatorFunc: 'isAnyCheckboxChecked',
+     *    validationErrorId: 'reasonsConstentOrderNotApproved',
+     *    checkboxes: [
+     *        'partiesNeedAttend', 'NotEnoughInformation', 'orderNotAppearOfS25ca1973', 'd81',
+     *        'pensionAnnex', 'applicantTakenAdvice', 'respondentTakenAdvice', 'Other2'
+     *    ]}]
    */
   createFormGroupValidators(formGroup: FormGroup, formGroupValidators) {
 
