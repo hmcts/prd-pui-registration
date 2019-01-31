@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {ValidationService} from './form-builder-validation.service';
 
-
 @Injectable({
   providedIn: 'root'
 })

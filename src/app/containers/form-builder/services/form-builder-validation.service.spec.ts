@@ -1,14 +1,12 @@
 import {TestBed, inject} from '@angular/core/testing';
-
+import { DatePipe } from '@angular/common';
 import {ValidationService} from './form-builder-validation.service';
-import {FormGroup, FormControl, ValidatorFn, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FormsService} from './form-builder.service';
+import {FormGroup, FormControl, ValidatorFn, Validators} from '@angular/forms';
 
 describe('ValidationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      providers: [FormsService, ValidationService]
+      providers: [ValidationService, DatePipe]
     });
   });
 
@@ -21,7 +19,6 @@ describe('ValidationService', () => {
       expect(service).toBeTruthy();
     }));
 
-  // TODO: This should not check for Function as it's too broad.
   it('should create a form group validator, with type ValidationFn.', inject([ValidationService], (service: ValidationService) => {
 
     const formGroup = new FormGroup({
@@ -94,8 +91,7 @@ describe('ValidationService', () => {
     formGroup.get('checkboxTest2').setValue(false);
     expect(isAnyCheckboxChecked(formGroup).isAnyCheckboxChecked).toBe(true);
   }));
-  xit('should check if all fields required common function unit test',
-    inject([ValidationService], (service: ValidationService) => {
+  it('should check if all fields required common function unit test', inject([ValidationService], (service: ValidationService) => {
     const formGroup = new FormGroup({
       test1Filed: new FormControl(),
       test2Filed: new FormControl()
@@ -111,7 +107,7 @@ describe('ValidationService', () => {
     isAllFieldsRequiredValidationFn = service.isAllFieldsRequiredValidationFn(formGroup, fields, validationIdentifier);
     expect(isAllFieldsRequiredValidationFn).toBe(null);
   }));
-  xit('should check if all fields required group validator returns a validation function', inject([ValidationService], (service: ValidationService) => {
+  it('should check if all fields required group validator returns a validation function', inject([ValidationService], (service: ValidationService) => {
     const formGroup = new FormGroup({
       test1Filed: new FormControl(),
       test2Filed: new FormControl()
@@ -124,7 +120,7 @@ describe('ValidationService', () => {
     expect(isAllFieldsRequired).toEqual(jasmine.any(Function));
     expect(isAllFieldsRequired(formGroup)[validationIdentifier]).toBe(true);
   }));
-  xit('should check conditional validator textarea should be valid if parent checkbox checked', inject([ValidationService], (service: ValidationService) => {
+  it('should check conditional validator textarea should be valid if parent checkbox checked', inject([ValidationService], (service: ValidationService) => {
     const formGroup = new FormGroup({
       testCheckbox: new FormControl(),
       testTextarea: new FormControl()
@@ -143,7 +139,7 @@ describe('ValidationService', () => {
     isTextAreaValidWhenCheckboxChecked = service.isTextAreaValidWhenCheckboxChecked(formGroup, controls, validationIdentifier);
     expect(isTextAreaValidWhenCheckboxChecked(formGroup)).toBe(null);
   }));
-  xit('should check conditional validator radio should be valid if one option selected', inject([ValidationService], (service: ValidationService) => {
+  it('should check conditional validator radio should be valid if one option selected', inject([ValidationService], (service: ValidationService) => {
     const formGroup = new FormGroup({
       testRadioControl: new FormControl('testOption'),
       test1: new FormControl('test1'),
@@ -196,4 +192,75 @@ describe('ValidationService', () => {
     console.log(createFormGroupValidators);
     expect(createFormGroupValidators[0]).toEqual(jasmine.any(Function));
   }));
+  it('should check if date group validator returns a validation function', inject([ValidationService], (service: ValidationService) => {
+    const formGroup = new FormGroup({
+      dayTestFiled: new FormControl(),
+      monthTestFiled: new FormControl(),
+      yearTestFiled: new FormControl()
+    });
+    const validationIdentifier = 'isValidDate';
+    const fields = [
+      'yearTestFiled', 'monthTestFiled', 'dayTestFiled'
+    ]
+    const isValidDate = service.isValidDate(formGroup, fields, validationIdentifier);
+    expect(isValidDate).toEqual(jasmine.any(Function));
+    expect(isValidDate(formGroup)[validationIdentifier]).toBe(true);
+  }));
+  describe( 'isValidDateValidationFn' , () => {
+    const formGroup = new FormGroup({
+      dayTestFiled: new FormControl(),
+      monthTestFiled: new FormControl(),
+      yearTestFiled: new FormControl()
+    });
+    const validationIdentifier = 'isValidDateValidationFn';
+    const fields = [
+      'yearTestFiled', 'monthTestFiled', 'dayTestFiled'
+    ]
+
+    it('should check if return invalid state for empty fields', inject([ValidationService], (service: ValidationService) => {
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn[validationIdentifier]).toBe(true);
+    }));
+
+    it('should check if return invalid state for the case if at least one field is not a number value', inject([ValidationService], (service: ValidationService) => {
+      formGroup.get('dayTestFiled').setValue('1');
+      formGroup.get('monthTestFiled').setValue('02');
+      formGroup.get('yearTestFiled').setValue('test value 2');
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn[validationIdentifier]).toBe(true);
+    }));
+
+    it('should check if return invalid state for the case if month is not in range from 1 to 12', inject([ValidationService], (service: ValidationService) => {
+      formGroup.get('dayTestFiled').setValue('1');
+      formGroup.get('monthTestFiled').setValue('0');
+      formGroup.get('yearTestFiled').setValue('2019');
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn[validationIdentifier]).toBe(true);
+    }));
+
+    it('should check if return invalid state for the case if day is not in range from 1 to 31', inject([ValidationService], (service: ValidationService) => {
+      formGroup.get('dayTestFiled').setValue('33');
+      formGroup.get('monthTestFiled').setValue('1');
+      formGroup.get('yearTestFiled').setValue('2019');
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn[validationIdentifier]).toBe(true);
+    }));
+
+    it('should check if date is valid 29/02/2019 does not exist and should return error', inject([ValidationService], (service: ValidationService) => {
+      formGroup.get('dayTestFiled').setValue('29');
+      formGroup.get('monthTestFiled').setValue('2');
+      formGroup.get('yearTestFiled').setValue('2019');
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn[validationIdentifier]).toBe(true);
+    }));
+
+    it('should not return any error if date is valid and properly formatted', inject([ValidationService], (service: ValidationService) => {
+      formGroup.get('dayTestFiled').setValue('2');
+      formGroup.get('monthTestFiled').setValue('2');
+      formGroup.get('yearTestFiled').setValue('2019');
+      const isValidDateValidationFn = service.isValidDateValidationFn(formGroup, fields, validationIdentifier);
+      expect(isValidDateValidationFn).toBe(null);
+    }));
+  });
+
 });

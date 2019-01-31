@@ -1,13 +1,12 @@
-3
 import { TestBed, inject } from '@angular/core/testing';
-
-import { FormsService } from './form-builder.service';
-import { ValidationService } from './form-builder-validation.service';
+import { DatePipe } from '@angular/common';
+import { FormsService } from  './form-builder.service';
+import { ValidationService } from   './form-builder-validation.service';
 
 describe('FormsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FormsService, ValidationService]
+      providers: [DatePipe, FormsService, ValidationService]
     });
   });
 
