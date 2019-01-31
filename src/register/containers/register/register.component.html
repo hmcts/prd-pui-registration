@@ -17,67 +17,104 @@
       (submitPage)="onPageContinue($event)" >
     </app-form-builder>
     <!--TODO add this as component -->
-    <ng-container *ngIf="(data$ | async).length !== 0 ">
-    <div class="govuk-grid-column-two-thirds" *ngIf="pageId === 'check'">
+    <ng-container *ngIf="(data$ | async).length !== 0 && pageId === 'check'">
+
       <h1 class="govuk-heading-xl">Check your answers before you register</h1>
       <dl class="govuk-check-your-answers  govuk-check-your-answers--short  govuk-!-margin-bottom-6">
-        <div class="govuk-check-your-answers__contents">
-          <dt class="govuk-check-your-answers__question">Organisation name</dt>
-          <dd class="govuk-check-your-answers__answer">
-            {{ (data$ | async).formValue.orgName }}
-          </dd>
-          <dd class="govuk-check-your-answers__change">
+
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>Organisation name</ng-container>
+          <ng-container answer>
+            {{ data.orgName}}
+          </ng-container>
+          <ng-container button>
             <a [routerLink]="'/register/organisation-name'">Change <span class="govuk-visually-hidden">organisation name</span></a>
-          </dd>
+          </ng-container>
         </div>
 
-        <div class="govuk-check-your-answers__contents">
-          <dt class="govuk-check-your-answers__question">Organisation address</dt>
-          <dd class="govuk-check-your-answers__answer">
-            {{ (data$ | async).formValue.officeAddressOne }} <br />
-            {{ (data$ | async).formValue.officeAddressTwo }} <br />
-            {{ (data$ | async).formValue.townOrCity }} <br />
-            {{ (data$ | async).formValue.county }} <br />
-            {{ (data$ | async).formValue.postcode }} <br />
-            {{ (data$ | async).formValue.officeAddressOne }} <br />
-            {{ (data$ | async).formValue.officeAddressTwo }}
-          </dd>
-          <dd class="govuk-check-your-answers__change">
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>Organisation address</ng-container>
+          <ng-container answer>
+            {{ data.officeAddressOne}}
+            {{ data.officeAddressOne }} <br />
+            {{ data.officeAddressTwo }} <br />
+            {{ data.townOrCity }} <br />
+            {{ data.county }} <br />
+            {{ data.postcode }} <br />
+            {{ data.officeAddressOne }} <br />
+            {{ data.officeAddressTwo }}
+          </ng-container>
+          <ng-container button>
             <a [routerLink]="'/register/organisation-address'" >Change <span class="govuk-visually-hidden">organistaion address</span></a>
-          </dd>
+          </ng-container>
         </div>
 
-        <div class="govuk-check-your-answers__contents">
-          <dt class="govuk-check-your-answers__question">PBA number</dt>
-          <dd class="govuk-check-your-answers__answer">
-            {{ (data$ | async).formValue.PBAnumber1 }} <br />
-            {{ (data$ | async).formValue.PBAnumber2 }}
-          </dd>
-          <dd class="govuk-check-your-answers__change">
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>PBA number</ng-container>
+          <ng-container answer>
+            {{ data.PBAnumber1 }}
+            {{ data.PBAnumber2 }}
+          </ng-container>
+          <ng-container button>
             <a [routerLink]="'/register/pba-number'">Change <span class="govuk-visually-hidden">PBA number</span></a>
-          </dd>
+          </ng-container>
         </div>
 
-        <div class="govuk-check-your-answers__contents">
-          <dt class="govuk-check-your-answers__question">DX reference</dt>
-          <dd class="govuk-check-your-answers__answer">
-            {{ (data$ | async).formValue.DXnumber }} <br>
-            {{ (data$ | async).formValue.DXexchange }}
-          </dd>
-          <dd class="govuk-check-your-answers__change">
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>DX reference</ng-container>
+          <ng-container answer>
+            {{ data.DXnumber }}
+            {{ data.DXexchange }}
+          </ng-container>
+          <ng-container button>
             <a [routerLink]="'/register/DXreference'">Change <span class="govuk-visually-hidden">DX reference</span></a>
-          </dd>
+          </ng-container>
         </div>
 
-        <div class="govuk-check-your-answers__contents">
-          <dt class="govuk-check-your-answers__question">Email address</dt>
-          <dd class="govuk-check-your-answers__answer">
-            {{ (data$ | async).formValue.emailAddress }}
-          </dd>
-          <dd class="govuk-check-your-answers__change">
-            <a  [routerLink]="'/register/email-address'">Change <span class="govuk-visually-hidden">email address</span></a>
-          </dd>
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>First name(s)</ng-container>
+          <ng-container answer>
+            {{ data.firstName }}
+          </ng-container>
+          <ng-container button>
+            <a [routerLink]="'/register/register-organisation/name'">Change <span class="govuk-visually-hidden">name</span></a>
+          </ng-container>
         </div>
+
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>Last name</ng-container>
+          <ng-container answer>
+            {{ data.lastName }}
+          </ng-container>
+          <ng-container button>
+            <a [routerLink]="'/register/register-organisation/name'">Change <span class="govuk-visually-hidden">last name</span></a>
+          </ng-container>
+        </div>
+
+        <div app-govuk-dl-list-item
+             class="govuk-check-your-answers__contents"
+             *ngIf="(data$ | async).formValue as data">
+          <ng-container question>Email address</ng-container>
+          <ng-container answer>
+            {{ data.emailAddress }}
+          </ng-container>
+          <ng-container button>
+            <a  [routerLink]="'/register/email-address'">Change <span class="govuk-visually-hidden">email address</span></a>
+          </ng-container>
+        </div>
+
       </dl>
       <h2 class="govuk-heading-l">Now submit your registration details</h2>
       <p>You are confirming that the details you've given are accurate.</p>
@@ -85,7 +122,7 @@
       <a href="" role="button" draggable="false" class="govuk-button">
         Submit
       </a>
-    </div>
+
   </ng-container>
 
 </div>
