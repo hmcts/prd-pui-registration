@@ -23,6 +23,7 @@ import * as fromComponents from './components';
 
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/register' },
@@ -53,7 +54,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
       logOnly: environment.production
     }),
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
