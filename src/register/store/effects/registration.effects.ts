@@ -6,11 +6,17 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {RegistrationFormService} from '../../services/registration-form.service';
 
+import {select, Store} from '@ngrx/store';
+import {withLatestFrom} from 'rxjs/internal/operators';
+import {RegistrationState} from '../reducers';
+import {getRegistrationPagesValues} from '../selectors';
+
 @Injectable()
 export class RegistrationEffects {
   constructor(
     private actions$: Actions,
-    private registrationService: RegistrationFormService
+    private registrationService: RegistrationFormService,
+    private store: Store<RegistrationState>
   ) {}
 
   @Effect()
@@ -28,4 +34,20 @@ export class RegistrationEffects {
       );
     })
   );
+
+  @Effect()
+  postRegistrationForm$ = this.actions$.pipe(
+    ofType(registrationActions.POST_FORM_DATA),
+    withLatestFrom(this.store.pipe(select(getRegistrationPagesValues))),
+    switchMap(([payload,  store]) => {
+      return this.registrationService.postRetistrationFrom(store).pipe(
+        map(obj => {
+          return new registrationActions.PostFormDataSuccess(store);
+        }),
+        catchError(error => of(new registrationActions.PostFormDataFail(error)))
+    );
+    })
+  );
+
+
 }
