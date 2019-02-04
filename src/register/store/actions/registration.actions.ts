@@ -36,11 +36,33 @@ export class SaveFormData implements Action {
   constructor(public payload: Object) {}
 }
 
+export const POST_FORM_DATA = '[POST][Registration] form';
+export const POST_FORM_DATA_SUCCESS = '[POST][Registration]  formSuccess';
+export const POST_FORM_DATA_FAIL = '[POST][Registration] form Fail';
 
+
+export class PostFormData implements Action {
+  readonly type = POST_FORM_DATA;
+  // constructor(public payload: any) {}
+}
+
+export class PostFormDataSuccess implements Action {
+  readonly type = POST_FORM_DATA_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class PostFormDataFail implements Action {
+  readonly type = POST_FORM_DATA_FAIL;
+  constructor(public payload: any) {
+  }
+}
 
 export type RegistrationActions =
   | SetCurrentPage
   | LoadPageItems
   | LoadPageItemsSuccess
   | LoadPageItemsFail
-  | SaveFormData;
+  | SaveFormData
+  | PostFormData
+  | PostFormDataSuccess
+  | PostFormDataFail;

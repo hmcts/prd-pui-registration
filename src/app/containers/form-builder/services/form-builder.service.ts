@@ -83,6 +83,7 @@ export class FormsService {
   }
 
   defineformControls(someJson: any, someData: any): any {
+    this.FormControls = [];
     this.create(someJson, someData);
     return this.FormControls;
   }

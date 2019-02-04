@@ -75,5 +75,5 @@ export function reducer(
 export const getRegistationFormPages = (state: RegistrationFormState) => state.pages;
 export const getRegistationFormPagesValues = (state: RegistrationFormState) => state.pagesValues;
 export const getRegistrationFromLoading = (state: RegistrationFormState) => state.loading;
-export const getRegistrationPizzasLoaded = (state: RegistrationFormState) => state.loaded;
+export const getRegistrationPagesLoaded = (state: RegistrationFormState) => state.loaded;
 
