@@ -28,32 +28,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   pageId: string;
   $routeSubscription: Subscription;
   $pageItemsSubscritpion: Subscription;
-  formData;
   data$: Observable<any>;
 
   ngOnInit(): void {
     this.subscribeToRoute();
     this.subscribeToPageItems();
     this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
-    const combined = combineLatest(
-         this.store.pipe(select(arePagesLoaded)),
-         this.store.pipe(select(getCurrentPage)),
-         this.store.pipe(select(getRegistrationPagesValues))
-       );
-    const subscribe = combined.subscribe(
-      ([state, pageName, pageValue]) => {
-        if (
-          !pageValue || Object.keys(pageValue).length === 0 &&
-          (
-            pageName.pageId === 'organisation-address' ||
-            pageName.pageId === 'pba-number' ||
-            pageName.pageId === 'DXreference'  ||
-            pageName.pageId ===  'name' ||
-            pageName.pageId ===   'email-address'
-          )) {
-          this.router.navigate(['/register']);
-        }
-      })
   }
 
   subscribeToRoute(): void {
@@ -71,9 +51,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         if(this.pageId){
           this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
           this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
-
         }
-
       });
   }
 

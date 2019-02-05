@@ -14,8 +14,9 @@ export class RegistrationFormService {
   constructor(private http: HttpClient) {}
 
   getRetistrationFrom(pageId): Observable<any> {
-    return of(formObj[pageId]);
-    // http service goes here
+    const url = `/api/decisions/states/any/any/any/${pageId}`;
+    // return of(formObj[pageId]);
+    return this.http.get(url);
   }
   postRetistrationFrom(data: any): Observable<any> {
     const  postdata = { ...data, event: 'continue' };

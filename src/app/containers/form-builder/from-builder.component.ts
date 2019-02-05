@@ -30,7 +30,9 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
   formSubscirption: Subscription;
 
   ngOnInit(): void {
+    this.pageItems.formGroupValidators = []; // set validators so that the FB do not error when initilies
     this.createForm();
+
     this.formSubscirption = this.formDraft.valueChanges.subscribe(values => {
       this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, values));
       this.setValidators();
