@@ -1,5 +1,6 @@
 import organisationDx from './organisationDx'
 import emailAddress from './emailAddress'
+import name from './name'
 import organisationAddress from './organisationAddress'
 import organisationName from './organisationName'
 import pbaNumber from './organisationPba'
