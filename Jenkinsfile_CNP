@@ -15,8 +15,8 @@ properties([
 
 def type = "nodejs"
 def product = "pui-registration"
-def component = "webapp"
-def vault = "prd"
+def component = "pui-registration"
+def vault = "rpa"
 def channel = '#pui-pipeline'
 
 List<LinkedHashMap<String, Object>> secrets = [
@@ -46,6 +46,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 withPipeline(type, product, component) {
     enableSlackNotifications(channel)
     loadVaultSecrets(secrets)
+  
     setVaultName(vault)
     enableDockerBuild()
     installCharts()
