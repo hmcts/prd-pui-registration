@@ -97,12 +97,6 @@ export default {
             },
         },
         {
-            hiddenInput: {
-                control: 'nextUrl',
-                value: 'pba-number',
-            },
-        },
-        {
             button: {
                 control: 'createButton',
                 value: 'Continue',
