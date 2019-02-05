@@ -1,8 +1,8 @@
-import organisationDx from './organisation-dx'
+import organisationDx from './organisationDx'
 import emailAddress from './emailAddress'
 import organisationAddress from './organisationAddress'
 import organisationName from './organisationName'
-import pbaNumber from './organisation-pba'
+import pbaNumber from './organisationPba'
 
 const templates: any = []
 
