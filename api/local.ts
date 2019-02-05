@@ -1,13 +1,12 @@
-
+import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
-
 import config from './lib/config'
 import routes from './routes'
 
-const FileStore = sessionFileStore(session);
+const FileStore = sessionFileStore(session)
 
 const app = express()
 
@@ -16,7 +15,7 @@ app.use(
         cookie: {
             httpOnly: true,
             maxAge: 1800000,
-            secure: config.secureCookie !== false
+            secure: config.secureCookie !== false,
         },
         name: "jui-webapp",
         resave: true,
@@ -24,9 +23,12 @@ app.use(
         secret: config.sessionSecret,
         store: new FileStore({
             path: process.env.NOW ? "/tmp/sessions" : ".sessions",
-        })
+        }),
     })
 )
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', routes)
 

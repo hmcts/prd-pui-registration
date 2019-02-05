@@ -77,7 +77,7 @@ export async function process(req, res, mapping, payload, templates, store) {
     if (variables) {
         // get current store
         let stored = await store.get(`decisions_${jurisdiction}_${caseTypeId}_${caseId}`)
-        
+
         if (!(stored + '').length) {
             stored = {}
         }
@@ -85,9 +85,10 @@ export async function process(req, res, mapping, payload, templates, store) {
 
         await store.set(`decisions_${jurisdiction}_${caseTypeId}_${caseId}`, variables)
     }
-
+    logger.info(`handling instruction`)
     if (req.method === 'POST') {
         await map(mapping, async (instruction: any) => {
+            logger.info(`matching: ${instruction.event} === ${event}`)
             if (instruction.event === event) {
                 // event is the main index and so there can only be one instruction per event - exit after finding
                 logger.info(`Found matching event for ${event} `)
@@ -145,7 +146,7 @@ export async function process(req, res, mapping, payload, templates, store) {
             meta,
             newRoute,
         }
-        
+
         req.session.save(() => res.send(JSON.stringify(response)))
     }
 }
