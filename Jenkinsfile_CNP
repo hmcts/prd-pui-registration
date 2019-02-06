@@ -14,8 +14,8 @@ properties([
 @Library("Infrastructure")
 
 def type = "nodejs"
-def product = "prd"
-def component = "pui-registration"
+def product = "pui"
+def component = "registration"
 def vault = "prd" 
 def channel = '#pui-pipeline'
 
