@@ -24,9 +24,8 @@ export class RegistrationEffects {
     ofType(registrationActions.LOAD_PAGE_ITEMS),
     map((action: registrationActions.LoadPageItems) => action.payload),
     switchMap((pageId) => {
-      return this.registrationService.getRetistrationFrom(pageId).pipe(
+      return this.registrationService.getRegistrationForm(pageId).pipe(
         map(returnedItems => {
-          // returnedItems to be passed as Object otherwise interactes each charater
           return new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId});
 
         }),
@@ -36,11 +35,11 @@ export class RegistrationEffects {
   );
 
   @Effect()
-  postRegistrationForm$ = this.actions$.pipe(
+  postRegistrationFormData$ = this.actions$.pipe(
     ofType(registrationActions.POST_FORM_DATA),
     withLatestFrom(this.store.pipe(select(getRegistrationPagesValues))),
     switchMap(([payload,  store]) => {
-      return this.registrationService.postRetistrationFrom(store).pipe(
+      return this.registrationService.postRegistrationForm(store).pipe(
         map(obj => {
           return new registrationActions.PostFormDataSuccess(store);
         }),

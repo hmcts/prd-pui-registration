@@ -1,19 +1,12 @@
-// load registration form
+
 import {Action} from '@ngrx/store';
 
-export const SET_CURRENT_PAGE = '[Registration] Set Current Page';
 
 export const LOAD_PAGE_ITEMS = '[Registration] LoadPageItems';
 export const LOAD_PAGE_ITEMS_SUCCESS = '[Registration] LoadPageItems Success';
 export const LOAD_PAGE_ITEMS_FAIL = '[Registration] LoadPageItems Fail';
 
 export const SAVE_FORM_DATA = '[Registration] Save Form Data';
-
-
-export class SetCurrentPage implements Action {
-  readonly type = SET_CURRENT_PAGE;
-  constructor(public payload: string) {}
-}
 
 export class LoadPageItems implements Action {
   readonly type = LOAD_PAGE_ITEMS;
@@ -58,7 +51,6 @@ export class PostFormDataFail implements Action {
 }
 
 export type RegistrationActions =
-  | SetCurrentPage
   | LoadPageItems
   | LoadPageItemsSuccess
   | LoadPageItemsFail

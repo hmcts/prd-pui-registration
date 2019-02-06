@@ -3,9 +3,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute, Router} from '@angular/router';
-import {combineLatest, Observable, Subscription} from 'rxjs';
-import {arePagesLoaded, getCurrentPage, getRegistrationPagesValues} from '../../store/selectors';
-import {withLatestFrom} from 'rxjs/internal/operators';
+import {Observable, Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -14,7 +12,6 @@ import {withLatestFrom} from 'rxjs/internal/operators';
 @Component({
   selector: 'app-prd-register-component',
   templateUrl: './register.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush // can't use because of back btn
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
@@ -27,9 +24,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   pageValues: any;
   pageId: string;
   $routeSubscription: Subscription;
-  $pageItemsSubscritpion: Subscription;
+  $pageItemsSubscription: Subscription;
   data$: Observable<any>;
-  isValidationUsed = false;
+  isPageValid = false;
 
   ngOnInit(): void {
     this.subscribeToRoute();
@@ -47,7 +44,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   subscribeToPageItems(): void {
-    this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
+    this.$pageItemsSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
         if(this.pageId && formData.pageItems && formData.pageValues){
           this.pageValues  = formData.pageValues;
@@ -60,11 +57,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     if (formDraft.invalid ) {
 
-      this.isValidationUsed = true;
+      this.isPageValid = true;
 
     } else {
 
-      this.isValidationUsed = false;
+      this.isPageValid = false;
       const { value } = formDraft;
       const nextUrl = value.nextUrl;
 
@@ -80,7 +77,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$pageItemsSubscritpion.unsubscribe();
+    this.$pageItemsSubscription.unsubscribe();
     this.$routeSubscription.unsubscribe();
   }
 

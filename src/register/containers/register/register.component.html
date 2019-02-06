@@ -13,9 +13,10 @@
     <app-form-builder *ngIf="pageId && pageId != 'check'"
       [pageItems]="pageItems"
       [pageValues]="pageValues"
-      [useValidation]="isValidationUsed"
+      [isPageValid]="isPageValid"
       (submitPage)="onPageContinue($event)" >
     </app-form-builder>
+
     <!--TODO add this as component -->
     <ng-container *ngIf="(data$ | async).length !== 0 && pageId === 'check'">
 
@@ -24,7 +25,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>Organisation name</ng-container>
           <ng-container answer>
             {{ data.orgName}}

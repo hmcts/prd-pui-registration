@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, delay} from 'rxjs/operators';
-import {formObj} from './form.mock';
+import {Observable} from 'rxjs';
 
+// TODO MOVE THIS INTO THE EVIRONMENT FILE
 export const ENVIRONMENT = {
   registerOrganisation: '/api/decisions/states/any/any/any/check'
-}
+};
+
+/**
+ * Registration Services
+ * Responsible for communication between FE and BE only!
+ */
+
 
 @Injectable()
 export class RegistrationFormService {
   constructor(private http: HttpClient) {}
 
-  getRetistrationFrom(pageId): Observable<any> {
+  getRegistrationForm(pageId): Observable<any> { // TODO create type/model
     const url = `/api/decisions/states/any/any/any/${pageId}`;
-    // return of(formObj[pageId]).pipe(
-    //   delay(1000)
-    // );
     return this.http.get(url);
   }
-  postRetistrationFrom(data: any): Observable<any> {
+  postRegistrationForm(data: any): Observable<any> {
     const  postdata = { ...data, event: 'continue' };
     console.log('postdata', postdata );
     return postdata;
