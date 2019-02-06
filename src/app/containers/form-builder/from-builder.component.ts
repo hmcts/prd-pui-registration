@@ -40,9 +40,7 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.pageItems &&
-        changes.pageItems.currentValue &&
-        changes.pageValues &&
-        changes.pageValues.currentValue
+        changes.pageItems.currentValue
     ) {
       this.createForm();
     }

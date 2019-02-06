@@ -15,10 +15,10 @@ export class RegistrationFormService {
 
   getRetistrationFrom(pageId): Observable<any> {
     const url = `/api/decisions/states/any/any/any/${pageId}`;
-    return of(formObj[pageId]).pipe(
-      // delay(1000)
-    );
-    // return this.http.get(url);
+    // return of(formObj[pageId]).pipe(
+    //   delay(1000)
+    // );
+    return this.http.get(url);
   }
   postRetistrationFrom(data: any): Observable<any> {
     const  postdata = { ...data, event: 'continue' };

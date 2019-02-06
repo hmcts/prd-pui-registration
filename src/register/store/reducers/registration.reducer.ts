@@ -62,6 +62,7 @@ export function reducer(
         ...state.pagesValues,
         ...action.payload
       };
+
       return {
         ...state,
         pagesValues

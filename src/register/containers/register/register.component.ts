@@ -49,16 +49,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
   subscribeToPageItems(): void {
     this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
-        if(this.pageId){
-          this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
+        if(this.pageId && formData.pageItems && formData.pageValues){
+          this.pageValues  = formData.pageValues;
           this.pageItems = formData.pageItems ? formData.pageItems['meta'] : undefined;
         }
       });
   }
 
   onPageContinue(formDraft): void {
+
     if (formDraft.invalid ) {
+
       this.isValidationUsed = true;
+
     } else {
 
       this.isValidationUsed = false;
