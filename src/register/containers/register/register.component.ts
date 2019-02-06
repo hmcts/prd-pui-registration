@@ -2,8 +2,10 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
-import {ActivatedRoute} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {combineLatest, Observable, Subscription} from 'rxjs';
+import {arePagesLoaded, getCurrentPage, getRegistrationPagesValues} from '../../store/selectors';
+import {withLatestFrom} from 'rxjs/internal/operators';
 
 /**
  * Bootstraps the Register Components
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private store: Store<fromStore.RegistrationState>) {}
 
   pageItems: any; // todo add the type
@@ -32,6 +35,25 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subscribeToRoute();
     this.subscribeToPageItems();
     this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
+    const combined = combineLatest(
+         this.store.pipe(select(arePagesLoaded)),
+         this.store.pipe(select(getCurrentPage)),
+         this.store.pipe(select(getRegistrationPagesValues))
+       );
+    const subscribe = combined.subscribe(
+      ([state, pageName, pageValue]) => {
+        if (
+          !pageValue || Object.keys(pageValue).length === 0 &&
+          (
+            pageName.pageId === 'organisation-address' ||
+            pageName.pageId === 'pba-number' ||
+            pageName.pageId === 'DXreference'  ||
+            pageName.pageId ===  'name' ||
+            pageName.pageId ===   'email-address'
+          )) {
+          this.router.navigate(['/register']);
+        }
+      })
   }
 
   subscribeToRoute(): void {
@@ -70,5 +92,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.$routeSubscription.unsubscribe();
   }
 
+  submitdata(): void{
+    this.store.dispatch( new fromStore.PostFormData())
+  }
 }
 
