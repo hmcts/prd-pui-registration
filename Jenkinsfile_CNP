@@ -75,6 +75,8 @@ withPipeline(type, product, component) {
         ])
     }
 
+    after('test') {
+
         publishHTML ( [
             allowMissing         : true,
             alwaysLinkToLastBuild: true,
