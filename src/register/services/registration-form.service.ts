@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {Observable, of, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, delay} from 'rxjs/operators';
 import {formObj} from './form.mock';
 
 export const ENVIRONMENT = {
@@ -15,8 +15,10 @@ export class RegistrationFormService {
 
   getRetistrationFrom(pageId): Observable<any> {
     const url = `/api/decisions/states/any/any/any/${pageId}`;
-    // return of(formObj[pageId]);
-    return this.http.get(url);
+    return of(formObj[pageId]).pipe(
+      // delay(1000)
+    );
+    // return this.http.get(url);
   }
   postRetistrationFrom(data: any): Observable<any> {
     const  postdata = { ...data, event: 'continue' };

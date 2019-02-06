@@ -30,24 +30,27 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
   formSubscirption: Subscription;
 
   ngOnInit(): void {
-    this.pageItems.formGroupValidators = []; // set validators so that the FB do not error when initilies
+    // this.pageItems.formGroupValidators = []; // set validators so that the FB do not error when initilies
     this.createForm();
-
-    this.formSubscirption = this.formDraft.valueChanges.subscribe(values => {
-      this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, values));
-      this.setValidators();
-    })
+    // this.formSubscirption = this.formDraft.valueChanges.subscribe(values => {
+    //   this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, values));
+    //   this.setValidators();
+    // })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.pageItems.currentValue && changes.pageValues.currentValue) {
+    if (changes.pageItems &&
+        changes.pageItems.currentValue &&
+        changes.pageValues &&
+        changes.pageValues.currentValue
+    ) {
       this.createForm();
     }
   }
 
   createForm() {
     this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, this.pageValues));
-    this.setValidators();
+    // this.setValidators();
   }
 
   setValidators(): void {
@@ -56,8 +59,7 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onFormSubmit() {
-    const { value } = this.formDraft;
-    this.submitPage.emit({ ...value });
+    this.submitPage.emit(this.formDraft);
   }
 
   ngOnDestroy(): void {

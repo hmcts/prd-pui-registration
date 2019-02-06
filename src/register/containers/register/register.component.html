@@ -13,7 +13,7 @@
     <app-form-builder *ngIf="pageId && pageId != 'check'"
       [pageItems]="pageItems"
       [pageValues]="pageValues"
-      [useValidation]="true"
+      [useValidation]="isValidationUsed"
       (submitPage)="onPageContinue($event)" >
     </app-form-builder>
     <!--TODO add this as component -->

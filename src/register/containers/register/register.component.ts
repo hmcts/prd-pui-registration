@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   $routeSubscription: Subscription;
   $pageItemsSubscritpion: Subscription;
   data$: Observable<any>;
+  isValidationUsed = false;
 
   ngOnInit(): void {
     this.subscribeToRoute();
@@ -50,19 +51,29 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe(formData => {
         if(this.pageId){
           this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
-          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
+          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : undefined;
         }
       });
   }
 
-  onPageContinue(event): void {
-    const nextUrl = event.nextUrl;
-    delete event.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
-    this.store.dispatch(new fromStore.SaveFormData( event));
+  onPageContinue(formDraft): void {
+    if (formDraft.invalid ) {
+      this.isValidationUsed = true;
+    } else {
 
-    this.store.dispatch( new fromRoot.Go({
-      path: ['/register', nextUrl]
-    }));
+      this.isValidationUsed = false;
+      const { value } = formDraft;
+      const nextUrl = value.nextUrl;
+
+      delete value.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
+
+      this.store.dispatch(new fromStore.SaveFormData( value));
+      this.store.dispatch( new fromRoot.Go({
+        path: ['/register', nextUrl]
+      }));
+    }
+
+
   }
 
   ngOnDestroy(): void {
