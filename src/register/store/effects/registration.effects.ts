@@ -36,14 +36,14 @@ export class RegistrationEffects {
 
   @Effect()
   postRegistrationFormData$ = this.actions$.pipe(
-    ofType(registrationActions.POST_FORM_DATA),
-    withLatestFrom(this.store.pipe(select(getRegistrationPagesValues))),
-    switchMap(([payload,  store]) => {
-      return this.registrationService.postRegistrationForm(store).pipe(
+    ofType(registrationActions.SUBMIT_FORM_DATA),
+    map((action: registrationActions.SubmitFormData) => action.payload),
+    switchMap((formValues) => {
+      return this.registrationService.submitRegistrationForm(formValues).pipe(
         map(obj => {
-          return new registrationActions.PostFormDataSuccess(store);
+          return new registrationActions.SubmitFormDataSuccess();
         }),
-        catchError(error => of(new registrationActions.PostFormDataFail(error)))
+        catchError(error => of(new registrationActions.SubmitFormDataFail(error)))
     );
     })
   );

@@ -22,11 +22,14 @@ export class RegistrationFormService {
     const url = `/api/decisions/states/any/any/any/${pageId}`;
     return this.http.get(url);
   }
-  postRegistrationForm(data: any): Observable<any> {
-    const  postdata = { ...data, event: 'continue' };
-    console.log('postdata', postdata );
-    return postdata;
-    // return this.http.post<any>(`${ENVIRONMENT.registerOrganisation}`, postdata);
+
+  submitRegistrationForm(data: any): Observable<any> {
+    const  postData = {
+      fromValues: {...data},
+      event: 'continue'
+    };
+    return this.http.post<any>(`${ENVIRONMENT.registerOrganisation}`, postData);
   }
 
 }
+''

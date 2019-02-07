@@ -56,24 +56,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
   onPageContinue(formDraft): void {
 
     if (formDraft.invalid ) {
-
       this.isPageValid = true;
-
     } else {
-
       this.isPageValid = false;
       const { value } = formDraft;
       const nextUrl = value.nextUrl;
-
-      delete value.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
+      delete value.nextUrl; // removing nextUrl so ti doesn't overwrite the one from the server payload.
 
       this.store.dispatch(new fromStore.SaveFormData( value));
       this.store.dispatch( new fromRoot.Go({
         path: ['/register', nextUrl]
       }));
     }
-
-
   }
 
   ngOnDestroy(): void {
@@ -81,8 +75,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.$routeSubscription.unsubscribe();
   }
 
-  submitdata(): void{
-    this.store.dispatch( new fromStore.PostFormData())
+  onSubmitData(): void{
+    this.store.dispatch( new fromStore.SubmitFormData(this.pageValues));
   }
 }
 

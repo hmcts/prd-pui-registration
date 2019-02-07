@@ -56,7 +56,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>PBA number</ng-container>
           <ng-container answer>
             {{ data.PBAnumber1 }}
@@ -69,7 +69,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>DX reference</ng-container>
           <ng-container answer>
             {{ data.DXnumber }}
@@ -82,7 +82,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>First name(s)</ng-container>
           <ng-container answer>
             {{ data.firstName }}
@@ -94,7 +94,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>Last name</ng-container>
           <ng-container answer>
             {{ data.lastName }}
@@ -106,7 +106,7 @@
 
         <div app-govuk-dl-list-item
              class="govuk-check-your-answers__contents"
-             *ngIf="(data$ | async).formValue as data">
+             *ngIf="(data$ | async) as data">
           <ng-container question>Email address</ng-container>
           <ng-container answer>
             {{ data.emailAddress }}
@@ -122,7 +122,7 @@
 
       <div
         role="button" draggable="false"
-        (click)="submitdata()"
+        (click)="onSubmitData()"
         class="govuk-button">
         Submit
       </div>
