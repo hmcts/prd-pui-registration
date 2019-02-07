@@ -10,7 +10,6 @@ export const getRegistrationState = createSelector(
 );
 
 export const arePagesLoaded = createSelector(getRegistrationState, fromRegistration.getRegistrationPagesLoaded);
-export const arePagesLoading = createSelector(getRegistrationState, fromRegistration.getRegistrationFromLoading);
 
 export const getRegistrationPages = createSelector(
   getRegistrationState,

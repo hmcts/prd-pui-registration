@@ -57,9 +57,10 @@ export function reducer(
     }
 
     case fromRegistration.SAVE_FORM_DATA: {
+
       const pagesValues = {
         ...state.pagesValues,
-        formValue: action.payload
+        ...action.payload
       };
 
       return {

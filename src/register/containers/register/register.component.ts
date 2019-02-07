@@ -3,9 +3,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute, Router} from '@angular/router';
-import {combineLatest, Observable, Subscription} from 'rxjs';
-import {arePagesLoaded, getCurrentPage, getRegistrationPagesValues} from '../../store/selectors';
-import {withLatestFrom} from 'rxjs/internal/operators';
+import {Observable, Subscription} from 'rxjs';
 
 /**
  * Bootstraps the Register Components
@@ -14,7 +12,6 @@ import {withLatestFrom} from 'rxjs/internal/operators';
 @Component({
   selector: 'app-prd-register-component',
   templateUrl: './register.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush // can't use because of back btn
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
@@ -27,33 +24,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   pageValues: any;
   pageId: string;
   $routeSubscription: Subscription;
-  $pageItemsSubscritpion: Subscription;
-  formData;
+  $pageItemsSubscription: Subscription;
   data$: Observable<any>;
+  isPageValid = false;
 
   ngOnInit(): void {
     this.subscribeToRoute();
     this.subscribeToPageItems();
     this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
-    const combined = combineLatest(
-         this.store.pipe(select(arePagesLoaded)),
-         this.store.pipe(select(getCurrentPage)),
-         this.store.pipe(select(getRegistrationPagesValues))
-       );
-    const subscribe = combined.subscribe(
-      ([state, pageName, pageValue]) => {
-        if (
-          !pageValue || Object.keys(pageValue).length === 0 &&
-          (
-            pageName.pageId === 'organisation-address' ||
-            pageName.pageId === 'pba-number' ||
-            pageName.pageId === 'DXreference'  ||
-            pageName.pageId ===  'name' ||
-            pageName.pageId ===   'email-address'
-          )) {
-          this.router.navigate(['/register']);
-        }
-      })
   }
 
   subscribeToRoute(): void {
@@ -66,34 +44,39 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   subscribeToPageItems(): void {
-    this.$pageItemsSubscritpion = this.store.pipe(select(fromStore.getCurrentPageItems))
+    this.$pageItemsSubscription = this.store.pipe(select(fromStore.getCurrentPageItems))
       .subscribe(formData => {
-        if(this.pageId){
-          this.pageValues  = formData.pageValues['formValue'] ? formData.pageValues['formValue'] : [];
-          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : {};
-
+        if(this.pageId && formData.pageItems && formData.pageValues){
+          this.pageValues  = formData.pageValues;
+          this.pageItems = formData.pageItems ? formData.pageItems['meta'] : undefined;
         }
-
       });
   }
 
-  onPageContinue(event): void {
-    const nextUrl = event.nextUrl;
-    delete event.nextUrl; // removing nextUrl for it not to get overwriten the one from the server
-    this.store.dispatch(new fromStore.SaveFormData( event));
+  onPageContinue(formDraft): void {
 
-    this.store.dispatch( new fromRoot.Go({
-      path: ['/register', nextUrl]
-    }));
+    if (formDraft.invalid ) {
+      this.isPageValid = true;
+    } else {
+      this.isPageValid = false;
+      const { value } = formDraft;
+      const nextUrl = value.nextUrl;
+      delete value.nextUrl; // removing nextUrl so ti doesn't overwrite the one from the server payload.
+
+      this.store.dispatch(new fromStore.SaveFormData( value));
+      this.store.dispatch( new fromRoot.Go({
+        path: ['/register', nextUrl]
+      }));
+    }
   }
 
   ngOnDestroy(): void {
-    this.$pageItemsSubscritpion.unsubscribe();
+    this.$pageItemsSubscription.unsubscribe();
     this.$routeSubscription.unsubscribe();
   }
 
-  submitdata(): void{
-    this.store.dispatch( new fromStore.PostFormData())
+  onSubmitData(): void{
+    this.store.dispatch( new fromStore.SubmitFormData(this.pageValues));
   }
 }
 
