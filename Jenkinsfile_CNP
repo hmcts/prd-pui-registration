@@ -30,8 +30,6 @@ List<LinkedHashMap<String, Object>> secrets = [
     secret('sscs-email', 'SSCS_EMAIL'),
     secret('sscs-password', 'SSCS_PASSWORD'),
     secret('AppInsightsInstrumentationKey', 'APPINSIGHTS_INSTRUMENTATIONKEY'),
-
-
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
