@@ -2,20 +2,19 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {FormGroup} from '@angular/forms';
 import {FormsService} from './services/form-builder.service';
 import {ValidationService} from './services/form-builder-validation.service';
-import {Subscription} from 'rxjs';
 
 /**
  * Form Builder Wrapper
- *
+ * Component accepts pageItems and pageValues for From Builder to process
+ * and it emits form data to it's parent component.
  */
-
 
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html'
 })
 
-export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
+export class FromBuilderComponent implements OnChanges {
 
   constructor(
     private formsService: FormsService,
@@ -23,22 +22,13 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() pageItems: any;
   @Input() pageValues: any;
-  @Input() useValidation = true;
+  @Input() isPageValid: boolean;
   @Output() submitPage = new EventEmitter<FormGroup>();
 
   formDraft: FormGroup;
-  formSubscirption: Subscription;
-
-  ngOnInit(): void {
-    this.createForm();
-    this.formSubscirption = this.formDraft.valueChanges.subscribe(values => {
-      this.formDraft = new FormGroup(this.formsService.defineformControls(this.pageItems, values));
-      this.setValidators();
-    })
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.pageItems.currentValue && changes.pageValues.currentValue) {
+    if (changes.pageItems && changes.pageItems.currentValue) {
       this.createForm();
     }
   }
@@ -49,17 +39,13 @@ export class FromBuilderComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setValidators(): void {
-    const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, this.pageItems.formGroupValidators);
-    this.formDraft.setValidators(formGroupValidators);
+    if (this.pageItems) {
+      const formGroupValidators = this.validationService.createFormGroupValidators(this.formDraft, this.pageItems.formGroupValidators);
+      this.formDraft.setValidators(formGroupValidators);
+    }
   }
 
   onFormSubmit() {
-    const { value } = this.formDraft;
-    this.submitPage.emit({ ...value });
-  }
-
-  ngOnDestroy(): void {
-    // todo
-    // this.formSubscirption.unsubscribe();
+    this.submitPage.emit(this.formDraft);
   }
 }

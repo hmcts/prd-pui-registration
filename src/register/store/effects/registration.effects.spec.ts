@@ -32,7 +32,7 @@ describe('Registration Effects', () => {
   let actions$;
   let effects: RegistrationEffects;
   const RegistrationFormServiceMock = jasmine.createSpyObj('RegistrationFormService', [
-    'getRetistrationFrom',
+    'getRegistrationForm',
   ]);
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,7 +55,7 @@ describe('Registration Effects', () => {
   describe('loadRegistrationForm$', () => {
     it('should return a collection from loadRegistrationForm$ - LoadPageItemsSuccess', () => {
       const pageId = 'something';
-      RegistrationFormServiceMock.getRetistrationFrom.and.returnValue(of(pageId));
+      RegistrationFormServiceMock.getRegistrationForm.and.returnValue(of(pageId));
       const action = new LoadPageItems(pageId);
       const completion = new LoadPageItemsSuccess({payload: 'something', pageId});
       actions$ = hot('-a', { a: action });
