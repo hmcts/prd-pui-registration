@@ -6,17 +6,12 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {RegistrationFormService} from '../../services/registration-form.service';
 
-import {select, Store} from '@ngrx/store';
-import {withLatestFrom} from 'rxjs/internal/operators';
-import {RegistrationState} from '../reducers';
-import {getRegistrationPagesValues} from '../selectors';
 
 @Injectable()
 export class RegistrationEffects {
   constructor(
     private actions$: Actions,
-    private registrationService: RegistrationFormService,
-    private store: Store<RegistrationState>
+    private registrationService: RegistrationFormService
   ) {}
 
   @Effect()
