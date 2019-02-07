@@ -6,17 +6,12 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {RegistrationFormService} from '../../services/registration-form.service';
 
-import {select, Store} from '@ngrx/store';
-import {withLatestFrom} from 'rxjs/internal/operators';
-import {RegistrationState} from '../reducers';
-import {getRegistrationPagesValues} from '../selectors';
 
 @Injectable()
 export class RegistrationEffects {
   constructor(
     private actions$: Actions,
-    private registrationService: RegistrationFormService,
-    private store: Store<RegistrationState>
+    private registrationService: RegistrationFormService
   ) {}
 
   @Effect()
@@ -24,9 +19,8 @@ export class RegistrationEffects {
     ofType(registrationActions.LOAD_PAGE_ITEMS),
     map((action: registrationActions.LoadPageItems) => action.payload),
     switchMap((pageId) => {
-      return this.registrationService.getRetistrationFrom(pageId).pipe(
+      return this.registrationService.getRegistrationForm(pageId).pipe(
         map(returnedItems => {
-          // returnedItems to be passed as Object otherwise interactes each charater
           return new registrationActions.LoadPageItemsSuccess({payload: returnedItems, pageId});
 
         }),
@@ -36,15 +30,15 @@ export class RegistrationEffects {
   );
 
   @Effect()
-  postRegistrationForm$ = this.actions$.pipe(
-    ofType(registrationActions.POST_FORM_DATA),
-    withLatestFrom(this.store.pipe(select(getRegistrationPagesValues))),
-    switchMap(([payload,  store]) => {
-      return this.registrationService.postRetistrationFrom(store).pipe(
+  postRegistrationFormData$ = this.actions$.pipe(
+    ofType(registrationActions.SUBMIT_FORM_DATA),
+    map((action: registrationActions.SubmitFormData) => action.payload),
+    switchMap((formValues) => {
+      return this.registrationService.submitRegistrationForm(formValues).pipe(
         map(obj => {
-          return new registrationActions.PostFormDataSuccess(store);
+          return new registrationActions.SubmitFormDataSuccess();
         }),
-        catchError(error => of(new registrationActions.PostFormDataFail(error)))
+        catchError(error => of(new registrationActions.SubmitFormDataFail(error)))
     );
     })
   );
