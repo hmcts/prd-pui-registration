@@ -14,7 +14,6 @@
     "start:ng": "ng serve --port 4200 --host 0.0.0.0 --proxy-config proxy.config.json",
     "build:ng": "ng build",
     "test:ng": "ng test",
-    "lint:ng": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -39,6 +38,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "govuk-frontend": "2.5.0",
+    "lint": "^1.1.2",
     "log4js": "^3.0.6",
     "p-iteration": "^1.1.7",
     "rxjs": "^6.0.0",
