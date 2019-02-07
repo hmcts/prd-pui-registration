@@ -14,6 +14,7 @@
     "start:ng": "ng serve --port 4200 --host 0.0.0.0 --proxy-config proxy.config.json",
     "build:ng": "ng build",
     "test:ng": "ng test",
+    "lint:ng": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -33,7 +34,7 @@
     "@ngrx/store": "^6.0.3",
     "@ngrx/store-devtools": "^6.0.3",
     "@types/ejs": "^2.6.1",
-    "core-js": "^2.6.4",
+    "core-js": "^2.5.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
@@ -41,7 +42,7 @@
     "lint": "^1.1.2",
     "log4js": "^3.0.6",
     "p-iteration": "^1.1.7",
-    "rxjs": "^6.4.0",
+    "rxjs": "^6.0.0",
     "rxjs-compat": "^6.4.0",
     "session-file-store": "^1.2.0",
     "zone.js": "^0.8.26"
@@ -69,7 +70,7 @@
     "mocha": "^5.2.0",
     "ngrx-store-freeze": "^0.2.4",
     "nodemon": "^1.18.9",
-    "protractor": "^5.4.2",
+    "protractor": "~5.3.0",
     "ts-node": "^5.0.1",
     "tslint": "~5.9.1",
     "typescript": "2.9.2"
