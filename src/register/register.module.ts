@@ -18,12 +18,14 @@ import {EffectsModule} from '@ngrx/effects';
 import { reducers, effects } from './store';
 import {HttpClientModule} from '@angular/common/http';
 import { GovukDlListItemComponent } from './components/govuk-dl-list-item/govuk-dl-list-item.component';
+import {HmctsFormBuilderModule} from 'example-npm-module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    HmctsFormBuilderModule,
     registerRouting,
     SharedModule,
     StoreModule.forFeature('registration', reducers),
