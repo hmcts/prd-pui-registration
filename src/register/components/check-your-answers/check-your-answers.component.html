@@ -17,11 +17,11 @@
          class="govuk-check-your-answers__contents">
       <ng-container question>Organisation address</ng-container>
       <ng-container answer>
-        {{ formDataValues.officeAddressOne }} <br />
-        {{ formDataValues.officeAddressTwo }} <br />
-        {{ formDataValues.townOrCity }} <br />
-        {{ formDataValues.county }} <br />
-        {{ formDataValues.postcode }} <br />
+        <span style="display: block"> {{ formDataValues.officeAddressOne }} </span>
+        <span style="display: block">{{ formDataValues.officeAddressTwo }} </span>
+        <span style="display: block">{{ formDataValues.townOrCity }} </span>
+        <span style="display: block">{{ formDataValues.county }} </span>
+        <span style="display: block">{{ formDataValues.postcode }} </span>
       </ng-container>
       <ng-container button>
         <a [routerLink]="'/register/organisation-address'" >Change <span class="govuk-visually-hidden">organistaion address</span></a>

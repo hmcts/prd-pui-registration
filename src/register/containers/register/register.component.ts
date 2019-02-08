@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   $routeSubscription: Subscription;
   $pageItemsSubscription: Subscription;
   data$: Observable<FormDataValuesModel>;
+  isFromSubmitted$: Observable<boolean>;
   pageId: string;
   isPageValid = false;
 
@@ -33,6 +34,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subscribeToRoute();
     this.subscribeToPageItems();
     this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
+    this.isFromSubmitted$ = this.store.pipe(select(fromStore.getIsRegistrationSubmitted));
   }
 
   subscribeToRoute(): void {
