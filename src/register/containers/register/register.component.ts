@@ -57,7 +57,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onPageContinue(formDraft): void {
-
     if (formDraft.invalid ) {
       this.isPageValid = true;
     } else {
@@ -65,11 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const { value } = formDraft;
       const nextUrl = value.nextUrl;
       delete value.nextUrl; // removing nextUrl so ti doesn't overwrite the one from the server payload.
-
-      this.store.dispatch(new fromStore.SaveFormData( value));
-      this.store.dispatch( new fromRoot.Go({
-        path: ['/register', nextUrl]
-      }));
+      this.store.dispatch(new fromStore.SaveFormData({value, nextUrl}));
     }
   }
 

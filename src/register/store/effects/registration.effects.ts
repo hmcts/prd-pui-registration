@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 
 import * as registrationActions from '../actions';
+import * as fromRoot from '../../../app/store';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {RegistrationFormService} from '../../services/registration-form.service';
@@ -43,5 +44,15 @@ export class RegistrationEffects {
     })
   );
 
+  @Effect()
+  saveFormData$ = this.actions$.pipe(
+    ofType(registrationActions.SAVE_FORM_DATA),
+    map((action: registrationActions.SaveFormData) => action.payload),
+    switchMap((formValues) =>  [
+      new fromRoot.Go({
+        path: ['/register', formValues.nextUrl]
+      })]
+    )
+  );
 
 }

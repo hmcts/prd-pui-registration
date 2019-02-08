@@ -62,7 +62,7 @@ export function reducer(
 
       const pagesValues = {
         ...state.pagesValues,
-        ...action.payload
+        ...action.payload.value
       };
 
       return {

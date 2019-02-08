@@ -26,7 +26,7 @@ describe('Registration selectors', () => {
         result = value;
 
       });
-      expect(result).toEqual({pages: {}, pagesValues: {}, loaded: false, loading: false});
+      expect(result).toEqual({pages: {}, pagesValues: {}, loaded: false, loading: false, submitted: false});
 
       store.dispatch(new LoadPageItems('hello-world'));
       expect(result).toEqual({
