@@ -1,4 +1,5 @@
 import emailAddress from './emailAddress'
+import haveDx from './organisationHaveDx'
 import name from './name'
 import organisationAddress from './organisationAddress'
 import organisationDx from './organisationDx'
@@ -12,6 +13,7 @@ templates.any = {
     name,
     'organisation-address': organisationAddress,
     'organisation-dx': organisationDx,
+    'organisation-have-dx': haveDx,
     'organisation-name': organisationName,
     'organisation-pba': pbaNumber,
 }

@@ -3,6 +3,20 @@ export default {
     name: 'organisation-dx',
     header: "What's the DX reference for your main office? (optional)",
     formGroupValidators: [],
+    'validationHeaderErrorMessages': [
+      {
+        validationLevel: 'formControl',
+        controlId: 'DXnumber',
+        text: 'Enter DX number',
+        href: '/register/organisation-name'
+      },
+      {
+        validationLevel: 'formControl',
+        controlId: 'DXexchange',
+        text: 'EnterDX exchange',
+        href: '/register/organisation-name'
+      }
+    ],
     groups: [
         {
             hiddenInput: {
@@ -17,6 +31,7 @@ export default {
                     classes: 'govuk-label--m',
                 },
                 control: 'DXnumber',
+                validators: ['required'],
                 classes: 'govuk-!-width-two-thirds',
             },
         },
@@ -27,6 +42,7 @@ export default {
                     classes: 'govuk-label--m',
                 },
                 control: 'DXexchange',
+                validators: ['required'],
                 classes: 'govuk-!-width-two-thirds',
             },
         },
