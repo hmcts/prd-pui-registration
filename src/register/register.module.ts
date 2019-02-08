@@ -7,6 +7,9 @@ import {SharedModule} from '../app/shared/shared.module';
 // containers
 import * as fromContainers from './containers';
 
+// components
+import * as fromComponent from './components';
+
 // services
 import * as fromServices from './services';
 import {StoreModule} from '@ngrx/store';
@@ -26,8 +29,8 @@ import { GovukDlListItemComponent } from './components/govuk-dl-list-item/govuk-
     StoreModule.forFeature('registration', reducers),
     EffectsModule.forFeature(effects),
   ],
-  exports: [...fromContainers.containers],
-  declarations: [...fromContainers.containers, GovukDlListItemComponent],
+  exports: [...fromContainers.containers, ...fromComponent.components],
+  declarations: [...fromContainers.containers, ...fromComponent.components],
   providers: [...fromServices.services]
 })
 

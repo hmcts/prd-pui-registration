@@ -4,6 +4,7 @@ import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import {FormDataValuesModel} from '../../models/form-data-values.model';
 
 /**
  * Bootstraps the Register Components
@@ -21,17 +22,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private store: Store<fromStore.RegistrationState>) {}
 
   pageItems: any; // todo add the type
-  pageValues: any;
-  pageId: string;
+  pageValues: FormDataValuesModel;
   $routeSubscription: Subscription;
   $pageItemsSubscription: Subscription;
-  data$: Observable<any>;
+  data$: Observable<FormDataValuesModel>;
+  isFromSubmitted$: Observable<boolean>;
+  pageId: string;
   isPageValid = false;
 
   ngOnInit(): void {
     this.subscribeToRoute();
     this.subscribeToPageItems();
     this.data$ = this.store.pipe(select(fromStore.getRegistrationPagesValues));
+    this.isFromSubmitted$ = this.store.pipe(select(fromStore.getIsRegistrationSubmitted));
   }
 
   subscribeToRoute(): void {
@@ -54,7 +57,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onPageContinue(formDraft): void {
-
     if (formDraft.invalid ) {
       this.isPageValid = true;
     } else {
@@ -62,11 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const { value } = formDraft;
       const nextUrl = value.nextUrl;
       delete value.nextUrl; // removing nextUrl so ti doesn't overwrite the one from the server payload.
-
-      this.store.dispatch(new fromStore.SaveFormData( value));
-      this.store.dispatch( new fromRoot.Go({
-        path: ['/register', nextUrl]
-      }));
+      this.store.dispatch(new fromStore.SaveFormData({value, nextUrl}));
     }
   }
 

@@ -12,6 +12,7 @@ export interface RegistrationFormState {
   pagesValues: Object;
   loaded: boolean;
   loading: boolean;
+  submitted: boolean;
 }
 
 export const initialState: RegistrationFormState = {
@@ -19,6 +20,7 @@ export const initialState: RegistrationFormState = {
   pagesValues: {},
   loaded: false,
   loading: false,
+  submitted: false
 };
 
 export function reducer(
@@ -60,7 +62,7 @@ export function reducer(
 
       const pagesValues = {
         ...state.pagesValues,
-        ...action.payload
+        ...action.payload.value
       };
 
       return {
@@ -68,13 +70,21 @@ export function reducer(
         pagesValues
       };
     }
+
+    case fromRegistration.SUBMIT_FORM_DATA_SUCCESS: {
+      return {
+        ...state,
+        submitted: true
+      };
+    }
   }
 
   return state;
 }
 
-export const getRegistationFormPages = (state: RegistrationFormState) => state.pages;
-export const getRegistationFormPagesValues = (state: RegistrationFormState) => state.pagesValues;
+export const getRegistrationFormPages = (state: RegistrationFormState) => state.pages;
+export const getRegistrationFormPagesValues = (state: RegistrationFormState) => state.pagesValues;
+export const getRegistartionFromPagesSubmited = (state: RegistrationFormState) => state.submitted;
 export const getRegistrationFromLoading = (state: RegistrationFormState) => state.loading;
 export const getRegistrationPagesLoaded = (state: RegistrationFormState) => state.loaded;
 

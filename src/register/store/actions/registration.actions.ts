@@ -26,7 +26,7 @@ export class LoadPageItemsFail implements Action {
 
 export class SaveFormData implements Action {
   readonly type = SAVE_FORM_DATA;
-  constructor(public payload: Object) {}
+  constructor(public payload: {value: object, nextUrl: string}) {}
 }
 
 export const SUBMIT_FORM_DATA = '[Registration] Submit Form Data';
