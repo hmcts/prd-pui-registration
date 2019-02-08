@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormDataValuesModel} from '../../models/form-data-values.model';
-import {FormGroup} from '@angular/forms';
 
 /**
  * Stateless component responsible for
@@ -17,15 +16,13 @@ export class CheckYourAnswersComponent {
 
   formDataValues: FormDataValuesModel;
 
+  @Output() submit = new EventEmitter();
   @Input() set fromValues(values) {
     this.formDataValues = values;
   };
 
-  @Output() submit = new EventEmitter();
-
   onSubmitData() {
     this.submit.emit();
   }
-
 
 }

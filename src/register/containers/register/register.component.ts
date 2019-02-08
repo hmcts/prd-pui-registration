@@ -4,6 +4,7 @@ import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import {FormDataValuesModel} from '../../models/form-data-values.model';
 
 /**
  * Bootstraps the Register Components
@@ -21,11 +22,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private store: Store<fromStore.RegistrationState>) {}
 
   pageItems: any; // todo add the type
-  pageValues: any;
-  pageId: string;
+  pageValues: FormDataValuesModel;
   $routeSubscription: Subscription;
   $pageItemsSubscription: Subscription;
-  data$: Observable<any>;
+  data$: Observable<FormDataValuesModel>;
+  pageId: string;
   isPageValid = false;
 
   ngOnInit(): void {
