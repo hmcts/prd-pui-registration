@@ -1,4 +1,4 @@
-export interface FormDataModel {
+export interface FormDataValuesModel {
   orgName?: string;
   officeAddressOne?: string;
   officeAddressTwo?: string;

@@ -1,6 +1,5 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
     <ng-container *ngIf="pageId === undefined">
         <h1 class="govuk-heading-xl">Register to manage civil and family law cases</h1>
         <p class="govuk-body">At the same time as you register your organisation, you'll give us details to create your user account.</p>
@@ -17,6 +16,6 @@
 
     <app-check-your-answers *ngIf="pageId === 'check'"
       [fromValues]="data$ | async"
+      (submit)="onSubmitData()"
     ></app-check-your-answers>
-
 </div>
