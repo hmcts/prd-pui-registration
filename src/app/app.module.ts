@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './containers/app/app.component';
 import {RegisterModule} from '../register/register.module';
-import {SharedModule} from './shared/shared.module';
+import {SharedModule} from '../shared/shared.module';
 
 // ngrx
 import {MetaReducer, StoreModule} from '@ngrx/store';
