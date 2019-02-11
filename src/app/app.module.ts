@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './containers/app/app.component';
 import {RegisterModule} from '../register/register.module';
@@ -24,12 +24,9 @@ import * as fromComponents from './components';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import { ComponentNameComponent } from './component-name/component-name.component';
+import {ROUTES} from './app.routes';
 
-export const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/register' },
-  { path: '**', redirectTo: '/register' }
-];
+
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];
@@ -40,7 +37,6 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     AppComponent,
     ...fromComponents.components,
     ...fromContainers.containers,
-    ComponentNameComponent,
   ],
   imports: [
     BrowserModule,
