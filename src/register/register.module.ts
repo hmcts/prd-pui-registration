@@ -17,8 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
 
 import { reducers, effects } from './store';
 import {HttpClientModule} from '@angular/common/http';
-import { GovukDlListItemComponent } from './components/govuk-dl-list-item/govuk-dl-list-item.component';
-import {HmctsFormBuilderModule} from 'example-npm-module';
+import {HmctsFormBuilderModule} from '../../projects/hmcts-form-builder/src/lib/hmcts-form-builder.module';
 
 
 @NgModule({
