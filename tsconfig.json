@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "hmcts-form-builder": [
+        "dist/hmcts-form-builder"
+      ],
+      "hmcts-form-builder/*": [
+        "dist/hmcts-form-builder/*"
+      ]
+    }
   }
 }

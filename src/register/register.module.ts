@@ -17,7 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
 
 import { reducers, effects } from './store';
 import {HttpClientModule} from '@angular/common/http';
-import {HmctsFormBuilderModule} from 'example-npm-module';
+import {HmctsFormBuilderModule} from '../../projects/hmcts-form-builder/src/lib/hmcts-form-builder.module';
 
 
 @NgModule({
