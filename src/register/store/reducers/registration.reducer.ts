@@ -17,7 +17,7 @@ export interface RegistrationFormState {
 
 export const initialState: RegistrationFormState = {
   pages: {},
-  pagesValues: {haveDXNumber: 'nextUrl'},
+  pagesValues: {haveDXNumber: 'dontHaveDX'},
   loaded: false,
   loading: false,
   submitted: false

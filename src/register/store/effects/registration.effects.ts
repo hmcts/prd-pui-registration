@@ -49,8 +49,8 @@ export class RegistrationEffects {
     ofType(registrationActions.SAVE_FORM_DATA),
     map((action: registrationActions.SaveFormData) => action.payload),
     switchMap((formValues) =>  {
-      const nextUrl = formValues.value['haveDXNumber'] === 'nextUrl2' ?
-        formValues.value['nextUrl2'] : formValues.nextUrl;
+      const nextUrl = formValues.value['haveDXNumber'] === 'dontHaveDX' ?
+        formValues.value['dontHaveDX'] : formValues.nextUrl;
       return [
           new fromRoot.Go({
             path: ['/register', nextUrl]

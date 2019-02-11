@@ -31,7 +31,7 @@ export default {
                 hiddenAccessibilityText: 'some hidden text',
               },
               {
-                value: 'nextUrl2',
+                value: 'dontHaveDX',
                 text: 'No',
                 hiddenAccessibilityText: 'some hidden text'
               }
@@ -48,7 +48,7 @@ export default {
     },
     {
       hiddenInput: {
-        control: 'nextUrl2',
+        control: 'dontHaveDX',
         value: 'name',
       },
     },

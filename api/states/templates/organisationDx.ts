@@ -32,6 +32,10 @@ export default {
                 },
                 control: 'DXnumber',
                 validators: ['required'],
+                validationError: {
+                  value: 'Enter DX number',
+                  controlId: 'DXnumber',
+                },
                 classes: 'govuk-!-width-two-thirds',
             },
         },
@@ -43,6 +47,10 @@ export default {
                 },
                 control: 'DXexchange',
                 validators: ['required'],
+                validationError: {
+                  value: 'Enter DX exchange',
+                  controlId: 'DXexchange',
+                },
                 classes: 'govuk-!-width-two-thirds',
             },
         },
