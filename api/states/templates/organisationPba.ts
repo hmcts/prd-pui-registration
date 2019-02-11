@@ -27,7 +27,7 @@ export default {
         {
             hiddenInput: {
                 control: 'nextUrl',
-                value: 'organisation-dx',
+                value: 'organisation-have-dx',
             },
         },
         {
