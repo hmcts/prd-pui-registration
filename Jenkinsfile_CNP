@@ -14,9 +14,9 @@ properties([
 @Library("Infrastructure")
 
 def type = "nodejs"
-def product = "prd-pui-registration"
-def component = "webapp"
-def vault = "prd"
+def product = "pui"
+def component = "registration"
+def vault = "prd" 
 def channel = '#pui-pipeline'
 
 List<LinkedHashMap<String, Object>> secrets = [
@@ -30,8 +30,6 @@ List<LinkedHashMap<String, Object>> secrets = [
     secret('sscs-email', 'SSCS_EMAIL'),
     secret('sscs-password', 'SSCS_PASSWORD'),
     secret('AppInsightsInstrumentationKey', 'APPINSIGHTS_INSTRUMENTATIONKEY'),
-
-
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
@@ -74,6 +72,8 @@ withPipeline(type, product, component) {
             reportName           : 'ng lint Report'
         ])
     }
+
+    after('test') {
 
         publishHTML ( [
             allowMissing         : true,

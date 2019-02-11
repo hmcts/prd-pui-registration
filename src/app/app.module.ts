@@ -24,6 +24,7 @@ import * as fromComponents from './components';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import { ComponentNameComponent } from './component-name/component-name.component';
 
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/register' },
@@ -39,6 +40,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     AppComponent,
     ...fromComponents.components,
     ...fromContainers.containers,
+    ComponentNameComponent,
   ],
   imports: [
     BrowserModule,
