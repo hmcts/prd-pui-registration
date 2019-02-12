@@ -1,4 +1,6 @@
 
+import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
 import * as session from 'express-session'
 import * as log4js from 'log4js'
@@ -27,6 +29,10 @@ app.use(
         })
     })
 )
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.use('/api', routes)
 

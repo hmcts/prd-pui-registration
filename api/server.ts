@@ -1,4 +1,6 @@
 
+import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
 import * as ejs from 'ejs'
 import * as express from 'express'
 import * as session from 'express-session'
@@ -8,9 +10,11 @@ import * as sessionFileStore from 'session-file-store'
 import config from './lib/config'
 import routes from './routes'
 
-const FileStore = sessionFileStore(session);
+const FileStore = sessionFileStore(session)
 
 const app = express()
+
+
 
 app.use(
     session({
@@ -35,6 +39,11 @@ app.set('views', __dirname)
 
 app.use(express.static(path.join(__dirname, '..', 'assets'), { index: false }))
 app.use(express.static(path.join(__dirname, '..', ), { index: false }))
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
+
 
 app.use('/api', routes)
 

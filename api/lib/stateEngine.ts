@@ -70,7 +70,6 @@ export async function process(req, res, mapping, payload, templates, store) {
     const event = req.body.event
     let variables = req.body.formValues
     let result = null
-
     let meta = {}
     let newRoute = null
 
@@ -88,6 +87,7 @@ export async function process(req, res, mapping, payload, templates, store) {
 
     if (req.method === 'POST') {
         await map(mapping, async (instruction: any) => {
+            console.log('ghg', mapping)
             if (instruction.event === event) {
                 // event is the main index and so there can only be one instruction per event - exit after finding
                 logger.info(`Found matching event for ${event} `)
@@ -132,7 +132,6 @@ export async function process(req, res, mapping, payload, templates, store) {
             return
         }
 
-        console.log(templates)
         meta = templates[caseTypeId][stateId]
         result = true
     }
