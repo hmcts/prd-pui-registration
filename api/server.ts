@@ -7,14 +7,14 @@ import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as path from 'path'
 import * as sessionFileStore from 'session-file-store'
+import { appInsights } from './lib/appInsights'
 import config from './lib/config'
+import { errorStack } from './lib/errorStack'
 import routes from './routes'
 
 const FileStore = sessionFileStore(session)
 
 const app = express()
-
-
 
 app.use(
     session({
@@ -40,7 +40,9 @@ app.set('views', __dirname)
 app.use(express.static(path.join(__dirname, '..', 'assets'), { index: false }))
 app.use(express.static(path.join(__dirname, '..', ), { index: false }))
 
-app.use(bodyParser.json());
+app.use(errorStack)
+app.use(appInsights)
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
