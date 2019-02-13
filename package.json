@@ -26,7 +26,7 @@
     "e2e": "ng e2e",
     "npm:form-builder": "ng build --prod hmcts-form-builder",
     "npm:publish": " npm publish dist/example-npm-module",
-    "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner"
+    "sonar-scan": "echo 'not implemented'"
   },
   "private": true,
   "dependencies": {
