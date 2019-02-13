@@ -25,7 +25,8 @@
     "lint:fix:ng": "ng lint jui --fix",
     "e2e": "ng e2e",
     "npm:form-builder": "ng build --prod hmcts-form-builder",
-    "npm:publish": " npm publish dist/example-npm-module"
+    "npm:publish": " npm publish dist/example-npm-module",
+    "sonar-scan": "echo 'not implemented'"
   },
   "private": true,
   "dependencies": {
