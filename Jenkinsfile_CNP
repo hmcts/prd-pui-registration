@@ -16,7 +16,7 @@ properties([
 def type = "nodejs"
 def product = "pui"
 def component = "registration"
-def vault = "prd" 
+def vault = "rpa" 
 def channel = '#pui-pipeline'
 
 List<LinkedHashMap<String, Object>> secrets = [
