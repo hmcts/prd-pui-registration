@@ -12,6 +12,7 @@
     "test:node:watch": "cd api && npm run test:watch",
     "test:coverage:ng": "ng test --code-coverage --watch",
     "test:coverage:node": "cd api && npm run coverage",
+    "test:a11y": "echo 'not implemented'",
     "ng": "ng",
     "start:ng": "ng serve --port 4200 --host 0.0.0.0 --proxy-config proxy.config.json",
     "build:ng": "ng build",
