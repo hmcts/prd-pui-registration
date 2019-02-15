@@ -3,7 +3,7 @@ nodejs:
   applicationPort: 3000
   environment:
     REFORM_TEAM: rpa
-    REFORM_SERVICE_NAME: jui-webapp
+    REFORM_SERVICE_NAME: prd-pui-registration
     NODE_ENV: production
     UV_THREADPOOL_SIZE: 64
     APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY}
