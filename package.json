@@ -12,6 +12,10 @@
     "test:node:watch": "cd api && npm run test:watch",
     "test:coverage:ng": "ng test --code-coverage --watch",
     "test:coverage:node": "cd api && npm run coverage",
+    "test:smoke": "webdriver-manager update --versions.chrome 2.40 && protractor ./test/e2e/config/smoke.conf.js --local",
+    "test:smoke:local": "webdriver-manager update --versions.chrome 2.40 && protractor ./test/e2e/config/smoke.conf.js --local",
+    "test:functional": "webdriver-manager update --versions.chrome 2.40 && protractor ./test/e2e/config/conf.js --local && yarn test:api",
+    "test:functional:local": "protractor ./test/e2e/config/conf.js --local",
     "test:a11y": "echo 'not implemented'",
     "ng": "ng",
     "start:ng": "ng serve --port 4200 --host 0.0.0.0 --proxy-config proxy.config.json",
@@ -71,6 +75,8 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "7.1.1",
     "jasmine-core": "^2.99.1",
     "jasmine-marbles": "^0.4.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -89,6 +95,14 @@
     "tsickle": ">=0.25.5",
     "tslib": "^1.7.1",
     "tslint": "~5.9.1",
-    "typescript": "2.9.2"
+    "typescript": "2.9.2",
+    "protractor": "5.4.1",
+    "protractor-cucumber-framework": "6.1.1",
+    "protractor-multiple-cucumber-html-reporter-plugin": "1.8.0",
+    "cucumber": "5.1.0",
+    "cucumber-html-report": "0.6.5",
+    "cucumber-html-reporter": "^4.0.4",
+    "cucumber-pretty": "1.5.0",
+    "cucumberjs-allure-reporter": "1.0.3"
   }
 }
