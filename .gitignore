@@ -4,9 +4,12 @@
 /dist
 /tmp
 /out-tsc
+/reports
 
 # dependencies
 /node_modules
+api/node_modules
+api/.nyc_output
 
 # IDEs and editors
 /.idea
@@ -34,7 +37,11 @@ yarn-error.log
 testem.log
 /typings
 
-# System Files
 .DS_Store
 Thumbs.db
-.sessions
+version
+/test/reports/
+reports/
+.tmp/
+!.sessions/
+.sessions/*
