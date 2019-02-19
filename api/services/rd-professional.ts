@@ -12,3 +12,10 @@ export async function postOrganisation(body: any): Promise<any> {
   const response = await http.post(`${url}/organisations`, body)
   return response.data
 }
+
+// This works, and returns successfully.
+export async function getOrganisations(body: any): Promise<any> {
+  logger.log('getting organisations', body)
+  const response = await http.get(`${url}/organisations`, body)
+  return response.data
+}
