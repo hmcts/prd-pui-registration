@@ -17,7 +17,7 @@ export default {
         {
             input: {
                 label: {
-                    text: 'PBA number 1 (optional)',
+                    text: 'PBA number 2 (optional)',
                     classes: 'govuk-label--m',
                 },
                 control: 'PBAnumber2',

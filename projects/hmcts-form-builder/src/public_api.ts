@@ -6,7 +6,7 @@ export * from './lib/hmcts-form-builder.service';
 export * from './lib/hmcts-form-builder.component';
 export * from './lib/hmcts-form-builder.module';
 
-export * from  './lib/components/form-builder/from-builder.component';
+export * from './lib/components/form-builder/form-builder.component';
 export * from  './lib/components/fieldset/fieldset.component';
 export * from  './lib/components/jui-form-elements/jui-form-elements.component';
 export * from  './lib/components/legend/legend.component';
