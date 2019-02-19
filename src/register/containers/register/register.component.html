@@ -1,4 +1,4 @@
-<a href="#" class="govuk-back-link" *ngIf="pageId !== undefined">Back</a>
+<a [routerLink]="" class="govuk-back-link" (click)="onGoBack()" *ngIf="pageId !== undefined">Back</a>
 <main id="content" role="main" class="govuk-main-wrapper">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

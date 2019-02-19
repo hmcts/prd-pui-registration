@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
@@ -75,6 +75,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   onSubmitData(): void{
     this.store.dispatch( new fromStore.SubmitFormData(this.pageValues));
+  }
+
+  onGoBack(event) {
+    this.store.dispatch(new fromRoot.Back());
   }
 }
 
