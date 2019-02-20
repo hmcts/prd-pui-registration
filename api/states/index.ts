@@ -4,6 +4,7 @@ import {process} from '../lib/stateEngine'
 import {Store} from '../lib/store'
 import {asyncReturnOrError} from '../lib/util'
 import * as rdProfessional from '../services/rd-professional'
+import {makeOrganisationPayload} from '../lib/payloadBuilder'
 import mapping from './mapping'
 import templates from './templates'
 
@@ -25,26 +26,32 @@ async function registerOrganisation(req, res) {
 
     const payloadData = req.body
 
-    const payloadData = {
-        "name": "org inc16",
-        "url": "www.org5.inc",
-        "domains": [
-            {
-                "domain": "org8.com",
-            },
-        ],
-        "superUser": {
-            "firstName": "Foo16",
-            "lastName": "Barton16",
-            "email": "foobarton16@org.com",
-        },
-    }
+    const organisationPayload = makeOrganisationPayload(req.body.fromValues)
+
+    console.log('req.body')
+    console.log(req.body.fromValues)
+    console.log(organisationPayload)
+
+    // const payloadData = {
+    //     "name": "org inc16",
+    //     "url": "www.org5.inc",
+    //     "domains": [
+    //         {
+    //             "domain": "org8.com",
+    //         },
+    //     ],
+    //     "superUser": {
+    //         "firstName": "Foo16",
+    //         "lastName": "Barton16",
+    //         "email": "foobarton16@org.com",
+    //     },
+    // }
 
     logger.info('Payload assembled')
-    logger.info(JSON.stringify(payloadData))
+    logger.info(JSON.stringify(organisationPayload))
 
     return await asyncReturnOrError(
-        rdProfessional.postOrganisation(payloadData),
+        rdProfessional.postOrganisation(organisationPayload),
         'Error registering organisation',
         res,
         logger,
