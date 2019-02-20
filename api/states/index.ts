@@ -10,17 +10,23 @@ import templates from './templates'
 const logger = log4jui.getLogger('states')
 const ERROR400 = 400
 
+/**
+ * Note you cannot send exactly the same data twice otherwise the api will throw back a 500.
+ *
+ * TODO: payload should be mapped to an interface.
+ * TODO: conversion of the req.body to payload should happen.
+ * TODO: transform the state body into payload.
+ *
+ * @param req
+ * @param res
+ * @return {Promise<any>}
+ */
 async function registerOrganisation(req, res) {
 
     const payloadData = req.body
 
-    logger.info('Payload assembled')
-    logger.info(JSON.stringify(payloadData))
-
-    // TODO: Note you cannot send the same thing twice as it will give you a 500 the second time.
-    // You need to
     const payloadData = {
-        "name": "org inc11",
+        "name": "org inc16",
         "url": "www.org5.inc",
         "domains": [
             {
@@ -28,56 +34,37 @@ async function registerOrganisation(req, res) {
             },
         ],
         "superUser": {
-            "firstName": "Foo5",
-            "lastName": "Barton10",
-            "email": "foobarton11@org.com",
+            "firstName": "Foo16",
+            "lastName": "Barton16",
+            "email": "foobarton16@org.com",
         },
     }
 
-    return await rdProfessional.postOrganisation(payloadData)
-    // return await rdProfessional.getOrganisations(payloadData)
-    //
-    // try {
-    //     const postOrganisationResponse = rdProfessional.postOrganisation(payloadData)
-    //     console.log(postOrganisationResponse)
-    // } catch (error) {
-    //     console.log('error')
-    //     console.log(error)
-    // }
+    logger.info('Payload assembled')
+    logger.info(JSON.stringify(payloadData))
 
-    // Ok let's see the issue
-    // return await asyncReturnOrError(
-    //   rdProfessional.postOrganisation(payloadData),
-    //   'Error registering organisation',
-    //   res,
-    //   logger,
-    //   true
-    // )
+    return await asyncReturnOrError(
+        rdProfessional.postOrganisation(payloadData),
+        'Error registering organisation',
+        res,
+        logger,
+        false
+    )
 }
 
+// TODO: On the UI should show an appropiate message to the user if we're unable to submit their
+// request
 async function payload(req, res) {
 
     logger.info('Posting to Reference Data (Professional) service')
-    // const result = await registerOrganisation(req, res)
+    const result = await registerOrganisation(req, res)
+    logger.info('Posted to Reference Data (Professional) service', result)
 
-    registerOrganisation(req, res).then(response => {
-        console.log('response')
-        console.log(response)
-    }).catch(error => {
-        console.log('error')
-        console.log(error)
-    })
+    if (result) {
+        return 'registration-confirmation'
+    }
 
-    // console.log('result 2')
-    // console.log(result)
-    //
-    // logger.info('Posted to Reference Data (Professional) service', result)
-    //
-    // if (result) {
-    //   return 'registration-confirmation'
-    // }
-    //
-    // res.status(ERROR400).send('Error registering organisation')
+    res.status(ERROR400).send('Error registering organisation')
     return null
 }
 
