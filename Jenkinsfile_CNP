@@ -16,20 +16,20 @@ properties([
 def type = "nodejs"
 def product = "pui"
 def component = "registration"
-def vault = "prd" 
+def vault = "rpa" 
 def channel = '#pui-pipeline'
 
 List<LinkedHashMap<String, Object>> secrets = [
     secret('test-email', 'TEST_EMAIL'),
     secret('test-password', 'TEST_PASSWORD'),
-    secret('pui-s2s-token', 'S2S_SECRET'),
+    /*secret('pui-s2s-token', 'S2S_SECRET'),
     secret('decrypt-key', 'DECRYPT_KEY'),
     secret('pui-oauth2-token', 'IDAM_SECRET'),
     secret('fr-email', 'FR_EMAIL'),
     secret('fr-password', 'FR_PASSWORD'),
     secret('sscs-email', 'SSCS_EMAIL'),
     secret('sscs-password', 'SSCS_PASSWORD'),
-    secret('AppInsightsInstrumentationKey', 'APPINSIGHTS_INSTRUMENTATIONKEY'),
+    secret('AppInsightsInstrumentationKey', 'APPINSIGHTS_INSTRUMENTATIONKEY'),*/
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {

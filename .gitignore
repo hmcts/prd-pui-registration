@@ -9,6 +9,7 @@
 /node_modules
 api/node_modules
 api/.nyc_output
+api/.sessions/
 
 # IDEs and editors
 /.idea
@@ -36,9 +37,12 @@ yarn-error.log
 testem.log
 /typings
 
-# System Files
 .DS_Store
 Thumbs.db
 .sessions
+version
 /test/reports/
 reports/
+.tmp/
+!.sessions/
+.sessions/*
