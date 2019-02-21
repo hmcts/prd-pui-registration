@@ -88,7 +88,6 @@ export async function process(req, res, mapping, payload, templates, store) {
 
     if (req.method === 'POST') {
         await map(mapping, async (instruction: any) => {
-            console.log('ghg', mapping)
             if (instruction.event === event) {
                 // event is the main index and so there can only be one instruction per event - exit after finding
                 logger.info(`Found matching event for ${event} `)
