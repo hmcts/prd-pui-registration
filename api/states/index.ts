@@ -13,11 +13,6 @@ const ERROR400 = 400
 
 /**
  * registerOrganisation
- *
- * registerOrganisation
- * @param req
- * @param res
- * @return {Promise<any>}
  */
 async function registerOrganisation(req, res) {
 
