@@ -12,43 +12,16 @@ const logger = log4jui.getLogger('states')
 const ERROR400 = 400
 
 /**
- * Note you cannot send exactly the same data twice otherwise the api will throw back a 500.
+ * registerOrganisation
  *
- * TODO: payload should be mapped to an interface.
- * TODO: conversion of the req.body to payload should happen.
- * TODO: transform the state body into payload.
- *
+ * registerOrganisation
  * @param req
  * @param res
  * @return {Promise<any>}
  */
 async function registerOrganisation(req, res) {
 
-    const payloadData = req.body
-
     const organisationPayload = makeOrganisationPayload(req.body.fromValues)
-
-    console.log('req.body')
-    console.log(req.body.fromValues)
-    console.log(organisationPayload)
-
-    // const payloadData = {
-    //     "name": "org inc16",
-    //     "url": "www.org5.inc",
-    //     "domains": [
-    //         {
-    //             "domain": "org8.com",
-    //         },
-    //     ],
-    //     "superUser": {
-    //         "firstName": "Foo16",
-    //         "lastName": "Barton16",
-    //         "email": "foobarton16@org.com",
-    //     },
-    // }
-
-    logger.info('Payload assembled')
-    logger.info(JSON.stringify(organisationPayload))
 
     return await asyncReturnOrError(
         rdProfessional.postOrganisation(organisationPayload),
@@ -59,8 +32,17 @@ async function registerOrganisation(req, res) {
     )
 }
 
-// TODO: On the UI should show an appropiate message to the user if we're unable to submit their
-// request
+/**
+ * payload
+ *
+ * TODO: On the UI show an appropiate message to the user if we're;
+ * 1. Unable to submit their request, this requires a more verbose status message back from the api, that currently
+ * being looked at.
+ * 2. The same data has been submitted twice, currently the Api will throw back a 500.
+ *
+ * @param req
+ * @param res
+ */
 async function payload(req, res) {
 
     logger.info('Posting to Reference Data (Professional) service')

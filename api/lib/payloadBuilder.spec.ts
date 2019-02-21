@@ -26,24 +26,6 @@ describe('Payload builder', () => {
         DXexchange: '12345 dx exchange field',
     }
 
-    /**
-     * Signature of object required for rd-professional api
-     */
-    const requiredPayload = {
-        "name": "org inc16",
-        "url": "www.org5.inc",
-        "domains": [
-            {
-                "domain": "org8.com",
-            },
-        ],
-        "superUser": {
-            "firstName": "Foo16",
-            "lastName": "Barton16",
-            "email": "foobarton16@org.com",
-        },
-    }
-
     it('Should take the stored organsation name and set it on the payload.', () => {
 
         const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
@@ -84,15 +66,15 @@ describe('Payload builder', () => {
         expect(organsiationPayload.pbaAccounts[1].pbaNumber).to.equal(STATE_VALUES.PBAnumber2)
     })
 
-    // it('Should take the stored DX exchange field and set it as DX address, DX exchange on the payload.', () => {
-    //
-    //     const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
-    //     expect(organsiationPayload.dxAddress.dxExchange).to.equal(STATE_VALUES.DXexchange)
-    // })
-    //
-    // it('Should take the stored DX number field and set it as DX address, DX number on the payload.', () => {
-    //
-    //     const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
-    //     expect(organsiationPayload.dxAddress.dxNumber).to.equal(STATE_VALUES.DXnumber)
-    // })
+    xit('Should take the stored DX exchange field and set it as DX address, DX exchange on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.dxAddress.dxExchange).to.equal(STATE_VALUES.DXexchange)
+    })
+
+    xit('Should take the stored DX number field and set it as DX address, DX number on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.dxAddress.dxNumber).to.equal(STATE_VALUES.DXnumber)
+    })
 })
