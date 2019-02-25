@@ -1,15 +1,20 @@
 
+import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
 import * as session from 'express-session'
+import * as globalTunnel from 'global-tunnel-ng'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
-
+import { appInsights } from './lib/appInsights'
 import config from './lib/config'
+import { errorStack } from './lib/errorStack'
 import routes from './routes'
 
-const FileStore = sessionFileStore(session);
+const FileStore = sessionFileStore(session)
 
 const app = express()
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 app.use(
     session({
@@ -27,6 +32,19 @@ app.use(
         })
     })
 )
+
+if (config.proxy) {
+    globalTunnel.initialize({
+        host: config.proxy.host,
+        port: config.proxy.port,
+    })
+}
+
+app.use(errorStack)
+app.use(appInsights)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.use('/api', routes)
 

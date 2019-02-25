@@ -4,12 +4,12 @@
 /dist
 /tmp
 /out-tsc
-/reports
 
 # dependencies
 /node_modules
 api/node_modules
 api/.nyc_output
+api/.sessions/
 
 # IDEs and editors
 /.idea
@@ -39,6 +39,7 @@ testem.log
 
 .DS_Store
 Thumbs.db
+.sessions
 version
 /test/reports/
 reports/
