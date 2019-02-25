@@ -17,11 +17,6 @@ import {PostOrgansiationPayload} from "../interfaces/postOrgansiationPayload"
 export function makeOrganisationPayload(stateValues): PostOrgansiationPayload {
     return {
         name: stateValues.orgName,
-        superUser: {
-            firstName: stateValues.firstName,
-            lastName: stateValues.lastName,
-            email: stateValues.emailAddress,
-        },
         pbaAccounts: [
             {
                 pbaNumber: stateValues.PBAnumber1,
@@ -30,5 +25,10 @@ export function makeOrganisationPayload(stateValues): PostOrgansiationPayload {
                 pbaNumber: stateValues.PBAnumber2,
             },
         ],
+        superUser: {
+            email: stateValues.emailAddress,
+            firstName: stateValues.firstName,
+            lastName: stateValues.lastName,
+        },
     }
 }
