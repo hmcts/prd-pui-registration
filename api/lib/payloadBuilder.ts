@@ -1,4 +1,4 @@
-import {PostOrgansiationPayload} from '../interfaces/postOrgansiationPayload'
+import {OrganisationPayload} from '../interfaces/organisationPayload'
 
 /**
  * makeOrganisationPayload
@@ -15,7 +15,7 @@ import {PostOrgansiationPayload} from '../interfaces/postOrgansiationPayload'
  * @param stateValues
  * @return
  */
-export function makeOrganisationPayload(stateValues): PostOrgansiationPayload {
+export function makeOrganisationPayload(stateValues): OrganisationPayload {
     return {
         address: {
             addressLine1: stateValues.officeAddressOne,

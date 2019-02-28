@@ -1,4 +1,4 @@
-export interface PostOrgansiationPayload {
+export interface OrganisationPayload {
     name: string,
     url?: string,
     superUser: {
