@@ -20,8 +20,8 @@ export interface PostOrgansiationPayload {
     },
     address: {
         /**
-         * TODO: houseNoBuildingName should be optional on the api layer, currently it is
-         * required. Hence it is not optional here.
+         * TODO: houseNoBuildingName should be optional, remove when it is.
+         * @see payloadBuilder.ts for descriptive comments.
          */
         houseNoBuildingName: string,
         addressLine1: string,

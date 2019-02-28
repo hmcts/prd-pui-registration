@@ -10,7 +10,7 @@ import {PostOrgansiationPayload} from '../interfaces/postOrgansiationPayload'
  *
  * TODO: houseNoBuildingName should not be an mandatory field on the api,
  * but an optional one. Hence it's currently an empty string, to prevent
- * a 500.
+ * a 500. JIRA ticket: PUID-111
  *
  * @param stateValues
  * @return
