@@ -66,6 +66,36 @@ describe('Payload builder', () => {
         expect(organsiationPayload.pbaAccounts[1].pbaNumber).to.equal(STATE_VALUES.PBAnumber2)
     })
 
+    it('Should take the office address one and set it as the addressLine1 on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.address.addressLine1).to.equal(STATE_VALUES.officeAddressOne)
+    })
+
+    it('Should take the office address two and set it as the addressLine2 on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.address.addressLine2).to.equal(STATE_VALUES.officeAddressTwo)
+    })
+
+    it('Should take the county and set it as the county on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.address.county).to.equal(STATE_VALUES.county)
+    })
+
+    it('Should take the postcode and set it as the postcode on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.address.postcode).to.equal(STATE_VALUES.postcode)
+    })
+
+    it('Should take the town or city and set it as the town city on the payload.', () => {
+
+        const organsiationPayload = makeOrganisationPayload(STATE_VALUES)
+        expect(organsiationPayload.address.townCity).to.equal(STATE_VALUES.townOrCity)
+    })
+
     xit('Should take the stored DX exchange field and set it as DX address, DX exchange on the payload.', () => {
 
         const organsiationPayload = makeOrganisationPayload(STATE_VALUES)

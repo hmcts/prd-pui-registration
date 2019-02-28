@@ -1,4 +1,4 @@
-import {PostOrgansiationPayload} from "../interfaces/postOrgansiationPayload"
+import {PostOrgansiationPayload} from '../interfaces/postOrgansiationPayload'
 
 /**
  * makeOrganisationPayload
@@ -8,14 +8,23 @@ import {PostOrgansiationPayload} from "../interfaces/postOrgansiationPayload"
  * TODO: Note that if we add the dxAddress in, we get a 500 status error.
  * Fix required on the api. Awaiting fix. JIRA ticket raised: PUID-103
  *
- * TODO: Note that is we add the contacts in, we get a 500 status error
- * Fix required on api. Awaiting fix. JIRA ticket raised: PUID-104
+ * TODO: houseNoBuildingName should not be an mandatory field on the api,
+ * but an optional one. Hence it's currently an empty string, to prevent
+ * a 500.
  *
  * @param stateValues
  * @return
  */
 export function makeOrganisationPayload(stateValues): PostOrgansiationPayload {
     return {
+        address: {
+            addressLine1: stateValues.officeAddressOne,
+            addressLine2: stateValues.officeAddressTwo,
+            county: stateValues.county,
+            houseNoBuildingName: 'Remove property on api fix @see comments',
+            postcode: stateValues.postcode,
+            townCity: stateValues.townOrCity,
+        },
         name: stateValues.orgName,
         pbaAccounts: [
             {
