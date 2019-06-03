@@ -1,33 +1,34 @@
 export interface OrganisationPayload {
     name: string,
-    url?: string,
+    companyUrl?: string,
+    companyNumber: string,
+    sraRegulated: boolean,
+  sraId: string,
     superUser: {
         firstName: string,
         lastName: string,
         email: string,
     }
     pbaAccounts: [
-        {
+          {
+            pbaAccounts: string,
             pbaNumber: string,
-        },
-        {
-            pbaNumber: string,
-        }
+          }
         ],
-    dxAddress?: {
-        dxExchange: string,
-        dxNumber: string,
-    },
-    address: {
-        /**
-         * TODO: houseNoBuildingName should be optional, remove when it is.
-         * @see payloadBuilder.ts for descriptive comments.
-         */
-        houseNoBuildingName: string,
+
+    contactInformation: [{
         addressLine1: string,
         addressLine2?: string,
+        addressLine3?: string,
         townCity: string,
         county: string,
+        country: string,
         postcode: string,
-    }
+        dxAddress?: [
+          {
+            dxExchange: string,
+            dxNumber: string,
+          }
+        ],
+    }]
 }
