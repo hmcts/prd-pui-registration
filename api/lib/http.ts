@@ -1,5 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { globalProxy } from '../local'
+import config from './config'
+
 import { errorInterceptor, requestInterceptor, successInterceptor } from './interceptors'
 
 export const http: AxiosInstance = axios.create({})
@@ -10,5 +12,7 @@ http.interceptors.request.use(requestInterceptor)
 http.interceptors.response.use(successInterceptor, errorInterceptor)
 
 export function disableProxy() {
-    globalProxy.end()
+    if (config.proxy) {
+        globalProxy.end()
+    }
 }
