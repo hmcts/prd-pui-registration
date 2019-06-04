@@ -3,7 +3,6 @@ import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
 import * as session from 'express-session'
-import * as globalTunnel from 'global-tunnel-ng'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
 import serviceTokenMiddleware from './lib/serviceToken'
@@ -33,15 +32,6 @@ app.use(
         })
     })
 )
-
-export const globalProxy = globalTunnel
-
-if (config.proxy) {
-    globalProxy.initialize({
-        host: config.proxy.host,
-        port: config.proxy.port,
-    })
-}
 
 app.use(errorStack)
 app.use(appInsights)
