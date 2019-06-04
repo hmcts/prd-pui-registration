@@ -24,8 +24,7 @@ export async function postS2SLease() {
         })
     } else {
         // this is only for local development against the RD docker image
-        request = await http.get(config.services.RDLocalS2s, {
-        })
+        request = await http.get(url)
     }
 
     return request.data

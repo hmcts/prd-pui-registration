@@ -14,7 +14,8 @@ export default {
             'https://dm-store-demo.service.core-compute-demo.internal',
         em_anno_api: 'https://em-anno-demo.service.core-compute-demo.internal',
         em_npa_api: 'https://em-npa-demo.service.core-compute-demo.internal',
-        coh_cor_api: 'https://coh-cor-demo.service.core-compute-demo.internal'
+        coh_cor_api: 'https://coh-cor-demo.service.core-compute-demo.internal',
+        rd_professional_api: 'https://rpa-rd-professional-aat.service.core-compute-aat.internal'
     },
     useProxy: false,
     secureCookie: false,
