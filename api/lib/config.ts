@@ -13,4 +13,5 @@ export default {
     rd_professional_api: 'http://localhost:8090/v1',
   },
   sessionSecret: 'secretSauce',
+  RDLocalS2s: 'http://127.0.0.1:8089/token'
 }
