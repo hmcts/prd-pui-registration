@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as jwtDecode from 'jwt-decode'
 import { postS2SLease } from '../services/serviceAuth'
 import config from './config'
@@ -53,6 +54,8 @@ export default async (req, res, next) => {
     if (token) {
         logger.info('Attaching s2s token')
         req.headers.ServiceAuthorization = `Bearer ${token}`
+
+        axios.defaults.headers.common.ServiceAuthorization = req.headers.ServiceAuthorization
 
         //  now we have token we need to disable proxy for local
         logger.info('disabling proxy')
