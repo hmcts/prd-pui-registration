@@ -50,6 +50,11 @@ export async function serviceTokenGenerator() {
 }
 
 export default async (req, res, next) => {
+    const configEnv = process ? process.env.JUI_ENV || 'local' : 'local'
+    if (configEnv === 'local') {
+        disableProxy()
+    }
+
     const token = await asyncReturnOrError(serviceTokenGenerator(), 'Error getting s2s token', res, logger)
     if (token) {
         logger.info('Attaching s2s token')
@@ -59,7 +64,7 @@ export default async (req, res, next) => {
 
         //  now we have token we need to disable proxy for local
         logger.info('disabling proxy')
-        disableProxy()
+
         next()
     }
 }
