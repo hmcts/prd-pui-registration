@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as jwtDecode from 'jwt-decode'
 import { postS2SLease } from '../services/serviceAuth'
 import config from './config'
-import { disableProxy, http } from './http'
+import { http } from './http'
 import * as log4jui from './log4jui'
 import { asyncReturnOrError } from './util'
 
