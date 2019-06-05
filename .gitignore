@@ -10,6 +10,8 @@
 api/node_modules
 api/.nyc_output
 api/.sessions/
+api/.sessions
+api/.sessions/*
 
 # IDEs and editors
 /.idea
