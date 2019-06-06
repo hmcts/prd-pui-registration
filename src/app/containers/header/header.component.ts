@@ -21,15 +21,12 @@ export class HeaderComponent implements  OnInit {
             active: true
         }];
         this.serviceName = {
-            name: 'Pui Registration',
+            name: 'Register to manage civil and family law cases',
             url: '/'
         };
         this.navigations = {
             label: 'Account navigation',
-            items: [{
-                text: 'Sign out',
-                href: this.logoutLink
-            }]
+            items: []
         };
     }
 

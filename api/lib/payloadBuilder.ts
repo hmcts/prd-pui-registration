@@ -8,36 +8,53 @@ import {OrganisationPayload} from '../interfaces/organisationPayload'
  * TODO: Note that if we add the dxAddress in, we get a 500 status error.
  * Fix required on the api. Awaiting fix. JIRA ticket raised: PUID-103
  *
- * TODO: houseNoBuildingName should not be an mandatory field on the api,
- * but an optional one. Hence it's currently an empty string, to prevent
- * a 500. JIRA ticket: PUID-111
- *
  * @param stateValues
  * @return
  */
+
+// The hardcoded values need to be replaced with dynamic functionality
+
 export function makeOrganisationPayload(stateValues): OrganisationPayload {
     return {
-        address: {
-            addressLine1: stateValues.officeAddressOne,
-            addressLine2: stateValues.officeAddressTwo,
-            county: stateValues.county,
-            houseNoBuildingName: 'Remove property on api fix @see comments',
-            postcode: stateValues.postcode,
-            townCity: stateValues.townOrCity,
-        },
-        name: stateValues.orgName,
-        pbaAccounts: [
+      // hardcoded value for dev purpose
+      companyNumber: '12345678',
+      // hardcoded value for dev purpose
+      companyUrl: 'comp-url1',
+      contactInformation: [
+        {
+          addressLine1: stateValues.officeAddressOne,
+          addressLine2: stateValues.officeAddressTwo,
+          // hardcoded value for dev purpose
+          addressLine3: 'This needs to be clarified',
+          // hardcoded value for dev purpose
+          country: 'Test Country Name - UK',
+          county: stateValues.county,
+        postcode: stateValues.postcode,
+        townCity: stateValues.townOrCity,
+          dxAddress: [
             {
-                pbaNumber: stateValues.PBAnumber1,
+              // hardcoded value for dev purpose
+              dxExchange: 'dxexchange1',
+              // hardcoded value for dev purpose
+              dxNumber: 'DX 1234567890',
             },
-            {
-                pbaNumber: stateValues.PBAnumber2,
-            },
-        ],
-        superUser: {
-            email: stateValues.emailAddress,
-            firstName: stateValues.firstName,
-            lastName: stateValues.lastName,
-        },
+          ],
+      }
+      ],
+      name: stateValues.orgName,
+      pbaAccounts: [
+        {
+          pbaAccounts: stateValues.PBAnumber1,
+          pbaNumber: stateValues.PBAnumber2,
+          },
+      ],
+      // hardcoded value for dev purpose
+      sraId: 'sraId123',
+      sraRegulated: true,
+      superUser: {
+          email: stateValues.emailAddress,
+          firstName: stateValues.firstName,
+          lastName: stateValues.lastName,
+      },
     }
 }

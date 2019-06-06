@@ -7,6 +7,7 @@ import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as path from 'path'
 import * as sessionFileStore from 'session-file-store'
+import serviceTokenMiddleware from './lib/serviceToken'
 import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
@@ -38,7 +39,7 @@ app.set('view engine', 'html')
 app.set('views', __dirname)
 
 app.use(express.static(path.join(__dirname, '..', 'assets'), { index: false }))
-app.use(express.static(path.join(__dirname, '..', ), { index: false }))
+app.use(express.static(path.join(__dirname, '..'), { index: false }))
 
 app.use(errorStack)
 app.use(appInsights)
@@ -46,6 +47,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+app.use(serviceTokenMiddleware)
 
 app.use('/api', routes)
 
