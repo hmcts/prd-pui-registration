@@ -5,13 +5,13 @@ import { mockReq, mockRes } from 'sinon-express-mock'
 import { http } from '../lib/http'
 import * as serviceAuth from './serviceAuth'
 
-import { config } from '../../config'
+import config from '../lib/config'
 
 describe('serviceAuth', () => {
 
     let res
 
-    const url = config.services.s2s
+    const url = config.s2s
     const microservice = config.microservice
     const s2sSecret = process.env.S2S_SECRET || 'AAAAAAAAAAAAAAAA'
 

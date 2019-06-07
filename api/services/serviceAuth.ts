@@ -1,11 +1,11 @@
 import * as express from 'express'
 import * as otp from 'otp'
-import { config } from '../../config'
+import config from '../lib/config'
 import { http } from '../lib/http'
 import { getHealth, getInfo } from '../lib/util'
 import { AxiosResponse } from 'axios';
 
-const url = config.services.s2s
+const url = config.s2s
 const microservice = config.microservice
 const s2sSecret = process.env.S2S_SECRET || 'AAAAAAAAAAAAAAAA'
 

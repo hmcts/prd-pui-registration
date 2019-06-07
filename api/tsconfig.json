@@ -1,7 +1,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "../dist/rpa-pui-registration",
+        "outDir": "../dist/rpa-pui-registration/api",
         "target": "es5",
         "types": [
             "node",
