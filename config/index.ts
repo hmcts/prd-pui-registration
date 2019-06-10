@@ -1,7 +1,7 @@
 import { application } from './application.config';
 
 import * as local from './environments/local.config';
-import * as laat from './environments/local.config';
+import * as laat from './environments/laat.config';
 import * as docker from './environments/docker.config';
 import * as spreview from './environments/spreview.config';
 import * as saat from './environments/saat.config';
@@ -31,7 +31,7 @@ const configs = {
     protocol: 'https'
 }
 
-export const configEnv = process ? process.env.PUI_ENV || "local" : "local";
+export const configEnv = process ? process.env.PUI_ENV || 'local' : 'local';
 export const config = { ...application, ...configs[configEnv].default };
 
 if (process) {

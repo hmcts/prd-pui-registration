@@ -3,14 +3,16 @@ import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
 import * as session from 'express-session'
+import * as globalTunnel from 'global-tunnel-ng'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
-import serviceTokenMiddleware from './lib/serviceToken'
-import * as globalTunnel from 'global-tunnel-ng'
+import * as envConfig from '../config'
 import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
+import serviceTokenMiddleware from './lib/serviceToken'
 import routes from './routes'
+
 
 const FileStore = sessionFileStore(session)
 
@@ -49,7 +51,8 @@ app.use(cookieParser())
 
 app.use(serviceTokenMiddleware)
 
-app.use('/api', routes)
+
+app.use(routes)
 
 const port = process.env.PORT || 3000
 app.listen(port)
@@ -57,4 +60,4 @@ app.listen(port)
 const logger = log4js.getLogger('server')
 logger.level = config.logging ? config.logging : 'OFF'
 
-logger.info(`Local server up at ${port}`)
+logger.info(`Started up on ${envConfig.configEnv || 'local'} using ${port}`)
