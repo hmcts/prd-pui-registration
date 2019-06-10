@@ -6,12 +6,20 @@ import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
 import serviceTokenMiddleware from './lib/serviceToken'
+import * as globalTunnel from 'global-tunnel-ng'
 import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
 import routes from './routes'
 
 const FileStore = sessionFileStore(session)
+
+if (config.proxy) {
+    globalTunnel.initialize({
+        host: config.proxy.host,
+        port: config.proxy.port,
+    })
+}
 
 const app = express()
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
