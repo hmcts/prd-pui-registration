@@ -14,11 +14,6 @@ const logger = log4jui.getLogger('service auth')
 
 export async function postS2SLease() {
 
-    const configEnv = process ? process.env.PUI_ENV || 'local' : 'local'
-    let request: AxiosResponse<any>
-
-    if (configEnv !== 'local') {
-
         const oneTimePassword = otp({ secret: s2sSecret }).totp()
 
         logger.info('generating from secret  :', s2sSecret,
@@ -26,14 +21,11 @@ export async function postS2SLease() {
         oneTimePassword
         )
 
-        request = await http.post(`${url}/lease`, {
+        const request = await http.post(`${url}/lease`, {
             microservice,
             oneTimePassword,
         })
-    } else {
-        // this is only for local development against the RD docker image
-        request = await http.get(url)
-    }
+    
 
     return request.data
 }
