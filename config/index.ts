@@ -14,6 +14,7 @@ import * as process from "process";
 
 const configs = {
     local,
+    laat,
     docker,
     spreview,
     saat,
