@@ -7,6 +7,8 @@ nodejs:
     NODE_ENV: production
     UV_THREADPOOL_SIZE: 64
     PUI_ENV: preview
+    S2S_SECRET: ${S2S_SECRET}
+    IDAM_SECRET: ${IDAM_SECRET}
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
