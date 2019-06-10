@@ -4,10 +4,13 @@ import { config } from '../../config'
 import { http } from '../lib/http'
 import { getHealth, getInfo } from '../lib/util'
 import { AxiosResponse } from 'axios';
+import * as log4jui from '../lib/log4jui'
 
 const url = config.services.s2s
 const microservice = config.microservice
 const s2sSecret = process.env.S2S_SECRET || 'AAAAAAAAAAAAAAAA'
+
+const logger = log4jui.getLogger('service auth')
 
 export async function postS2SLease() {
 
@@ -17,6 +20,11 @@ export async function postS2SLease() {
     if (configEnv !== 'local') {
 
         const oneTimePassword = otp({ secret: s2sSecret }).totp()
+
+        logger.info('generating from secret  :', s2sSecret,
+        microservice,
+        oneTimePassword
+        )
 
         request = await http.post(`${url}/lease`, {
             microservice,
