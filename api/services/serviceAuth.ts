@@ -39,15 +39,13 @@ export async function postS2SLease() {
 }
 
 
-export default app => {
-    const router = express.Router({ mergeParams: true })
-    app.use('/s2s', router)
+export const router = express.Router({mergeParams: true})
 
-    router.get('/health', (req, res, next) => {
-        res.status(200).send(getHealth(url))
-    })
+router.get('/health', (req, res, next) => {
+    res.status(200).send(getHealth(url))
+})
 
-    router.get('/info', (req, res, next) => {
-        res.status(200).send(getInfo(url))
-    })
-}
+router.get('/info', (req, res, next) => {
+    res.status(200).send(getInfo(url))
+})
+export default router

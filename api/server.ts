@@ -7,10 +7,11 @@ import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as path from 'path'
 import * as sessionFileStore from 'session-file-store'
-import serviceTokenMiddleware from './lib/serviceToken'
+import * as envConfig from '../config'
 import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
+import serviceTokenMiddleware from './lib/serviceToken'
 import routes from './routes'
 
 const FileStore = sessionFileStore(session)
@@ -49,7 +50,7 @@ app.use(cookieParser())
 
 app.use(serviceTokenMiddleware)
 
-app.use('/api', routes)
+app.use( routes)
 
 app.use('/*', (req, res) => {
     console.time(`GET: ${req.originalUrl}`)
@@ -64,4 +65,11 @@ app.use('/*', (req, res) => {
     console.timeEnd(`GET: ${req.originalUrl}`)
 })
 
-app.listen(process.env.PORT || 3000)
+const port = process.env.PORT || 3000
+app.listen(port)
+
+const logger = log4js.getLogger('server')
+logger.level = config.logging ? config.logging : 'OFF'
+
+logger.info(`Started up on ${envConfig.configEnv || 'local'} using ${port}`)
+

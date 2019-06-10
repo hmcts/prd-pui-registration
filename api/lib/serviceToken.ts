@@ -54,13 +54,10 @@ export default async (req, res, next) => {
 
     const token = await asyncReturnOrError(serviceTokenGenerator(), 'Error getting s2s token', res, logger)
     if (token) {
-        logger.info('Attaching s2s token')
+        logger.info('Adding s2s token to defaults')
         req.headers.ServiceAuthorization = `Bearer ${token}`
 
         axios.defaults.headers.common.ServiceAuthorization = req.headers.ServiceAuthorization
-
-        //  now we have token we need to disable proxy for local
-        logger.info('disabling proxy')
 
         next()
     }
