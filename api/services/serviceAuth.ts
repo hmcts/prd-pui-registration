@@ -11,7 +11,7 @@ const s2sSecret = process.env.S2S_SECRET || 'AAAAAAAAAAAAAAAA'
 
 export async function postS2SLease() {
 
-    const configEnv = process ? process.env.JUI_ENV || 'local' : 'local'
+    const configEnv = process ? process.env.PUI_ENV || 'local' : 'local'
     let request: AxiosResponse<any>
 
     if (configEnv !== 'local') {
