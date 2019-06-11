@@ -66,7 +66,10 @@ app.use('/*', (req, res) => {
 })
 
 const port = process.env.PORT || 3000
-app.listen(port)
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Server listening on port 3000!')
+})
 
 const logger = log4js.getLogger('server')
 logger.level = config.logging ? config.logging : 'OFF'
