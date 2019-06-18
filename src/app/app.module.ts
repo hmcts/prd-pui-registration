@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './containers/app/app.component';
 import {RegisterModule} from '../register/register.module';
-import {SharedModule} from './shared/shared.module';
+import {SharedModule} from '../shared/shared.module';
 
 // ngrx
 import {MetaReducer, StoreModule} from '@ngrx/store';
@@ -24,11 +24,9 @@ import * as fromComponents from './components';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {ROUTES} from './app.routes';
 
-export const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/register' },
-  { path: '**', redirectTo: '/register' }
-];
+
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];

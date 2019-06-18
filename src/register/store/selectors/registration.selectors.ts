@@ -11,17 +11,22 @@ export const getRegistrationState = createSelector(
 
 export const getRegistrationPages = createSelector(
   getRegistrationState,
-  fromRegistration.getRegistationFormPages
+  fromRegistration.getRegistrationFormPages
 );
 
 export const getRegistrationPagesValues = createSelector(
   getRegistrationState,
-  fromRegistration.getRegistationFormPagesValues
+  fromRegistration.getRegistrationFormPagesValues
 );
 
 export const getCurrentPage = createSelector(
   fromRoot.getRouterState,
   (router) => router.state.params
+);
+
+export const getIsRegistrationSubmitted = createSelector(
+  getRegistrationState,
+  fromRegistration.getRegistartionFromPagesSubmited
 );
 
 export const getCurrentPageItems = createSelector(

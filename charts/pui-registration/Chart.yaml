@@ -1,0 +1,6 @@
+name: pui-registration
+home: https://github.com/hmcts/prd-pui-registration 
+version: 0.0.1
+description: PUI frontend application
+maintainers:
+  - name: HMCTS PUI

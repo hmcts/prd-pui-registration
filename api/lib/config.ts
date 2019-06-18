@@ -1,9 +1,12 @@
 export default {
-  logging: 'debug',
-  maxLogLine: 1,
-  secureCookie: false,
-  services: {
-    rd_professional_api: 'https://rpa-rd-professional-aat.service.core-compute-aat.internal',
-  },
-  sessionSecret: 'secretSauce',
+    logging: 'debug',
+    maxLogLine: 1,
+    secureCookie: false,
+    sessionSecret: 'secretSauce',
+    appInsightsInstrumentationKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY || 'AAAAAAAAAAAAAAAA',
+    microservice: 'jui_webapp',
+    proxy: {
+        host: '172.16.0.7',
+        port: 8080,
+    },
 }

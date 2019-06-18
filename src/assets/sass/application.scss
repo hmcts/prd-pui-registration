@@ -6,10 +6,6 @@ $path: "/public/images/";
 $govuk-global-styles: true;
 
 
-// Width of main container
-$hmcts-page-width: 1220px;
-
-
 // Import GOV.UK Frontend
 @import "~govuk-frontend/all";
 @import "~@hmcts/frontend/all";

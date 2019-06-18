@@ -1,0 +1,14 @@
+
+nodejs:
+  applicationPort: 3000
+  environment:
+    REFORM_TEAM: rpa
+    REFORM_SERVICE_NAME: pui-webapp
+    NODE_ENV: production
+    UV_THREADPOOL_SIZE: 64
+    PUI_ENV: preview
+    S2S_SECRET: ${S2S_SECRET}
+    IDAM_SECRET: ${IDAM_SECRET}
+  # Don't modify below here
+  image: ${IMAGE_NAME}
+  ingressHost: ${SERVICE_FQDN}
