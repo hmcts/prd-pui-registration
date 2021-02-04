@@ -58,7 +58,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "global-tunnel-ng": "^2.7.1",
-    "govuk-frontend": "2.5.0",
+    "govuk-frontend": "2.13.0",
     "json-stringify-safe": "^5.0.1",
     "jwt-decode": "^2.2.0",
     "lint": "^1.1.2",
